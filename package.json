@@ -1,0 +1,30 @@
+{
+  "name": "CTD-BOT",
+  "version": "1.0.0",
+  "description": "Le bot du serveur Cherche Ton Dev",
+  "main": "index.js",
+  "repository": "https://github.com/rafalou38/CTD-BOT.git",
+  "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "dev": "nodemon ./src/index.ts",
+    "start": "node ./build/index.js",
+    "build": "tsc",
+    "format": "prettier -w ./src/",
+    "lint": "eslint ./src"
+  },
+  "dependencies": {
+    "discord.js": "^13.1.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "eslint": "^7.32.0",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
