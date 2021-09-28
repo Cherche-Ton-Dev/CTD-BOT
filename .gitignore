@@ -33,7 +33,3 @@ node_modules/
 
 # typescript
 build
-
-# misc
-
-.vscode
