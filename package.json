@@ -13,18 +13,23 @@
     "start": "node ./build/index.js",
     "build": "tsc",
     "format": "prettier -w ./src/",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "push": "node ./build/scripts/pushCommands.js"
   },
   "dependencies": {
-    "discord.js": "^13.1.0"
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "node-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
+    "discord-api-types": "0.22.0",
     "eslint": "^7.32.0",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
-  }
+  },
+  "type": "module"
 }
