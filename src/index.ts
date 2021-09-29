@@ -5,11 +5,7 @@ import Discord from "discord.js";
 import { log } from "./utils/log.js";
 import { handleInteractionCreate } from "./events/interactionCreate.js";
 
-const intents: Discord.IntentsString[] = [
-    "GUILDS",
-    "GUILD_MESSAGES",
-    "GUILD_MEMBERS",
-];
+const intents: Discord.IntentsString[] = ["GUILDS", "GUILD_MESSAGES"];
 const client = new Discord.Client({
     intents: intents,
 });
