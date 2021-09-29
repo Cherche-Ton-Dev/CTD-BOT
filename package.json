@@ -9,12 +9,12 @@
     "node": "16.x"
   },
   "scripts": {
-    "dev": "nodemon ./src/index.ts",
+    "dev": "node --loader ts-node/esm ./src/index.ts",
     "start": "node ./build/index.js",
     "build": "tsc",
     "format": "prettier -w ./src/",
     "lint": "eslint ./src",
-    "push": "node ./build/scripts/pushCommands.js"
+    "push": "node --loader ts-node/esm ./build/scripts/pushCommands.js"
   },
   "dependencies": {
     "discord.js": "^13.1.0",
@@ -26,7 +26,6 @@
     "@typescript-eslint/parser": "^4.32.0",
     "discord-api-types": "0.22.0",
     "eslint": "^7.32.0",
-    "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
