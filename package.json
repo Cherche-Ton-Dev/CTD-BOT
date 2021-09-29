@@ -14,7 +14,7 @@
     "build": "tsc",
     "format": "prettier -w ./src/",
     "lint": "eslint ./src",
-    "push": "node --loader ts-node/esm ./build/scripts/pushCommands.js"
+    "push": "node --loader ts-node/esm ./src/scripts/pushCommands.ts"
   },
   "dependencies": {
     "chalk": "^4.1.2",
