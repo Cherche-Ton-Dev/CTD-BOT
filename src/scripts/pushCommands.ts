@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import fetch from "node-fetch";
+import { ApplicationCommand } from "../types/commands.js";
 import { commands } from "../commands/index.js";
 dotenv.config();
 
@@ -11,7 +12,9 @@ const headers = {
 async function deploy() {
     process.stdout.write("deploying commads: ");
 
-    const commandsData = Object.values(commands).map((command) => command.data);
+    const commandsData = Object.values(commands).map(
+        (command) => command?.data,
+    ) as ApplicationCommand[];
     // console.log(commandsData);
     // return;
 

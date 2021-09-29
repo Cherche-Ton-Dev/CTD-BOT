@@ -17,7 +17,7 @@ export const data: ApplicationCommand = {
 export async function run(
     client: Client,
     interaction: Interaction,
-): CommandReturn {
+): Promise<CommandReturn> {
     if (!interaction.isCommand()) return { status: "IGNORE" };
 
     interaction.reply("hello");
