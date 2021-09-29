@@ -26,12 +26,12 @@ export async function handleInteractionCreate(
             error = err;
         }
 
-        console.log(
+        log(
             chalk.green(`/${interaction.commandName}`),
             "exécuté par",
             chalk.blue(interaction.user.tag),
             result.status === "OK" && !error ? "✔️" : "❌",
-            result.label,
+            result.label || "",
             error || result.status !== "OK"
                 ? error || chalk.bold(chalk.red(result))
                 : "",
