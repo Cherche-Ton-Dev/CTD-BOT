@@ -2,8 +2,9 @@ import dotenv from "dotenv";
 dotenv.config(); // load discord token from .env
 
 import Discord from "discord.js";
-import { log } from "./utils/log.js";
-import { handleInteractionCreate } from "./events/interactionCreate.js";
+import { log } from "./utils/log";
+import { handleInteractionCreate } from "./events/interactionCreate";
+import { connectDB } from "./db/init";
 
 const intents: Discord.IntentsString[] = ["GUILDS", "GUILD_MESSAGES"];
 const client = new Discord.Client({
@@ -18,4 +19,6 @@ client.once("ready", async () => {
 
 client.on("interactionCreate", handleInteractionCreate);
 
-client.login(process.env.BOT_TOKEN);
+connectDB().then(() => {
+    client.login(process.env.BOT_TOKEN);
+});
