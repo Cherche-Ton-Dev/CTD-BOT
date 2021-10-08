@@ -1,6 +1,6 @@
-import { ICommandList } from "../types/commands.js";
+import { ICommandList } from "../types/commands";
 
-import * as suggest from "./suggest.js";
+import * as suggest from "./suggest";
 
 export const commands: ICommandList = {
     suggest,

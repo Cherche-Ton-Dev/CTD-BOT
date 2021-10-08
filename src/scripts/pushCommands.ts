@@ -1,8 +1,8 @@
 import readline from "readline";
 import dotenv from "dotenv";
 import fetch from "node-fetch";
-import { ApplicationCommand } from "../types/commands.js";
-import { commands } from "../commands/index.js";
+import { ApplicationCommand } from "../types/commands";
+import { commands } from "../commands/index";
 dotenv.config();
 
 const headers = {
