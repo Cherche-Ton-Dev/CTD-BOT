@@ -3,6 +3,7 @@ import { Client, Interaction } from "discord.js";
 import { config } from "../context/config";
 import { ApplicationCommand, CommandReturn } from "../types/commands";
 
+export const subCommand = false;
 export const data: ApplicationCommand = {
     name: "suggest",
     description: "Créez une suggestion pour améliorer CTD",
