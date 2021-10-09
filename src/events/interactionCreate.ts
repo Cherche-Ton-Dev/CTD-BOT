@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { commands } from "../commands/index";
 import { context } from "../context/context";
 import { GuildMember, Interaction } from "discord.js";
-import { CommandReturn } from "../types/commands";
+import { CommandReturn, rawCommandModule } from "../types/commands";
 import { log } from "../utils/log";
 import { addInvite } from "../db/api/member";
 
@@ -10,7 +10,21 @@ export async function handleInteractionCreate(
     interaction: Interaction,
 ): Promise<void> {
     if (interaction.isCommand()) {
-        const command = commands[interaction.commandName];
+        let command: rawCommandModule | undefined;
+
+        let subCommandName;
+        try {
+            subCommandName = interaction.options.getSubcommand();
+        } catch {}
+
+        if (subCommandName) {
+            const group = commands[interaction.commandName];
+            if (group?.subCommand === true) {
+                command = group.commands[subCommandName];
+            }
+        } else {
+            command = commands[interaction.commandName] as rawCommandModule;
+        }
         if (!command)
             return log(
                 chalk.green(`/${interaction.commandName}`),

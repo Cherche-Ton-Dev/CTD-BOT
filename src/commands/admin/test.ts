@@ -22,7 +22,7 @@ export async function run(
 ): Promise<CommandReturn> {
     if (!interaction.isCommand()) return { status: "IGNORE" };
 
-    interaction.reply("ok");
+    await interaction.reply("ok");
 
     return {
         status: "OK",
