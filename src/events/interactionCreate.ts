@@ -5,6 +5,7 @@ import { GuildMember, Interaction } from "discord.js";
 import { CommandReturn, rawCommandModule } from "../types/commands";
 import { log } from "../utils/log";
 import { addInvite } from "../db/api/member";
+import { handleButtonPress } from "../buttons/index";
 
 export async function handleInteractionCreate(
     interaction: Interaction,
@@ -51,5 +52,7 @@ export async function handleInteractionCreate(
                 ? error || chalk.bold(chalk.red(result))
                 : "",
         );
+    } else if (interaction.isButton()) {
+        handleButtonPress(interaction);
     }
 }

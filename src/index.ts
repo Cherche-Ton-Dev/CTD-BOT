@@ -5,11 +5,17 @@ import Discord from "discord.js";
 import { log } from "./utils/log";
 import { handleInteractionCreate } from "./events/interactionCreate";
 import { connectDB } from "./db/init";
+import { context } from "./context/context";
 
-const intents: Discord.IntentsString[] = ["GUILDS", "GUILD_MESSAGES"];
+const intents: Discord.IntentsString[] = [
+    "GUILDS",
+    "GUILD_MESSAGES",
+    "DIRECT_MESSAGES",
+];
 const client = new Discord.Client({
     intents: intents,
 });
+context.client = client;
 
 client.once("ready", async () => {
     log(
