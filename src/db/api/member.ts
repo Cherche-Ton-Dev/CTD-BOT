@@ -14,6 +14,17 @@ export function createMember(member: GuildMember): DBMember {
         username: member.user.username,
     });
 }
+export async function createOrGetMember(
+    member: GuildMember,
+    save = false,
+): Promise<DBMember> {
+    let dbMember = await getMember(member);
+    if (!dbMember) {
+        dbMember = createMember(member);
+        if (save) await dbMember.save();
+    }
+    return dbMember;
+}
 export async function addInvite(member: GuildMember) {
     let target = await getMember(member);
     if (!target) {
