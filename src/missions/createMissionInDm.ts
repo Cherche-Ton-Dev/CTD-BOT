@@ -72,6 +72,41 @@ export async function createMission(DM: DMChannel) {
     if (!task) return cancelMission(DM);
     mission.task = task;
 
+    let difficulty = await askSelectOne<"1" | "2" | "3" | "4" | "5">(
+        DM,
+        timeout,
+        "Quel est la difficulté?",
+        [
+            {
+                label: "1",
+                value: "1",
+                emoji: "1️⃣",
+            },
+            {
+                label: "2",
+                value: "2",
+                emoji: "2️⃣",
+            },
+            {
+                label: "3",
+                value: "3",
+                emoji: "3️⃣",
+            },
+            {
+                label: "4",
+                value: "4",
+                emoji: "4️⃣",
+            },
+            {
+                label: "5",
+                value: "5",
+                emoji: "5️⃣",
+            },
+        ],
+    );
+    if (!difficulty) return cancelMission(DM);
+    mission.difficulty = difficulty;
+
     await DM.send({
         content: "Est ce que tout est bon?",
         embeds: [generateMissionEmbed(mission, DM.recipient)],

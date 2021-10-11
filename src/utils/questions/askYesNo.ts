@@ -34,7 +34,7 @@ export async function askYesNo(
     let buttonInteraction: ButtonInteraction;
     try {
         buttonInteraction = await sentMessage.awaitMessageComponent({
-            time: timeout, // 2 min
+            time: timeout,
             componentType: "BUTTON",
         });
         await fakeReply(buttonInteraction);
