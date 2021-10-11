@@ -6,7 +6,9 @@ import { log } from "../utils/log";
 import { context } from "../context/context";
 
 export async function handleButtonPress(interaction: ButtonInteraction) {
-    let command = commands[interaction.customId];
+    if (!interaction.customId.startsWith("event-")) return;
+
+    let command = commands[interaction.customId.replace("event-", "")];
 
     if (!command)
         return log(

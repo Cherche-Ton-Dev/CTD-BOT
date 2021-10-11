@@ -34,7 +34,7 @@ export async function run(
                         label: "👨‍💻 CRÉER UNE MISSION 🖌️",
                         type: "BUTTON",
                         style: "SUCCESS",
-                        customId: "create-mission",
+                        customId: "event-create-mission",
                     },
                 ],
             },
