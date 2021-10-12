@@ -1,4 +1,4 @@
-import { ButtonInteraction, Client } from "discord.js";
+import { ButtonInteraction, Client, GuildMember } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
 import { createMission } from "../missions/createMissionInDm";
@@ -13,7 +13,8 @@ export async function run(
     const sentMessage = await DM.send(
         "** **\n\n\n\n\n\n\n\n\n\n\n\nCreation d'une nouvelle mission.\n❗ Tu as **5 minutes** pour répondre à chaque question ❗",
     );
-    createMission(DM); // not awaited: will run separated
+
+    createMission(DM, interaction.member as GuildMember); // not awaited: will run separated
 
     await interaction.reply({
         embeds: [

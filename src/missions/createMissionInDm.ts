@@ -1,4 +1,4 @@
-import { DMChannel } from "discord.js";
+import { DMChannel, GuildMember } from "discord.js";
 
 import { askYesNo, askText, askSelectOne } from "../utils/questions/index";
 import { config } from "../context/config";
@@ -6,18 +6,22 @@ import { Dev, IMission } from "../types/missions";
 import { generateMissionEmbed } from "../missions/generateEmbed";
 import chalk from "chalk";
 import { log } from "../utils/log";
+import { validateMission } from "./validateMission";
+import { ObjectId } from "mongoose";
 
 export const subCommand = false;
 
 const timeout = 1000 * 60 * 5; // 5 min
 
-export async function createMission(DM: DMChannel) {
+export async function createMission(DM: DMChannel, member: GuildMember) {
     const mission: IMission = {
         accepted: false,
         difficulty: "1",
         isPayed: false,
         target: "dev",
         task: "",
+        authorGuildID: member.guild.id,
+        authorUserID: member.user.id,
     };
 
     let selectedDev = await askSelectOne<Dev>(
@@ -120,10 +124,12 @@ export async function createMission(DM: DMChannel) {
         "Annuler la mission",
     );
     if (!done) DM.send("Ta mission a été annulée");
-    else
+    else {
+        validateMission(mission, member);
         DM.send(
             "Ta mission a été envoyée elle sera disponible après avoir été vérifiée par les modérateurs",
         );
+    }
 }
 
 async function cancelMission(DM: DMChannel) {

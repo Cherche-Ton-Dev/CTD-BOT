@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 export type Dev = "web-dev" | "artist" | "dev";
 export type Difficulty = "1" | "2" | "3" | "4" | "5";
 
@@ -8,4 +10,7 @@ export interface IMission {
     task: string;
     target: Dev;
     difficulty: Difficulty;
+    author?: ObjectId;
+    authorUserID: string;
+    authorGuildID: string;
 }
