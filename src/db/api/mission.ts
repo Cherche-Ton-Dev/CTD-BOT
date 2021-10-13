@@ -5,3 +5,6 @@ export async function validateMission(id: string) {
         accepted: true,
     });
 }
+export async function declineMission(id: string) {
+    return Mission.findByIdAndDelete(id);
+}

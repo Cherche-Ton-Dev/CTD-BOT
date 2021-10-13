@@ -1,4 +1,10 @@
-import { DMChannel } from "discord.js";
+import {
+    ButtonInteraction,
+    CommandInteraction,
+    DMChannel,
+    Interaction,
+    SelectMenuInteraction,
+} from "discord.js";
 
 export async function askText(
     DM: DMChannel,
@@ -16,6 +22,30 @@ export async function askText(
             max: 1,
         });
         value = received.first()?.content || "";
+    } catch (error) {
+        return null;
+    }
+
+    return value;
+}
+export async function askTextInteraction(
+    interaction: ButtonInteraction | SelectMenuInteraction | CommandInteraction,
+    timeout: number,
+    text: string,
+    remove = false,
+): Promise<string | null> {
+    await interaction.editReply({
+        content: text,
+    });
+
+    let value: string;
+    try {
+        let received = await interaction.channel?.awaitMessages({
+            time: timeout,
+            max: 1,
+        });
+        value = received?.first()?.content || "";
+        if (remove) await received?.first()?.delete();
     } catch (error) {
         return null;
     }
