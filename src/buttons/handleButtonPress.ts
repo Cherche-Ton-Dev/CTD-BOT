@@ -8,7 +8,10 @@ import { context } from "../context/context";
 export async function handleButtonPress(interaction: ButtonInteraction) {
     if (!interaction.customId.startsWith("event-")) return;
 
-    let command = commands[interaction.customId.replace("event-", "")];
+    let customID = interaction.customId.replace("event-", "");
+    let args = customID.match(/(?<={).*(?=})/)?.[0];
+    customID = customID.replace(/-?{.+}/, "");
+    let command = commands[customID];
 
     if (!command)
         return log(
@@ -24,7 +27,7 @@ export async function handleButtonPress(interaction: ButtonInteraction) {
     };
     let error: unknown;
     try {
-        result = await command.run(context.client, interaction);
+        result = await command.run(context.client, interaction, args);
     } catch (err) {
         error = err;
     }

@@ -1,5 +1,6 @@
 export const config = {
     suggestionsChanelId: "892774559147782154",
+    pendingChannelId: "897503615357427732",
     devRoles: [
         {
             label: "Programmeur",

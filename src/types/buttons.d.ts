@@ -6,6 +6,7 @@ declare interface IButtonList {
         run: (
             client: Client,
             interaction: ButtonInteraction,
+            args: string | undefined,
         ) => Promise<CommandReturn>;
     };
 }
