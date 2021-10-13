@@ -2,7 +2,6 @@ import readline from "readline";
 import dotenv from "dotenv";
 import util from "util";
 import axios from "axios";
-import { ApplicationCommand } from "../types/commands";
 import { commands } from "../commands/index";
 dotenv.config();
 

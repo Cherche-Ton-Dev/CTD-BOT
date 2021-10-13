@@ -16,7 +16,7 @@ export async function askYesNo(
     labelNo?: string,
     remove = false,
 ): Promise<boolean | null> {
-    let sentMessage = await DM.send({
+    const sentMessage = await DM.send({
         content: text,
         components: [
             {

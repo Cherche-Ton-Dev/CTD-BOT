@@ -1,7 +1,7 @@
 import { Document, model, Schema, Types } from "mongoose";
 import { IMission } from "../../types/missions";
 
-export type Mission = Document<any, any, IMission> &
+export type Mission = Document<unknown, unknown, IMission> &
     IMission & {
         _id: Types.ObjectId;
     };

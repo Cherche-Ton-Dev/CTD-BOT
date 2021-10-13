@@ -1,20 +1,13 @@
 import {
     ButtonInteraction,
     Client,
-    GuildMember,
     Message,
-    MessageEmbed,
-    TextChannel,
 } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
-import { createMission } from "../missions/createMissionInDm";
-import { declineMission, validateMission } from "../db/api/mission";
-import { Color } from "chalk";
+import { declineMission } from "../db/api/mission";
 import { generateMissionEmbed } from "../missions/generateEmbed";
-import { askText, askYesNo } from "../utils/questions";
 import { askTextInteraction } from "../utils/questions/askText";
-import { askYesNoInteraction } from "../utils/questions/askYesNo";
 
 export const subCommand = false;
 

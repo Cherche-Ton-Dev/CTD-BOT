@@ -1,4 +1,3 @@
-import { ButtonInteraction, Interaction } from "discord.js";
 import { IButtonList } from "../types/buttons";
 
 import * as validateMission from "./validate-mission";

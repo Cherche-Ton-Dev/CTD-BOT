@@ -2,7 +2,6 @@ import {
     ButtonInteraction,
     CommandInteraction,
     DMChannel,
-    Interaction,
     SelectMenuInteraction,
 } from "discord.js";
 
@@ -17,7 +16,7 @@ export async function askText(
 
     let value: string;
     try {
-        let received = await DM.awaitMessages({
+        const received = await DM.awaitMessages({
             time: timeout,
             max: 1,
         });
@@ -40,7 +39,7 @@ export async function askTextInteraction(
 
     let value: string;
     try {
-        let received = await interaction.channel?.awaitMessages({
+        const received = await interaction.channel?.awaitMessages({
             time: timeout,
             max: 1,
         });

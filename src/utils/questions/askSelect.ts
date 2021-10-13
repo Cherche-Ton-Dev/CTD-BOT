@@ -11,7 +11,7 @@ export async function askSelectOne<T>(
     text: string,
     options: MessageSelectOptionData[],
 ): Promise<T | null> {
-    let sentMessage = await DM.send({
+    const sentMessage = await DM.send({
         content: text,
         components: [
             {

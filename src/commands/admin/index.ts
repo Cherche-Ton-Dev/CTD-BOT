@@ -1,7 +1,5 @@
 import {
     commandModule,
-    ICommandList,
-    rawCommandModule,
 } from "../../types/commands";
 
 import * as test from "./test";

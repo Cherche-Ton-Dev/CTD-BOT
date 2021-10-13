@@ -6,7 +6,7 @@ interface IDBMember {
     username: string;
     invites: number;
 }
-export type DBMember = Document<any, any, IDBMember> &
+export type DBMember = Document<unknown, unknown, IDBMember> &
     IDBMember & {
         _id: Types.ObjectId;
     };

@@ -9,9 +9,9 @@ export async function handleButtonPress(interaction: ButtonInteraction) {
     if (!interaction.customId.startsWith("event-")) return;
 
     let customID = interaction.customId.replace("event-", "");
-    let args = customID.match(/(?<={).*(?=})/)?.[0];
+    const args = customID.match(/(?<={).*(?=})/)?.[0];
     customID = customID.replace(/-?{.+}/, "");
-    let command = commands[customID];
+    const command = commands[customID];
 
     if (!command)
         return log(

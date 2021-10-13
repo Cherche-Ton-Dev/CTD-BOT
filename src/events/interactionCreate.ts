@@ -1,10 +1,9 @@
 import chalk from "chalk";
 import { commands } from "../commands/index";
 import { context } from "../context/context";
-import { GuildMember, Interaction } from "discord.js";
+import { Interaction } from "discord.js";
 import { CommandReturn, rawCommandModule } from "../types/commands";
 import { log } from "../utils/log";
-import { addInvite } from "../db/api/member";
 import { handleButtonPress } from "../buttons/index";
 
 export async function handleInteractionCreate(

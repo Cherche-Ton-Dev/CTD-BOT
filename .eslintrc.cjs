@@ -15,5 +15,7 @@ module.exports = {
         "linebreak-style": ["error", "windows"],
         quotes: ["error", "double"],
         semi: ["error", "always"],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-empty": "off",
     },
 };

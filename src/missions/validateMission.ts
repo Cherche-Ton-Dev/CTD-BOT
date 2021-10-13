@@ -1,7 +1,6 @@
-import { GuildMember, User } from "discord.js";
+import { GuildMember } from "discord.js";
 import { Mission } from "../db/schemas/mission";
-import { context } from "../context/context";
-import { Dev, IMission } from "../types/missions";
+import { IMission } from "../types/missions";
 import { createOrGetMember } from "../db/api/member";
 import { config } from "../context/config";
 import { log } from "../utils/log";

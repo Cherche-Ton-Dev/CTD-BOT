@@ -7,7 +7,6 @@ import { generateMissionEmbed } from "../missions/generateEmbed";
 import chalk from "chalk";
 import { log } from "../utils/log";
 import { validateMission } from "./validateMission";
-import { ObjectId } from "mongoose";
 
 export const subCommand = false;
 
@@ -24,7 +23,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
         authorUserID: member.user.id,
     };
 
-    let selectedDev = await askSelectOne<Dev>(
+    const selectedDev = await askSelectOne<Dev>(
         DM,
         timeout,
         "Quel type de dev cherches-tu ?",
@@ -33,7 +32,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
     if (selectedDev === null) return cancelMission(DM);
     mission.target = selectedDev;
 
-    let isPayed = await askYesNo(
+    const isPayed = await askYesNo(
         DM,
         timeout,
         "Ta mission est rémunérée avec du vrai argent?",
@@ -53,7 +52,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
         if (!price) return cancelMission(DM);
         mission.price = price;
     } else {
-        let hasPrice = await askYesNo(
+        const hasPrice = await askYesNo(
             DM,
             timeout,
             "Offres tu une récompense autre que de l'argent?",
@@ -68,7 +67,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
         }
     }
 
-    let task = await askText(
+    const task = await askText(
         DM,
         timeout,
         "Que veut tu que le dev fasse pour toi?",
@@ -76,7 +75,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
     if (!task) return cancelMission(DM);
     mission.task = task;
 
-    let difficulty = await askSelectOne<"1" | "2" | "3" | "4" | "5">(
+    const difficulty = await askSelectOne<"1" | "2" | "3" | "4" | "5">(
         DM,
         timeout,
         "Quel est la difficulté?",

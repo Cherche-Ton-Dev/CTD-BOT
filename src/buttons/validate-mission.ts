@@ -1,15 +1,12 @@
 import {
     ButtonInteraction,
     Client,
-    GuildMember,
     Message,
     MessageEmbed,
 } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
-import { createMission } from "../missions/createMissionInDm";
 import { validateMission } from "../db/api/mission";
-import { Color } from "chalk";
 
 export const subCommand = false;
 
@@ -28,7 +25,7 @@ export async function run(
             label: "id of accept is missing",
         };
     }
-    let mission = await validateMission(id);
+    const mission = await validateMission(id);
     if (mission) {
         (interaction.message as Message).edit({
             components: [],
