@@ -1,9 +1,4 @@
-import {
-    ButtonInteraction,
-    Client,
-    Message,
-    MessageEmbed,
-} from "discord.js";
+import { ButtonInteraction, Client, Message, MessageEmbed } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
 import { validateMission } from "../db/api/mission";

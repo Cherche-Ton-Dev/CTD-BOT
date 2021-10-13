@@ -1,8 +1,4 @@
-import {
-    ButtonInteraction,
-    Client,
-    Message,
-} from "discord.js";
+import { ButtonInteraction, Client, Message } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
 import { declineMission } from "../db/api/mission";
