@@ -76,7 +76,7 @@ export async function run(
             (interaction.message as Message).edit({
                 components: [],
                 embeds: [
-                    interaction.message.embeds[0] as MessageEmbed,
+                    ...(interaction.message.embeds as MessageEmbed[]),
                     {
                         author: {
                             iconURL: interaction.user.avatarURL() || "",
