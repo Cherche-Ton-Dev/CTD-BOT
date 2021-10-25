@@ -26,7 +26,23 @@ export async function validateMission(
     }
     channel.send({
         content: `nouvelle mission de ${member}`,
-        embeds: [generateMissionEmbed(newMission, member.user)],
+        embeds: [
+            {
+                title: "Infos",
+                fields: [
+                    {
+                        name: "Développeur cible:",
+                        value: newMission.target,
+                    },
+                    {
+                        name: "Payée:",
+                        value: newMission.isPayed ? "oui" : "non",
+                    },
+                ],
+                color: "RANDOM",
+            },
+            generateMissionEmbed(newMission, member.user),
+        ],
         components: [
             {
                 type: "ACTION_ROW",
@@ -36,7 +52,7 @@ export async function validateMission(
                         label: "ACCEPTER",
                         style: "SUCCESS",
                         emoji: "✅",
-                        customId: `event-accept-{${newMission.id}}`,
+                        customId: `event-validate-{${newMission.id}}`,
                     },
                     {
                         type: "BUTTON",

@@ -8,6 +8,8 @@ export type Mission = Document<unknown, unknown, IMission> &
 
 const schema = new Schema<IMission>({
     accepted: { type: Boolean, required: true },
+    acceptedBy: { type: String, required: false },
+    channel: { type: String, required: false },
     isPayed: { type: Boolean, required: true },
     price: { type: String, required: false },
     task: { type: String, required: true },
