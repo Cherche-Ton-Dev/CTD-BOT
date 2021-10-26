@@ -4,6 +4,8 @@
         "outDir": "./build",
         "rootDir": "./src",
 
+        "module": "commonjs",
+
         "strict": true,
 
         "moduleResolution": "node",

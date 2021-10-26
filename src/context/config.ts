@@ -5,8 +5,8 @@ const rawConfig = {
     pendingChannelId: "897503615357427732",
     missionChannelIDS: {
         "web-dev": {
-            free: "902124287828312104",
-            payed: "902124318530609193",
+            free: "902601841710334062",
+            payed: "902601721220587560",
         },
         artist: {
             free: "876441952445431889",
