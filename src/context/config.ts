@@ -1,6 +1,51 @@
 import { Dev } from "../types/missions";
 
-export const config = {
+const rawConfig = {
+    suggestionsChanelId: "856601907346145281",
+    pendingChannelId: "897503615357427732",
+    missionChannelIDS: {
+        "web-dev": {
+            free: "902124287828312104",
+            payed: "902124318530609193",
+        },
+        artist: {
+            free: "876441952445431889",
+            payed: "876442066283024384",
+        },
+        dev: {
+            free: "856612483443064852",
+            payed: "876441721515433994",
+        },
+    } as { [key in Dev]: { free: string; payed: string } },
+    devRoles: [
+        {
+            label: "Programmeur",
+            value: "dev" as Dev,
+            emoji: "👨‍💻",
+            description: "Pour créer un bot discord, programme, plugin, etc.",
+            roleID: "856624575684673566",
+        },
+        {
+            label: "Artiste",
+            value: "artist" as Dev,
+            emoji: "🎨",
+            description:
+                "Pour créer un design de site web, une bannière, une photo de profil, etc.",
+            roleID: "858310927447097374",
+        },
+        {
+            label: "Dev Web",
+            value: "web-dev" as Dev,
+            emoji: "🌐",
+            description: "Pour créer un site web.",
+            roleID: "902132166773833748",
+        },
+    ],
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const testConfig = {
+    ...rawConfig,
     suggestionsChanelId: "892774559147782154",
     pendingChannelId: "897503615357427732",
     missionChannelIDS: {
@@ -19,26 +64,18 @@ export const config = {
     } as { [key in Dev]: { free: string; payed: string } },
     devRoles: [
         {
-            label: "Programmeur",
-            value: "dev" as Dev,
-            emoji: "👨‍💻",
-            description: "Pour créer un bot discord, programme, plugin, etc.",
+            ...rawConfig.devRoles[0],
             roleID: "902132191834804264",
         },
         {
-            label: "Artiste",
-            value: "artist" as Dev,
-            emoji: "🎨",
-            description:
-                "Pour créer un design de site web, une bannière, une photo de profil, etc.",
+            ...rawConfig.devRoles[1],
             roleID: "902132141821919272",
         },
         {
-            label: "Dev Web",
-            value: "web-dev" as Dev,
-            emoji: "🌐",
-            description: "Pour créer un site web.",
+            ...rawConfig.devRoles[2],
             roleID: "902132166773833748",
         },
     ],
 };
+
+export const config = rawConfig;
