@@ -5,7 +5,7 @@ import admin from "./admin/index";
 import gestion from "./gestion/index";
 
 export const commands: ICommandList = {
-    admin,
+    // admin,
     gestion,
     suggest: suggest,
 };
