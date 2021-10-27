@@ -2,7 +2,7 @@ import { Dev } from "../types/missions";
 
 const rawConfig = {
     suggestionsChanelId: "856601907346145281",
-    pendingChannelId: "897503615357427732",
+    pendingChannelId: "902632260451319808",
     missionChannelIDS: {
         "web-dev": {
             free: "902601841710334062",
@@ -38,7 +38,7 @@ const rawConfig = {
             value: "web-dev" as Dev,
             emoji: "🌐",
             description: "Pour créer un site web.",
-            roleID: "902132166773833748",
+            roleID: "856624575684673566",
         },
     ],
 };
