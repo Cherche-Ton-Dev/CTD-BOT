@@ -3,6 +3,7 @@ import { Dev } from "../types/missions";
 const rawConfig = {
     suggestionsChanelId: "856601907346145281",
     pendingChannelId: "902632260451319808",
+    modoRoleId: "860881358721253378",
     missionChannelIDS: {
         "web-dev": {
             free: "902601841710334062",
@@ -48,6 +49,7 @@ const testConfig = {
     ...rawConfig,
     suggestionsChanelId: "892774559147782154",
     pendingChannelId: "897503615357427732",
+    modoRoleId: "905389455765037116",
     missionChannelIDS: {
         "web-dev": {
             free: "902124287828312104",
@@ -79,3 +81,4 @@ const testConfig = {
 };
 
 export const config = rawConfig;
+// export const config = testConfig;

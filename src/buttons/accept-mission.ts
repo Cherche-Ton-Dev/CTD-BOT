@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import {
     ButtonInteraction,
     Client,
@@ -28,7 +29,23 @@ export async function run(
             label: "id of accept is missing",
         };
     }
-
+    const modoRole = await interaction.guild?.roles.fetch(config.modoRoleId);
+    if (!modoRole) {
+        interaction.reply({
+            embeds: [
+                {
+                    title: "Erreur",
+                    description: "Problème de configuration du bot.",
+                    color: "RED",
+                },
+            ],
+            ephemeral: true,
+        });
+        return {
+            status: "ERROR",
+            label: chalk.red("wrong modo role"),
+        };
+    }
     const mission = await Mission.findById(id);
 
     // check if mission exists
@@ -107,6 +124,10 @@ export async function run(
                 },
                 {
                     id: interaction.user.id,
+                    allow: "VIEW_CHANNEL",
+                },
+                {
+                    id: modoRole,
                     allow: "VIEW_CHANNEL",
                 },
                 {
