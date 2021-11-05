@@ -1,4 +1,4 @@
-import { ButtonInteraction, Client, Message } from "discord.js";
+import { ButtonInteraction, Client, Message, MessageEmbed } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
 import { declineMission } from "../db/api/mission";
@@ -44,7 +44,23 @@ export async function run(
 
     const mission = await declineMission(id);
 
-    await (interaction.message as Message).delete();
+    // await (interaction.message as Message).delete();
+    (interaction.message as Message).edit({
+        components: [],
+        embeds: [
+            ...(interaction.message.embeds as MessageEmbed[]),
+            {
+                author: {
+                    iconURL: interaction.user.avatarURL() || "",
+                    name: interaction.user.tag,
+                },
+                timestamp: new Date(),
+                title: "Mission Refusé.",
+                description: reason,
+                color: "RED",
+            },
+        ],
+    });
     if (mission) {
         await interaction.editReply({
             content: "Mission supprimée.",
