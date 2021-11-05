@@ -26,7 +26,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
     const selectedDev = await askSelectOne<Dev>(
         DM,
         timeout,
-        "Quel type de dev cherches-tu ?",
+        "Quel poste recherches-tu pour t'aider dans l'avancement de ton projet ?",
         config.devRoles,
     );
     if (selectedDev === null) return cancelMission(DM);
@@ -35,7 +35,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
     const isPayed = await askYesNo(
         DM,
         timeout,
-        "Ta mission est rémunérée avec du vrai argent?",
+        "Ta mission est-elle rémunérée avec une devise ou une monnaie réelle ?",
         "OUI 💰",
         "NON ❌",
     );
@@ -44,11 +44,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
 
     let price: string | null;
     if (isPayed) {
-        price = await askText(
-            DM,
-            timeout,
-            "Combien d'argent est tu prêt a donner?",
-        );
+        price = await askText(DM, timeout, "Quel est ton budget ?");
         if (!price) return cancelMission(DM);
         mission.price = price;
     } else {
@@ -61,24 +57,24 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
         );
         if (hasPrice === null) return cancelMission(DM);
         if (hasPrice) {
-            price = await askText(DM, timeout, "Quel est ta récompense?");
+            price = await askText(
+                DM,
+                timeout,
+                "Quelle récompense proposes-tu ?",
+            );
             if (!price) return cancelMission(DM);
             mission.price = price;
         }
     }
 
-    const task = await askText(
-        DM,
-        timeout,
-        "Que veut tu que le dev fasse pour toi?",
-    );
+    const task = await askText(DM, timeout, "Quelle est ta mission ?");
     if (!task) return cancelMission(DM);
     mission.task = task;
 
     const difficulty = await askSelectOne<"1" | "2" | "3" | "4" | "5">(
         DM,
         timeout,
-        "Quel est la difficulté?",
+        "Quelle est la difficulté estimée (selon toi) de ta mission ?",
         [
             {
                 label: "1",
@@ -136,6 +132,6 @@ async function cancelMission(DM: DMChannel) {
         "Aucune donnée entrée pendant 5m, annulation de la mission de",
         chalk.blue(DM.recipient.tag),
     );
-    DM.send("Trop lent, annulation de la mission.");
+    DM.send("Tu as été trop lent dans ta réponse ! Annulation de la mission.");
     return null;
 }

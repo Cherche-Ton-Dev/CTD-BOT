@@ -30,8 +30,7 @@ const rawConfig = {
             label: "Artiste",
             value: "artist" as Dev,
             emoji: "🎨",
-            description:
-                "Pour créer un design de site web, une bannière, une photo de profil, etc.",
+            description: "Pour créer un design de site web, une bannière, etc.",
             roleID: "858310927447097374",
         },
         {

@@ -11,7 +11,7 @@ export async function run(
 ): Promise<CommandReturn> {
     const DM = await interaction.user.createDM();
     const sentMessage = await DM.send(
-        "** **\n\n\n\n\n\n\n\n\n\n\n\nCreation d'une nouvelle mission.\n❗ Tu as **5 minutes** pour répondre à chaque question ❗",
+        "** **\n\n\n\n\n\n\n\n\n\n\n\nCreation d'une nouvelle mission.\n❗ Tu possèdes désormais **5 minutes** pour répondre à chaque question ❗",
     );
 
     createMission(DM, interaction.member as GuildMember); // not awaited: will run separated
@@ -21,7 +21,7 @@ export async function run(
             {
                 title: "Nouvelle Mission",
                 description:
-                    "Rdv dans tes messages privées pour me donner les informations sur ta mission.",
+                    "Fais un tour dans tes messages privés pour nous donner les informations nécessaire à la création de la mission !",
                 color: "GREEN",
                 thumbnail: { url: client.user?.avatarURL() || "" },
                 url: sentMessage.url,
