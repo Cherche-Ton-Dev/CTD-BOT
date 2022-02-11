@@ -7,6 +7,7 @@ import {
     MessageEmbed,
 } from "discord.js";
 import { config } from "../context/config";
+import { createOrGetMember } from "../db/api/member";
 import { Mission } from "../db/schemas/mission";
 import { generateMissionEmbed } from "../missions/generateEmbed";
 
@@ -111,9 +112,27 @@ export async function run(
                     buttonInteraction.component.label === "Obtenir le role",
             })
             .then(async (buttonInteraction) => {
+                if (!buttonInteraction.member) return;
+
                 await buttonInteraction.deferReply({
                     ephemeral: true,
                 });
+                const DBMember = await createOrGetMember(
+                    buttonInteraction.member as GuildMember,
+                );
+                if (DBMember.roleTicketPending)
+                    return await buttonInteraction.editReply({
+                        embeds: [
+                            {
+                                title: "Erreur",
+                                description:
+                                    "Tu as déjà un ticket de role ouvert, si ce n'est pas le cas, fais en part aux modérateurs",
+                                color: "RED",
+                            },
+                        ],
+                    });
+                DBMember.roleTicketPending = true;
+                DBMember.save();
                 const channel = await createTicket(
                     interaction.member as GuildMember,
                     `${interaction.member?.user.username}-devenir-${requiredRole?.label}`,

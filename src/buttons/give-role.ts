@@ -7,6 +7,7 @@ import {
 
 import { CommandReturn } from "../types/commands";
 import { config } from "../context/config";
+import { getMember } from "../db/api/member";
 
 export const subCommand = false;
 
@@ -46,6 +47,17 @@ export async function run(
     await dm?.send(`Tu as obtenu le role ${role?.name}`);
 
     await interaction.channel?.delete();
+
+    if (!user)
+        return {
+            status: "ERROR",
+            label: "No user",
+        };
+    const DBMember = await getMember(user);
+    if (DBMember) {
+        DBMember.roleTicketPending = false;
+        DBMember.save();
+    }
 
     return {
         status: "OK",

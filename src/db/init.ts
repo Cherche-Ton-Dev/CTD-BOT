@@ -5,6 +5,7 @@ export async function connectDB(): Promise<void> {
     if (process.env.MONGO_URI) {
         try {
             await mongoose.connect(process.env.MONGO_URI);
+            mongoose.set("debug", true);
             log("✅ connecté a mongoDB 🌳");
         } catch {
             log("❌ non connecté a mongoDB 🌳");
