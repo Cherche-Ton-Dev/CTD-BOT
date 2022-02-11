@@ -117,7 +117,7 @@ export async function run(
                 const channel = await createTicket(
                     interaction.member as GuildMember,
                     `${interaction.member?.user.username}-devenir-${requiredRole?.label}`,
-                    [modoRole.id],
+                    [modoRole.id, interaction.user.id],
                     config.ticketCategoryId,
                     [
                         {
@@ -135,6 +135,12 @@ export async function run(
                                     style: "SUCCESS",
                                     label: "Accepter",
                                     customId: `event-give-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
+                                },
+                                {
+                                    type: "BUTTON",
+                                    style: "DANGER",
+                                    label: "Refuser",
+                                    customId: `event-refuse-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
                                 },
                             ],
                         },

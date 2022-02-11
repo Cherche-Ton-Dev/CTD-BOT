@@ -34,10 +34,8 @@ export async function createTicket(
             });
         });
     }
-
     const channel = await requester.guild?.channels.create(title, {
         type: "GUILD_TEXT",
-        permissionOverwrites,
     });
 
     await channel.send({
@@ -46,6 +44,7 @@ export async function createTicket(
     });
 
     if (parentID) await channel.setParent(parentID);
+    await channel.permissionOverwrites.set(permissionOverwrites);
 
     return channel;
 }
