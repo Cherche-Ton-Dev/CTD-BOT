@@ -11,6 +11,7 @@ import { Mission } from "../db/schemas/mission";
 import { generateMissionEmbed } from "../missions/generateEmbed";
 
 import { CommandReturn } from "../types/commands";
+import { createTicket } from "../utils/ticket";
 
 export const subCommand = false;
 
@@ -84,8 +85,72 @@ export async function run(
                     color: "RED",
                 },
             ],
+            components: [
+                {
+                    type: "ACTION_ROW",
+                    components: [
+                        {
+                            type: "BUTTON",
+                            label: "Obtenir le role",
+                            style: "SUCCESS",
+                            customId: "get-role",
+                        },
+                    ],
+                },
+            ],
             ephemeral: true,
         });
+
+        interaction.channel
+            ?.awaitMessageComponent({
+                filter: (buttonInteraction) =>
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    buttonInteraction.member?.id === interaction.member?.id &&
+                    buttonInteraction.component?.type === "BUTTON" &&
+                    buttonInteraction.component.label === "Obtenir le role",
+            })
+            .then(async (buttonInteraction) => {
+                await buttonInteraction.deferReply({
+                    ephemeral: true,
+                });
+                const channel = await createTicket(
+                    interaction.member as GuildMember,
+                    `${interaction.member?.user.username}-devenir-${requiredRole?.label}`,
+                    [modoRole.id],
+                    config.ticketCategoryId,
+                    [
+                        {
+                            title: "Requête de rôle",
+                            description: `${interaction.member?.user.username} souhaite devenir ${requiredRole?.label}`,
+                            color: "BLUE",
+                        },
+                    ],
+                    [
+                        {
+                            type: "ACTION_ROW",
+                            components: [
+                                {
+                                    type: "BUTTON",
+                                    style: "SUCCESS",
+                                    label: "Accepter",
+                                    customId: `event-give-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
+                                },
+                            ],
+                        },
+                    ],
+                );
+                await buttonInteraction.editReply({
+                    embeds: [
+                        {
+                            title: "Ticket crée.",
+                            description: `Va dans ton ticket ${channel} pour demander le role`,
+                            color: "GREEN",
+                        },
+                    ],
+                });
+            });
+
         return {
             status: "ERROR",
             label: "missing role for accept",
