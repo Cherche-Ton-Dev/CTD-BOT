@@ -6,6 +6,7 @@ import * as createMission from "./create-mission";
 import * as acceptMission from "./accept-mission";
 import * as giveRole from "./give-role";
 import * as refuseRole from "./refuse-role";
+import * as closeTicket from "./close-ticket";
 
 export { handleButtonPress } from "./handleButtonPress";
 export const commands: IButtonList = {
@@ -15,4 +16,5 @@ export const commands: IButtonList = {
     decline: declineMission,
     "give-role": giveRole,
     "refuse-role": refuseRole,
+    "close-ticket": closeTicket,
 };
