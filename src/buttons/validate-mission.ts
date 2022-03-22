@@ -1,3 +1,7 @@
+/**
+ * IN Guild, admin channel, mission valid
+ */
+
 import {
     ButtonInteraction,
     Client,

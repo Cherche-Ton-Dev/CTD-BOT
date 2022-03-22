@@ -1,3 +1,7 @@
+/**
+ * IN Server, take the mission, enter in contact with the client.
+ */
+
 import chalk from "chalk";
 import {
     ButtonInteraction,

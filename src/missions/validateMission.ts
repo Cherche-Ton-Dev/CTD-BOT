@@ -1,3 +1,7 @@
+/**
+ * IN MP, send the mission to the server for validation.
+ */
+
 import { GuildMember } from "discord.js";
 import { Mission } from "../db/schemas/mission";
 import { IMission } from "../types/missions";

@@ -1,3 +1,7 @@
+/**
+ * IN MP, ask questions for creating the mission.
+ */
+
 import { DMChannel, GuildMember } from "discord.js";
 
 import { askYesNo, askText, askSelectOne } from "../utils/questions/index";

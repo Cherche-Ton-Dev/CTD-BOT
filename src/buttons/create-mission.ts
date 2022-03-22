@@ -1,3 +1,7 @@
+/**
+ * IN Guild, after create mission button cliqued
+ */
+
 import { ButtonInteraction, Client, GuildMember } from "discord.js";
 
 import { CommandReturn } from "../types/commands";
