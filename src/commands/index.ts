@@ -1,6 +1,7 @@
 import { ICommandList } from "../types/commands";
 
 import * as suggest from "./suggest";
+import * as finish from "./finish";
 import * as ticket from "./ticket";
 import admin from "./admin/index";
 import gestion from "./gestion/index";
@@ -10,4 +11,5 @@ export const commands: ICommandList = {
     gestion,
     suggest,
     ticket,
+    finish,
 };

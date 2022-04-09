@@ -2,16 +2,18 @@ import {
     DMChannel,
     MessageSelectOptionData,
     SelectMenuInteraction,
+    TextBasedChannels,
+    TextChannel,
 } from "discord.js";
 import { disableComponent, fakeReply } from "./index";
 
 export async function askSelectOne<T>(
-    DM: DMChannel,
+    channel: DMChannel | TextChannel,
     timeout: number,
     text: string,
     options: MessageSelectOptionData[],
 ): Promise<T | null> {
-    const sentMessage = await DM.send({
+    const sentMessage = await channel.send({
         content: text,
         components: [
             {
