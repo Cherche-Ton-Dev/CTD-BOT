@@ -55,6 +55,21 @@ export async function run(
             status: "ERROR",
         };
     }
+    if (mission.finished) {
+        interaction.editReply({
+            embeds: [
+                {
+                    title: "Erreur",
+                    description: "Cette mission est déjà terminée.",
+                    color: "RED",
+                },
+            ],
+        });
+        return {
+            label: "MISSION_FINISHED",
+            status: "ERROR",
+        };
+    }
 
     if (
         mission.authorUserID !== interaction.member.user.id &&
