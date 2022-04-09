@@ -1,7 +1,7 @@
 import { GuildMember } from "discord.js";
-import { config } from "../config";
 import { log } from "../utils/log";
 import { InviteData, JoinType } from "../types/invites";
+import { config } from "../context/config";
 
 export async function handleMemberAdd(
     member: GuildMember,

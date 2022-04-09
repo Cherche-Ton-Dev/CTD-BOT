@@ -1,6 +1,6 @@
 import { Document, model, Schema, Types } from "mongoose";
 
-interface IDBMember {
+export interface IDBMember {
     discordID: string;
     guildID: string;
     username: string;

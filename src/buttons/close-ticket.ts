@@ -12,7 +12,10 @@ export async function run(
     if (!(interaction.channel instanceof TextChannel))
         return { status: "IGNORE" };
 
-    if (!interaction.channel.name.startsWith("ticket-de")) {
+    if (
+        !interaction.channel.name.startsWith("ticket-de") &&
+        !interaction.channel.name.startsWith("mission-de")
+    ) {
         await interaction.reply({
             embeds: [
                 {
