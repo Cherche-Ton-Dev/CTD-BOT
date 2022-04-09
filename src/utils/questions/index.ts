@@ -14,7 +14,7 @@ export async function disableComponent(message: Message) {
     components.forEach((row) =>
         row.components.forEach((component) => component.setDisabled(true)),
     );
-    message.edit({
+    await message.edit({
         components,
     });
 }

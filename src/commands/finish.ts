@@ -30,12 +30,14 @@ export async function run(
     )
         return { status: "IGNORE" };
 
+    await interaction.deferReply({ ephemeral: true });
+
     const mission = await Mission.findOne({
         channel: interaction.channel.id,
     });
 
     if (!mission) {
-        interaction.reply({
+        interaction.editReply({
             embeds: [
                 {
                     title: "Erreur",
@@ -43,7 +45,6 @@ export async function run(
                     color: "RED",
                 },
             ],
-            ephemeral: true,
         });
         return {
             label: "NO_MISSION",
@@ -55,7 +56,7 @@ export async function run(
         mission.authorUserID !== interaction.member.user.id ||
         !interaction.member.roles.cache.find((r) => r.id == config.modoRoleId)
     ) {
-        interaction.reply({
+        interaction.editReply({
             embeds: [
                 {
                     title: "Erreur",
@@ -64,7 +65,6 @@ export async function run(
                     color: "RED",
                 },
             ],
-            ephemeral: true,
         });
         return {
             label: "MISSING_PERMISSIONS",
@@ -72,15 +72,11 @@ export async function run(
         };
     }
 
-    const rank = await askSelectOne(
+    const { interaction: rankInter, value: rank } = await askSelectOne(
         interaction.channel,
         1000 * 60 * 5,
         "Note:",
         [
-            {
-                label: "",
-                value: "0",
-            },
             {
                 label: "⭐",
                 value: "1",
@@ -102,12 +98,21 @@ export async function run(
                 value: "5",
             },
         ],
+        interaction,
     );
-    
+    if (!rankInter) return { status: "ERROR", label: "TIMEOUT" };
+    await rankInter.deferReply({ ephemeral: true });
 
-    log("Fin de mission:", rank, "/5", mission.task.slice(0, 20));
+    log("Fin de mission:", rank + "/5", mission.task.slice(0, 20));
 
-    const comment = await askTextInteraction()
+    const comment = await askTextInteraction(
+        rankInter,
+        1000 * 60 * 5,
+        "Commentaire:",
+        true,
+    );
+    if (!comment) return { status: "ERROR", label: "TIMEOUT" };
+    log("Commentaire:", comment.slice(0, 20));
 
     return {
         status: "OK",

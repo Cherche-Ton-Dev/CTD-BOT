@@ -27,7 +27,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
         authorUserID: member.user.id,
     };
 
-    const selectedDev = await askSelectOne<Dev>(
+    const { value: selectedDev } = await askSelectOne<Dev>(
         DM,
         timeout,
         "Quel poste recherches-tu pour t'aider dans l'avancement de ton projet ?",
@@ -75,7 +75,9 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
     if (!task) return cancelMission(DM);
     mission.task = task;
 
-    const difficulty = await askSelectOne<"1" | "2" | "3" | "4" | "5">(
+    const { value: difficulty } = await askSelectOne<
+        "1" | "2" | "3" | "4" | "5"
+    >(
         DM,
         timeout,
         "Quelle est la difficulté estimée (selon toi) de ta mission ?",
