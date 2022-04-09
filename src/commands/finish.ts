@@ -133,7 +133,7 @@ export async function run(
     );
     await rating.save();
 
-    const embed = generateRatingEmbed(rating);
+    const embed = await generateRatingEmbed(rating);
     await interaction.channel.send({ embeds: [embed] });
 
     const ratingChannel = await interaction.guild.channels.fetch(

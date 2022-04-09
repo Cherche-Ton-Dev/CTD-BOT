@@ -2,7 +2,15 @@ import { MessageEmbedOptions } from "discord.js";
 import { context } from "../context/context";
 import { Rating } from "../db/schemas/rating";
 
-export function generateRatingEmbed(rating: Rating): MessageEmbedOptions {
+export async function generateRatingEmbed(
+    rating: Rating,
+): Promise<MessageEmbedOptions> {
+    const devMember = await context.client.guilds.cache
+        .get(rating.guildID)
+        ?.members.fetch(rating.dev);
+    const clientMember = await context.client.guilds.cache
+        .get(rating.guildID)
+        ?.members.fetch(rating.client);
     return {
         title: "Avis",
         description: `<@${rating.dev}> a été noté **${rating.rating}/5** par <@${rating.client}>`,
@@ -17,5 +25,12 @@ export function generateRatingEmbed(rating: Rating): MessageEmbedOptions {
                 value: "⭐".repeat(rating.rating),
             },
         ],
+        thumbnail: {
+            url: devMember?.user.displayAvatarURL(),
+        },
+        footer: {
+            text: clientMember?.user.tag,
+            icon_url: clientMember?.user.displayAvatarURL(),
+        },
     };
 }
