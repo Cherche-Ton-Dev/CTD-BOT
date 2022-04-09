@@ -18,6 +18,7 @@ const schema = new Schema<IMission>({
     author: { type: Schema.Types.ObjectId, ref: "member" },
     authorUserID: { type: String, required: true },
     authorGuildID: { type: String, required: true },
+    finished: { type: Boolean, default: false },
 });
 
 export const Mission = model<IMission>("mission", schema);

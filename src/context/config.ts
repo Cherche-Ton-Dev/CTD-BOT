@@ -52,6 +52,7 @@ export const config = {
     modoRoleId: "905389455765037116",
     ticketCategoryId: "961269635414634566",
     welcomeChanelID: "892774431728996375",
+    ratingChanelID: "962352346430603315",
     missionChannelIDS: {
         dev: {
             free: "902124390458728449",

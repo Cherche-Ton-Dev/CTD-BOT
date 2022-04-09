@@ -23,6 +23,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
         isPayed: false,
         target: "dev",
         task: "",
+        finished: false,
         authorGuildID: member.guild.id,
         authorUserID: member.user.id,
     };
