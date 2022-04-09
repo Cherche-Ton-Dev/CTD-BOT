@@ -1,4 +1,4 @@
-import { GuildMember } from "discord.js";
+import { GuildMember, User } from "discord.js";
 import { Mission } from "../schemas/mission";
 import { Rating } from "../schemas/rating";
 import { getMember } from "./member";
@@ -17,5 +17,12 @@ export async function createRating(
         client: client.user.id,
         rating,
         comment,
+    });
+}
+
+export async function getRatings(dev: GuildMember) {
+    return Rating.find({
+        dev: dev.user.id,
+        guildID: dev.guild.id,
     });
 }
