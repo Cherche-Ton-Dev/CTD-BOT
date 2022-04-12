@@ -48,7 +48,11 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
 
     let price: string | null;
     if (isPayed) {
-        price = await askText(DM, timeout, "Quel est ton budget ?");
+        price = await askText(
+            DM,
+            timeout,
+            "Quel est ton budget ? *merci d'inclure la devise (€, $, btc, eth, ...)*",
+        );
         if (!price) return cancelMission(DM);
         mission.price = price;
     } else {
