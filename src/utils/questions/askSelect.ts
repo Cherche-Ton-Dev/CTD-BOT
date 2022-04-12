@@ -1,17 +1,24 @@
 import {
+    CommandInteraction,
     DMChannel,
+    Interaction,
+    Message,
+    MessageOptions,
     MessageSelectOptionData,
     SelectMenuInteraction,
+    TextBasedChannels,
+    TextChannel,
 } from "discord.js";
 import { disableComponent, fakeReply } from "./index";
 
 export async function askSelectOne<T>(
-    DM: DMChannel,
+    channel: DMChannel | TextChannel,
     timeout: number,
     text: string,
-    options: MessageSelectOptionData[],
-): Promise<T | null> {
-    const sentMessage = await DM.send({
+    options: (MessageSelectOptionData & { value: T })[],
+    interaction?: CommandInteraction,
+) {
+    const msgOptions: MessageOptions = {
         content: text,
         components: [
             {
@@ -25,7 +32,11 @@ export async function askSelectOne<T>(
                 ],
             },
         ],
-    });
+    };
+    let sentMessage: Message;
+    if (interaction)
+        sentMessage = (await interaction.editReply(msgOptions)) as Message;
+    else sentMessage = await channel.send(msgOptions);
 
     let selectInteraction: SelectMenuInteraction;
     try {
@@ -33,11 +44,17 @@ export async function askSelectOne<T>(
             time: timeout,
             componentType: "SELECT_MENU",
         });
-        await fakeReply(selectInteraction);
+        // await fakeReply(selectInteraction);
     } catch (error) {
-        return null;
+        return {
+            interaction: null,
+            value: null,
+        };
     }
 
-    await disableComponent(sentMessage);
-    return selectInteraction.values[0] as unknown as T | null;
+    if (!interaction) await disableComponent(sentMessage);
+    return {
+        interaction: selectInteraction,
+        value: selectInteraction.values[0] as unknown as T,
+    };
 }

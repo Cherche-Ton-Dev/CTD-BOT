@@ -1,7 +1,9 @@
 import {
     ButtonInteraction,
+    CollectorFilter,
     CommandInteraction,
     DMChannel,
+    Message,
     SelectMenuInteraction,
 } from "discord.js";
 
@@ -32,6 +34,7 @@ export async function askTextInteraction(
     timeout: number,
     text: string,
     remove = false,
+    filter?: CollectorFilter<[Message]>,
 ): Promise<string | null> {
     await interaction.editReply({
         content: text,
@@ -42,6 +45,7 @@ export async function askTextInteraction(
         const received = await interaction.channel?.awaitMessages({
             time: timeout,
             max: 1,
+            filter,
         });
         value = received?.first()?.content || "";
         if (remove) await received?.first()?.delete();

@@ -15,4 +15,5 @@ export interface IMission {
     author?: Types.ObjectId;
     authorUserID: string;
     authorGuildID: string;
+    finished: boolean;
 }

@@ -289,7 +289,7 @@ export async function run(
     });
 
     channel.send({
-        content: "** **",
+        content: "Utilisez la commande /finish une fois la mission terminée",
         embeds: [generateMissionEmbed(mission, author.user)],
     });
 
