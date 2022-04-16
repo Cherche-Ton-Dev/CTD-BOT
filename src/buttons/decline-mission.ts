@@ -32,6 +32,7 @@ export async function run(
         1000 * 60,
         "Pour quelle raison?",
         true,
+        (m) => m.author.id === interaction.member?.user.id,
     );
     if (!reason) return { status: "ERROR", label: "no response" };
     // if (interaction.channel) {
