@@ -169,6 +169,17 @@ export async function run(
                         },
                     ],
                 );
+                channel.send(
+                    `Bonjour ${interaction.member}, les <@&${
+                        requiredRole?.value == "artist"
+                            ? config.respArtistRoleId
+                            : config.respDevRoleId
+                    }> vont verifier tes competences.\nEst ce que tu pourrais presenter quelques uns de tes projets/creations, \n${
+                        requiredRole?.value == "artist"
+                            ? "ton portfolio si tu en as un ?"
+                            : "ton github / gitlab / portfolio ?"
+                    }`,
+                );
                 await buttonInteraction.editReply({
                     embeds: [
                         {

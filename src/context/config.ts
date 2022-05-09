@@ -4,7 +4,9 @@ export const config = {
     suggestionsChanelId: "934916135491608702",
     pendingChannelId: "934916135051198471",
     modoRoleId: "934916134329786383",
-    ticketCategoryId: "934916136259182603",
+    respDevRoleId: "934916134329786381",
+    respArtistRoleId: "934916134329786380",
+    ticketCategoryId: "973257863977922640",
     welcomeChanelID: "934916135235752021",
     ratingChanelID: "934916135902654466",
     missionChannelIDS: {

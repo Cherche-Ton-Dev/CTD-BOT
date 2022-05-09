@@ -23,7 +23,13 @@ export async function run(
 
     if (
         !(interaction.member?.roles as GuildMemberRoleManager).cache.find(
-            (r) => r.id == config.modoRoleId,
+            (r) =>
+                r.id in
+                [
+                    config.modoRoleId,
+                    config.respDevRoleId,
+                    config.respArtistRoleId,
+                ],
         )
     ) {
         await interaction.reply({
