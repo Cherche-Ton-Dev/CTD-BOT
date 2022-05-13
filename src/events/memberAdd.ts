@@ -2,6 +2,8 @@ import { GuildMember } from "discord.js";
 import { log } from "../utils/log";
 import { InviteData, JoinType } from "../types/invites";
 import { config } from "../context/config";
+import { addPoints, createOrGetMember } from "../db/api/member";
+import { invitePoints } from "../utils/equations";
 
 export async function handleMemberAdd(
     member: GuildMember,
@@ -35,6 +37,16 @@ export async function handleMemberAdd(
                 },
             ],
         });
+        const dbMem = await createOrGetMember(member, false);
+        const inviter = await member.guild.members.fetch(
+            usedInvite?.inviter.id,
+        );
+        dbMem.invitedBy = usedInvite?.inviter.id;
+        await dbMem.save();
+
+        const contribPoints = invitePoints();
+        await addPoints(inviter, contribPoints);
+
         return;
     }
 

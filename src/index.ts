@@ -10,6 +10,7 @@ import { connectDB } from "./db/init";
 import { context } from "./context/context";
 import { handleMemberAdd } from "./events/memberAdd";
 import { handleMessageCreated } from "./events/message";
+import { handleMemberRemove } from "./events/memberRemove";
 
 const intents: Discord.IntentsString[] = [
     "GUILDS",
@@ -29,6 +30,7 @@ const tracker = InvitesTracker.init(client, {
     fetchAuditLogs: true,
 });
 tracker.on("guildMemberAdd", handleMemberAdd);
+client.on("guildMemberRemove", handleMemberRemove);
 
 client.once("ready", async () => {
     log(
