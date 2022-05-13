@@ -9,6 +9,7 @@ import { handleInteractionCreate } from "./events/interactionCreate";
 import { connectDB } from "./db/init";
 import { context } from "./context/context";
 import { handleMemberAdd } from "./events/memberAdd";
+import { handleMessageCreated } from "./events/message";
 
 const intents: Discord.IntentsString[] = [
     "GUILDS",
@@ -36,6 +37,7 @@ client.once("ready", async () => {
 });
 
 client.on("interactionCreate", handleInteractionCreate);
+client.on("messageCreate", handleMessageCreated);
 
 connectDB().then(() => {
     client.login(process.env.BOT_TOKEN);

@@ -68,7 +68,7 @@ export async function addPoints(member: GuildMember, points: number) {
             dbMem.lastContribFeatured < step
         ) {
             dbMem.lastContribFeatured = step;
-            featureContrib(dbMem);
+            featureContrib(member, dbMem.contributionPoints);
         }
     }
 
