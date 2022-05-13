@@ -9,6 +9,7 @@ export const config = {
     ticketCategoryId: "973257863977922640",
     welcomeChanelID: "934916135235752021",
     ratingChanelID: "934916135902654466",
+    contribChanelID: "974593378115264514",
     missionChannelIDS: {
         dev: {
             free: "934916135709724706",

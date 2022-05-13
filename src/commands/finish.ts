@@ -8,9 +8,12 @@ import {
     TextChannel,
 } from "discord.js";
 import { config } from "../context/config";
+import { addPoints } from "../db/api/member";
 import { createRating } from "../db/api/rating";
+import { DBMember } from "../db/schemas/member";
 import { Mission } from "../db/schemas/mission";
 import { ApplicationCommand, CommandReturn } from "../types/commands";
+import { ratingPoints } from "../utils/equations";
 import { log } from "../utils/log";
 import { askSelectOne } from "../utils/questions";
 import { askTextInteraction } from "../utils/questions/askText";
@@ -162,6 +165,9 @@ export async function run(
 
     mission.finished = true;
     await mission.save();
+
+    const contribution_points = ratingPoints(parseInt(rank || "0"));
+    await addPoints(dev, contribution_points);
 
     interaction.channel.send({
         embeds: [

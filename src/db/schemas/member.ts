@@ -6,6 +6,8 @@ export interface IDBMember {
     username: string;
     invites: number;
     roleTicketPending: boolean;
+    contributionPoints: number;
+    lastContribFeatured: number;
 }
 export type DBMember = Document<unknown, unknown, IDBMember> &
     IDBMember & {
@@ -18,6 +20,8 @@ const schema = new Schema<IDBMember>({
     username: { type: String, required: false },
     invites: { type: Number, default: 0, required: false },
     roleTicketPending: { type: Boolean, default: false, required: false },
+    contributionPoints: { type: Number, default: 0, required: true },
+    lastContribFeatured: { type: Number, default: -1, required: true },
 });
 
 export const DBMember = model<IDBMember>("member", schema);
