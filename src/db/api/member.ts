@@ -68,6 +68,7 @@ export async function addPoints(member: GuildMember, points: number) {
             dbMem.lastContribFeatured < step
         ) {
             dbMem.lastContribFeatured = step;
+            await dbMem.save();
             featureContrib(member, dbMem.contributionPoints);
         }
     }
