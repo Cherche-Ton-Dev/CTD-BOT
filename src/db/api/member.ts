@@ -47,6 +47,8 @@ export async function removeInvite(member: GuildMember) {
 }
 
 export async function addPoints(member: GuildMember, points: number) {
+    if (member.user.bot) return;
+
     let dbMem = await DBMember.findOneAndUpdate(
         { discordID: member.id, guildID: member.guild.id },
         { $inc: { contributionPoints: points } },
