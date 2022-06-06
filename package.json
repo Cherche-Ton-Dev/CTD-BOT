@@ -6,7 +6,7 @@
   "repository": "https://github.com/rafalou38/CTD-BOT.git",
   "license": "MIT",
   "engines": {
-    "node": "16.x"
+    "node": ">= 17"
   },
   "scripts": {
     "dev": "node --loader ts-node/esm ./src/index.ts",
