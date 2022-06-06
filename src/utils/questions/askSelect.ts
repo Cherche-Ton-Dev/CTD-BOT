@@ -1,15 +1,13 @@
 import {
     CommandInteraction,
     DMChannel,
-    Interaction,
     Message,
     MessageOptions,
     MessageSelectOptionData,
     SelectMenuInteraction,
-    TextBasedChannels,
     TextChannel,
 } from "discord.js";
-import { disableComponent, fakeReply } from "./index";
+import { disableComponent } from "./index";
 
 export async function askSelectOne<T>(
     channel: DMChannel | TextChannel,

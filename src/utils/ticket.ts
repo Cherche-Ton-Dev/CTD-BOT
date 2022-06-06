@@ -1,10 +1,10 @@
 import {
+    BaseMessageComponentOptions,
     GuildMember,
+    MessageActionRow,
     MessageActionRowOptions,
-    MessageComponentOptions,
     MessageEmbedOptions,
     OverwriteResolvable,
-    Role,
 } from "discord.js";
 
 export async function createTicket(
@@ -13,7 +13,10 @@ export async function createTicket(
     rolesIDS?: string[],
     parentID?: string,
     embeds?: MessageEmbedOptions[],
-    components?: MessageActionRowOptions[],
+    components?: (
+        | MessageActionRow
+        | (Required<BaseMessageComponentOptions> & MessageActionRowOptions)
+    )[],
 ) {
     const permissionOverwrites: OverwriteResolvable[] = [
         {
