@@ -13,7 +13,7 @@ export async function generateRatingEmbed(
         ?.members.fetch(rating.client);
     return {
         title: "Avis",
-        description: `<@${rating.dev}> a été noté **${rating.rating}/5** par <@${rating.client}>`,
+        description: `${devMember} a été noté **${rating.rating}/5** par ${clientMember}`,
         color: "GREEN",
         fields: [
             {

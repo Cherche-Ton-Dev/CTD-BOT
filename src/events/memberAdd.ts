@@ -15,14 +15,15 @@ export async function handleMemberAdd(
         return log("ERREUR: welcomeChanelID invalide");
 
     if (joinType === "normal") {
-        log(
-            `${member.user.tag} a été invité par ${usedInvite?.inviter.username}`,
+        const inviterMem = await member.guild.members.fetch(
+            usedInvite?.inviter,
         );
+        log(`${member.user.tag} a été invité par ${inviterMem.user.username}`);
         channel.send({
             embeds: [
                 {
                     title: `Bonjour ${member.user.username} !`,
-                    description: `Bienvenue sur CTD.\nTu as été invité par ${usedInvite?.inviter}.`,
+                    description: `Bienvenue sur CTD.\nTu as été invité par ${inviterMem}.`,
                     color: "GREEN",
                     thumbnail: {
                         url:
@@ -31,17 +32,15 @@ export async function handleMemberAdd(
                             }) || "",
                     },
                     footer: {
-                        text: usedInvite?.inviter.tag,
-                        icon_url: usedInvite?.inviter.displayAvatarURL(),
+                        text: inviterMem.tag,
+                        icon_url: inviterMem.displayAvatarURL(),
                     },
                 },
             ],
         });
         const dbMem = await createOrGetMember(member, false);
-        const inviter = await member.guild.members.fetch(
-            usedInvite?.inviter.id,
-        );
-        dbMem.invitedBy = usedInvite?.inviter.id;
+        const inviter = await member.guild.members.fetch(inviterMem.id);
+        dbMem.invitedBy = inviter.id;
         await dbMem.save();
 
         const contribPoints = invitePoints();
