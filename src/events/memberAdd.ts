@@ -32,7 +32,7 @@ export async function handleMemberAdd(
                             }) || "",
                     },
                     footer: {
-                        text: inviterMem.tag,
+                        text: inviterMem.user.tag,
                         icon_url: inviterMem.displayAvatarURL(),
                     },
                 },
