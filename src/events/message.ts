@@ -14,10 +14,14 @@ export async function handleMessageCreated(message: Message) {
         message.author.id === "302050872383242240" /*disboard*/ &&
         message.interaction?.commandName === "bump"
     ) {
-        const contribPoints = bumpPoints();
-        await addPoints(message.member, contribPoints);
+        const bumper = await message.guild?.members.fetch(
+            message.interaction.user.id,
+        );
+        if (!bumper) return;
+        const contribPoints = bumpPoints(bumper);
+        await addPoints(bumper, contribPoints);
         await message.channel.send(
-            `${message.interaction.user} a reçu ${contribPoints} points de contribution pour son bump 👍.`,
+            `${bumper} a reçu ${contribPoints} points de contribution pour son bump 👍.`,
         );
     }
 }
