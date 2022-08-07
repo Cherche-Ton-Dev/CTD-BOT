@@ -1,12 +1,12 @@
-import { ApplicationCommandOptionType } from "discord-api-types";
+import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
 import { config } from "../context/config";
 import { createOrGetMember } from "../db/api/member";
 import { getRatings } from "../db/api/rating";
-import { ApplicationCommand, CommandReturn } from "../types/commands";
+import { CommandReturn, PartialApplicationCommand } from "../types/commands";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommand = {
     name: "contrib",
     description: "Affiche vos points de contribution.",
     options: [

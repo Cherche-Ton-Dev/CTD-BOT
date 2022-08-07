@@ -1,14 +1,16 @@
-import { ApplicationCommandOptionType } from "discord-api-types";
 import { Client, Interaction } from "discord.js";
-import { ApplicationCommand, CommandReturn } from "../../types/commands";
+import {
+    CommandReturn,
+    PartialApplicationCommandSubCommand,
+} from "../../types/commands";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommandSubCommand = {
     name: "create-mission-button",
     description: "crée un bouton pour créer une mission",
     options: [
         {
-            type: ApplicationCommandOptionType.String,
+            type: "STRING",
             name: "message",
             description: "Message que doit dire le bot avant le message",
             required: false,

@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType } from "discord-api-types";
+import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import {
     Client,
     Guild,
@@ -12,17 +12,18 @@ import { addPoints } from "../db/api/member";
 import { createRating } from "../db/api/rating";
 import { DBMember } from "../db/schemas/member";
 import { Mission } from "../db/schemas/mission";
-import { ApplicationCommand, CommandReturn } from "../types/commands";
+import { PartialApplicationCommand, CommandReturn } from "../types/commands";
 import { ratingPoints } from "../utils/equations";
 import { log } from "../utils/log";
 import { askSelectOne } from "../utils/questions";
 import { askTextInteraction } from "../utils/questions/askText";
-import { generateRatingEmbed } from "../utils/rating";
+import { generateRatingEmbed } from "../utils/embeds/rating";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommand = {
     name: "finish",
-    description: "Terminer une mission",
+    description: "Terminer une mission.",
+    options: [],
 };
 
 export async function run(

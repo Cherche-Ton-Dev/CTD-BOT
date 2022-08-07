@@ -1,18 +1,18 @@
-import { ApplicationCommandOptionType } from "discord-api-types";
+import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
 import { config } from "../context/config";
 import { getRatings } from "../db/api/rating";
-import { ApplicationCommand, CommandReturn } from "../types/commands";
+import { PartialApplicationCommand, CommandReturn } from "../types/commands";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommand = {
     name: "moyenne",
     description: "Affiche la moyenne d'avis d'un dev.",
     options: [
         {
             type: ApplicationCommandOptionType.User,
             name: "membre",
-            description: "Membre dont vous voulez lire la moyenne.",
+            description: "Membre dont vous voulez lire la moyenne de note.",
             required: false,
         },
     ],
