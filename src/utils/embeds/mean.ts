@@ -10,7 +10,7 @@ export function generateMeanEmbed(
         ratings.reduce((acc, cur) => acc + cur.rating, 0) / ratings.length;
     return {
         title: `Note de ${member.displayName}`,
-        description: `${member} a noté ${ratings.length} fois.`,
+        description: `${member} a reçu ${ratings.length} avis.`,
         fields: [
             {
                 name: "Moyenne",
