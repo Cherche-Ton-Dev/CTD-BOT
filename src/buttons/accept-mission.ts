@@ -31,8 +31,10 @@ export async function run(
                 title: "Erreur",
                 description:
                     "Cette fonctionalité a été désactive, merci de demander au créateur de a mission de la créer a nouveau",
+                color: "RED",
             },
         ],
+        ephemeral: true,
     });
 
     return {

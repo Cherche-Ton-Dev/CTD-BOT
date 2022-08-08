@@ -186,7 +186,7 @@ export async function run(
                         label: "Accepter",
                         emoji: "✅",
                         style: "SUCCESS",
-                        customId: "accept-offer",
+                        customId: "event-accept-offer",
                     },
                 ],
             },

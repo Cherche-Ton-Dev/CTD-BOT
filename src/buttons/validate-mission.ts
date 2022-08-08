@@ -86,24 +86,13 @@ export async function run(
             // Send mission to corresponding channel
             const sentMissionMessage = await channel.send({
                 embeds: [generateMissionEmbed(mission, author)],
-                content: mission.isPayed ? `Mention: ${targetRole}` : "",
-                components: [
-                    {
-                        type: "ACTION_ROW",
-                        components: [
-                            {
-                                label: "Accept",
-                                style: "SUCCESS",
-                                type: "BUTTON",
-                                customId: `event-accept{${mission.id}}`,
-                            },
-                        ],
-                    },
-                ],
+                content: mission.isPayed
+                    ? `Mention: ${targetRole}`
+                    : "Nouvelle mission",
             });
             // Create thread
             const thread = await channel.threads.create({
-                name: "Accord préalable.",
+                name: "Accepter la mission 👆",
                 startMessage: sentMissionMessage,
                 type: "GUILD_PUBLIC_THREAD",
             });
@@ -111,8 +100,8 @@ export async function run(
             mission.save();
             thread.send({
                 content:
-                    "Mettez vous d’accords ici sur le prix et les autres conditions pour la mission. \n" +
-                    "Pour accepter la mission exécutez la command `/offer` et ainsi réaliser une offre qui pourra être validée par le créateur de la mission.\n" +
+                    "Mettez vous d’accords ici sur **la récompense** et **les choses a réaliser**. \n" +
+                    "Ensuite effectuez la commande `/offer` pour créer une offre.\n" +
                     `||${author}||`,
             });
 
