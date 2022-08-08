@@ -1,8 +1,6 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
-import { config } from "$context/config";
 import { createOrGetMember } from "$db/api/member";
-import { getRatings } from "$db/api/rating";
 import { CommandReturn, PartialApplicationCommand } from "$types/commands";
 
 export const subCommand = false;

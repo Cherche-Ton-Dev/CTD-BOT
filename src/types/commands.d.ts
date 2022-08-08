@@ -1,16 +1,8 @@
 import {
     APIApplicationCommand,
     APIApplicationCommandBasicOption,
-    APIApplicationCommandSubcommandOption,
 } from "discord-api-types/v9";
-import {
-    ApplicationCommandChannelOption,
-    ApplicationCommandChoicesOption,
-    ApplicationCommandNonOptions,
-    ApplicationCommandSubCommand,
-    Client,
-    Interaction,
-} from "discord.js";
+import { ApplicationCommandSubCommand, Client, Interaction } from "discord.js";
 
 declare interface PartialApplicationCommand
     extends Partial<APIApplicationCommand> {

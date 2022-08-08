@@ -16,6 +16,7 @@ module.exports = {
         quotes: ["error", "double"],
         semi: ["error", "always"],
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-unused-vars": "error",
         "no-empty": "off",
     },
 };

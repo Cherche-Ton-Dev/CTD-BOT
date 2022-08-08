@@ -1,4 +1,4 @@
-import { GuildMember, User } from "discord.js";
+import { GuildMember } from "discord.js";
 import { Mission } from "$db/schemas/mission";
 import { Rating } from "$db/schemas/rating";
 

@@ -1,16 +1,13 @@
-import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import {
     Client,
     Guild,
     GuildMember,
-    GuildMemberRoleManager,
     Interaction,
     TextChannel,
 } from "discord.js";
 import { config } from "$context/config";
 import { addPoints } from "$db/api/member";
 import { createRating } from "$db/api/rating";
-import { DBMember } from "$db/schemas/member";
 import { Mission } from "$db/schemas/mission";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 import { ratingPoints } from "$utils/equations";

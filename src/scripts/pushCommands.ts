@@ -1,19 +1,13 @@
 import readline from "readline";
 import dotenv from "dotenv";
 import util from "util";
-import axios, { AxiosPromise } from "axios";
+import axios from "axios";
 import { commands } from "$commands/index";
 import {
     APIApplicationCommand,
-    APIApplicationCommandOption,
     APIApplicationCommandSubcommandOption,
 } from "discord-api-types/v9";
-import {
-    PartialApplicationCommand,
-    commandModule,
-    ICommandList,
-} from "$types/commands";
-import { log } from "$utils/log";
+import { PartialApplicationCommand, ICommandList } from "$types/commands";
 
 import * as Diff from "diff";
 import chalk from "chalk";
@@ -64,7 +58,7 @@ function formatOURCommands(commands: ICommandList) {
 
     const result: PartialApplicationCommand[] = [];
 
-    for (const [name, command] of Object.entries(commands)) {
+    for (const [, command] of Object.entries(commands)) {
         if (command?.subCommand) {
             const resultCommand: typeof result[0] = {
                 name: command.name,

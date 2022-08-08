@@ -1,8 +1,4 @@
-import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, GuildMember, Interaction } from "discord.js";
-import { config } from "$context/config";
-import { createOrGetMember } from "$db/api/member";
-import { getRatings } from "$db/api/rating";
+import { Client, Interaction } from "discord.js";
 import { DBMember } from "$db/schemas/member";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
