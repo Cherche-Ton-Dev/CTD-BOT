@@ -1,4 +1,4 @@
-import { commandModule } from "../../types/commands";
+import { commandModule } from "$types/commands";
 
 import * as test from "./test";
 

@@ -10,10 +10,10 @@ import {
     TextChannel,
 } from "discord.js";
 
-import { CommandReturn } from "../types/commands";
-import { validateMission } from "../db/api/mission";
-import { config } from "../context/config";
-import { generateMissionEmbed } from "../missions/generateEmbed";
+import { CommandReturn } from "$types/commands";
+import { validateMission } from "$db/api/mission";
+import { config } from "$context/config";
+import { generateMissionEmbed } from "utils/embeds/mission";
 
 export const subCommand = false;
 

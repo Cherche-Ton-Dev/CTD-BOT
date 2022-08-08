@@ -1,4 +1,4 @@
-import { ICommandList } from "../types/commands";
+import { ICommandList } from "types/commands";
 
 import * as suggest from "./suggest";
 import * as finish from "./finish";

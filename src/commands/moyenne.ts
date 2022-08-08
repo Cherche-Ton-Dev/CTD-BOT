@@ -1,8 +1,7 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
-import { config } from "../context/config";
-import { getRatings } from "../db/api/rating";
-import { PartialApplicationCommand, CommandReturn } from "../types/commands";
+import { getRatings } from "$db/api/rating";
+import { PartialApplicationCommand, CommandReturn } from "types/commands";
 
 export const subCommand = false;
 export const data: PartialApplicationCommand = {

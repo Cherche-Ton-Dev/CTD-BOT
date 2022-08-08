@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
-import { config } from "../../context/config";
-import { addPoints } from "../../db/api/member";
+import { config } from "$context/config";
+import { addPoints } from "$db/api/member";
 import {
     CommandReturn,
     PartialApplicationCommandSubCommand,
-} from "../../types/commands";
-import { log } from "../../utils/log";
+} from "$types/commands";
+import { log } from "$utils/log";
 
 export const subCommand = false;
 export const data: PartialApplicationCommandSubCommand = {

@@ -1,9 +1,9 @@
 import { GuildMember } from "discord.js";
-import { log } from "../utils/log";
-import { InviteData, JoinType } from "../types/invites";
-import { config } from "../context/config";
-import { addPoints, createOrGetMember } from "../db/api/member";
-import { invitePoints } from "../utils/equations";
+import { log } from "$utils/log";
+import { InviteData, JoinType } from "$types/invites";
+import { config } from "$context/config";
+import { addPoints, createOrGetMember } from "$db/api/member";
+import { invitePoints } from "$utils/equations";
 
 export async function handleMemberAdd(
     member: GuildMember,

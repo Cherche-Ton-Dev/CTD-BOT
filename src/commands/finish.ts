@@ -7,17 +7,17 @@ import {
     Interaction,
     TextChannel,
 } from "discord.js";
-import { config } from "../context/config";
-import { addPoints } from "../db/api/member";
-import { createRating } from "../db/api/rating";
-import { DBMember } from "../db/schemas/member";
-import { Mission } from "../db/schemas/mission";
-import { PartialApplicationCommand, CommandReturn } from "../types/commands";
-import { ratingPoints } from "../utils/equations";
-import { log } from "../utils/log";
-import { askSelectOne } from "../utils/questions";
-import { askTextInteraction } from "../utils/questions/askText";
-import { generateRatingEmbed } from "../utils/embeds/rating";
+import { config } from "$context/config";
+import { addPoints } from "$db/api/member";
+import { createRating } from "$db/api/rating";
+import { DBMember } from "$db/schemas/member";
+import { Mission } from "$db/schemas/mission";
+import { PartialApplicationCommand, CommandReturn } from "$types/commands";
+import { ratingPoints } from "$utils/equations";
+import { log } from "$utils/log";
+import { askSelectOne } from "$utils/questions";
+import { askTextInteraction } from "$utils/questions/askText";
+import { generateRatingEmbed } from "$utils/embeds/rating";
 
 export const subCommand = false;
 export const data: PartialApplicationCommand = {

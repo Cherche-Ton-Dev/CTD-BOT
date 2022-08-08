@@ -2,7 +2,7 @@ import readline from "readline";
 import dotenv from "dotenv";
 import util from "util";
 import axios, { AxiosPromise } from "axios";
-import { commands } from "../commands/index";
+import { commands } from "$commands/index";
 import {
     APIApplicationCommand,
     APIApplicationCommandOption,
@@ -12,8 +12,8 @@ import {
     PartialApplicationCommand,
     commandModule,
     ICommandList,
-} from "../types/commands";
-import { log } from "../utils/log";
+} from "$types/commands";
+import { log } from "$utils/log";
 
 import * as Diff from "diff";
 import chalk from "chalk";

@@ -1,5 +1,5 @@
 import { Document, model, Schema, Types } from "mongoose";
-import { IMission } from "../../types/missions";
+import { IMission } from "$types/missions";
 
 export type Mission = Document<unknown, unknown, IMission> &
     IMission & {

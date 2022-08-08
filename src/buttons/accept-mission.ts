@@ -10,13 +10,13 @@ import {
     Message,
     MessageEmbed,
 } from "discord.js";
-import { config } from "../context/config";
-import { createOrGetMember } from "../db/api/member";
-import { Mission } from "../db/schemas/mission";
-import { generateMissionEmbed } from "../missions/generateEmbed";
+import { config } from "$context/config";
+import { createOrGetMember } from "$db/api/member";
+import { Mission } from "$db/schemas/mission";
+import { generateMissionEmbed } from "utils/embeds/mission";
 
-import { CommandReturn } from "../types/commands";
-import { createTicket } from "../utils/ticket";
+import { CommandReturn } from "$types/commands";
+import { createTicket } from "$utils/ticket";
 
 export const subCommand = false;
 

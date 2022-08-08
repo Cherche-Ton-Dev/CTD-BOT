@@ -1,5 +1,5 @@
 import { EmbedFieldData, MessageEmbedOptions, User } from "discord.js";
-import { IMission } from "../types/missions";
+import { IMission } from "types/missions";
 
 export function generateMissionEmbed(
     mission: IMission,

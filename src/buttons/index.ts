@@ -1,4 +1,4 @@
-import { IButtonList } from "../types/buttons";
+import { IButtonList } from "$types/buttons";
 
 import * as validateMission from "./validate-mission";
 import * as declineMission from "./decline-mission";

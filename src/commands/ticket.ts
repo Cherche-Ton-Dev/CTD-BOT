@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, Interaction } from "discord.js";
-import { config } from "../context/config";
-import { PartialApplicationCommand, CommandReturn } from "../types/commands";
+import { config } from "$context/config";
+import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
 export const subCommand = false;
 export const data: PartialApplicationCommand = {

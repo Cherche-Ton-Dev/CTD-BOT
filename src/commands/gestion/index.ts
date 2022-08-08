@@ -1,4 +1,4 @@
-import { commandModule } from "../../types/commands";
+import { commandModule } from "$types/commands";
 
 import * as createMissionButton from "./createMissionButton";
 import * as addPoints from "./add-points";

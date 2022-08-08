@@ -1,4 +1,4 @@
-import { Dev } from "../types/missions";
+import { Dev } from "$types/missions";
 
 export const config = {
     suggestionsChanelId: "934916135491608702",

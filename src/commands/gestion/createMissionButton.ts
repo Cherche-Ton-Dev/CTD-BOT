@@ -3,7 +3,7 @@ import { Client, Interaction } from "discord.js";
 import {
     CommandReturn,
     PartialApplicationCommandSubCommand,
-} from "../../types/commands";
+} from "$types/commands";
 
 export const subCommand = false;
 export const data: PartialApplicationCommandSubCommand = {
