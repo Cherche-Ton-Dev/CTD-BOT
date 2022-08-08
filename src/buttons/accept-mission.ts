@@ -2,28 +2,15 @@
  * IN Server, take the mission, enter in contact with the client.
  */
 
-import chalk from "chalk";
-import {
-    ButtonInteraction,
-    Client,
-    GuildMember,
-    Message,
-    MessageEmbed,
-} from "discord.js";
-import { config } from "$context/config";
-import { createOrGetMember } from "$db/api/member";
-import { Mission } from "$db/schemas/mission";
-import { generateMissionEmbed } from "utils/embeds/mission";
+import { ButtonInteraction, Client } from "discord.js";
 
 import { CommandReturn } from "$types/commands";
-import { createTicket } from "$utils/ticket";
 
 export const subCommand = false;
 
 export async function run(
     client: Client,
     interaction: ButtonInteraction,
-    id: string | undefined,
 ): Promise<CommandReturn> {
     interaction.reply({
         embeds: [

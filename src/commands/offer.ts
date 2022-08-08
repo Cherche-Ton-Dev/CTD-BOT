@@ -2,14 +2,7 @@ import {
     Client,
     CommandInteraction,
     GuildMember,
-    Interaction,
-    MessageActionRow,
-    MessageActionRowOptions,
-    MessageSelectMenu,
-    MessageSelectMenuOptions,
     Modal,
-    ModalActionRowComponent,
-    ModalActionRowComponentResolvable,
 } from "discord.js";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 import { Mission } from "$db/schemas/mission";

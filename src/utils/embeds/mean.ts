@@ -1,4 +1,3 @@
-import { getRatings } from "$db/api/rating";
 import { IRating } from "$db/schemas/rating";
 import { GuildMember, MessageEmbedOptions } from "discord.js";
 

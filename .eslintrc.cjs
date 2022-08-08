@@ -9,7 +9,7 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: "module",
     },
-    plugins: ["@typescript-eslint"],
+    plugins: ["@typescript-eslint", "unused-imports"],
     rules: {
         indent: ["error", 4],
         "linebreak-style": ["error", "windows"],
@@ -17,5 +17,7 @@ module.exports = {
         semi: ["error", "always"],
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "no-empty": "off",
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "warn",
     },
 };

@@ -2,19 +2,15 @@ import chalk from "chalk";
 import {
     ButtonInteraction,
     Client,
-    GuildMember,
     Message,
     MessageEmbed,
-    MessageMentions,
     ThreadChannel,
 } from "discord.js";
 import { config } from "$context/config";
-import { createOrGetMember } from "$db/api/member";
 import { Mission, Offer } from "$db/schemas/mission";
 import { generateMissionEmbed } from "utils/embeds/mission";
 
 import { CommandReturn } from "$types/commands";
-import { createTicket } from "$utils/ticket";
 import { IOffer } from "$types/missions";
 
 export const subCommand = false;

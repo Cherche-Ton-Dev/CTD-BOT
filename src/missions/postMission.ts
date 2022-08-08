@@ -4,7 +4,6 @@ import { generateMissionEmbed } from "$utils/embeds/mission";
 import {
     ButtonInteraction,
     CommandInteraction,
-    Interaction,
     TextChannel,
 } from "discord.js";
 
@@ -78,7 +77,7 @@ export async function postMission(
         type: "GUILD_PUBLIC_THREAD",
     });
     mission.dealThreadID = thread.id;
-    mission.save();
+    await mission.save();
     thread.send({
         content:
             "Mettez vous d’accords ici sur **la récompense** et **les choses a réaliser**. \n" +

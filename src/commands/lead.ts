@@ -45,10 +45,10 @@ export async function run(
                 i === 0
                     ? "GOLD"
                     : i === 1
-                    ? "DARK_GREY"
-                    : i === 2
-                    ? "DARK_ORANGE"
-                    : "BLURPLE",
+                        ? "DARK_GREY"
+                        : i === 2
+                            ? "DARK_ORANGE"
+                            : "BLURPLE",
         })),
     });
 
