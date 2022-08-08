@@ -6,6 +6,7 @@ import * as moyenne from "./moyenne";
 import * as ticket from "./ticket";
 import * as contrib from "./contrib";
 import * as lead from "./lead";
+import * as offer from "./offer";
 // import admin from "./admin/index";
 import gestion from "./gestion/index";
 
@@ -18,4 +19,5 @@ export const commands: ICommandList = {
     finish,
     contrib,
     lead,
+    offer,
 };

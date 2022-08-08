@@ -10,7 +10,7 @@ import { Dev, IMission } from "$types/missions";
 import { generateMissionEmbed } from "$utils/embeds/mission";
 import chalk from "chalk";
 import { log } from "$utils/log";
-import { validateMission } from "./validateMission";
+import { validateMission } from "./sendForValidation";
 
 export const subCommand = false;
 

@@ -2,6 +2,7 @@ import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
 import { getRatings } from "$db/api/rating";
 import { PartialApplicationCommand, CommandReturn } from "types/commands";
+import { generateMeanEmbed } from "$utils/embeds/mean";
 
 export const subCommand = false;
 export const data: PartialApplicationCommand = {
@@ -42,31 +43,11 @@ export async function run(
             label: "TARGET_INVALID",
         };
     }
-
     const ratings = await getRatings(target);
-    const mean =
-        ratings.reduce((acc, cur) => acc + cur.rating, 0) / ratings.length;
+    const embed = generateMeanEmbed(target, ratings);
 
     interaction.reply({
-        embeds: [
-            {
-                title: `Note de ${target.displayName}`,
-                description: `${target} a noté ${ratings.length} fois.`,
-                fields: [
-                    {
-                        name: "Moyenne",
-                        value:
-                            "⭐".repeat(Math.round(mean)) +
-                            ":curly_loop:".repeat(5 - Math.round(mean)) +
-                            ` (${mean}/5)`,
-                    },
-                ],
-                color: mean >= 4 ? "GREEN" : mean >= 2 ? "YELLOW" : "RED",
-                thumbnail: {
-                    url: target.user.displayAvatarURL(),
-                },
-            },
-        ],
+        embeds: [embed],
     });
 
     return {

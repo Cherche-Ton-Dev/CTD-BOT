@@ -34,18 +34,10 @@ export async function run(
     }
     const mission = await validateMission(id);
     if (mission) {
-        const channelID =
-            config.missionChannelIDS[mission.target][
-                mission.isPayed ? "payed" : "free"
-            ];
-
-        const channel = (await interaction.guild?.channels.fetch(
-            channelID,
-        )) as TextChannel;
-
         const author = await client.users.fetch(mission.authorUserID);
 
         if (!author) {
+            // If the author of the mission left the server
             interaction.reply({
                 content: "** **",
                 embeds: [
@@ -56,13 +48,45 @@ export async function run(
                     },
                 ],
             });
+
             return {
                 status: "ERROR",
                 label: "user not found",
             };
         } else {
-            await channel.send({
+            // get target channel
+            const channelID =
+                config.missionChannelIDS[mission.target][
+                    mission.isPayed ? "payed" : "free"
+                ];
+
+            const channel = (await interaction.guild?.channels.fetch(
+                channelID,
+            )) as TextChannel;
+
+            const targetRoleID =
+                config.devRoles.find((role) => role.value === mission.target)
+                    ?.roleID || "";
+            const targetRole = await channel.guild.roles.fetch(targetRoleID);
+            if (!targetRole) {
+                interaction.reply({
+                    embeds: [
+                        {
+                            title: "Erreur",
+                            description: "Le role cible est introuvable",
+                        },
+                    ],
+                });
+
+                return {
+                    status: "ERROR",
+                    label: "Can't find target role",
+                };
+            }
+            // Send mission to corresponding channel
+            const sentMissionMessage = await channel.send({
                 embeds: [generateMissionEmbed(mission, author)],
+                content: mission.isPayed ? `Mention: ${targetRole}` : "",
                 components: [
                     {
                         type: "ACTION_ROW",
@@ -77,6 +101,22 @@ export async function run(
                     },
                 ],
             });
+            // Create thread
+            const thread = await channel.threads.create({
+                name: "Accord préalable.",
+                startMessage: sentMissionMessage,
+                type: "GUILD_PUBLIC_THREAD",
+            });
+            mission.dealThreadID = thread.id;
+            mission.save();
+            thread.send({
+                content:
+                    "Mettez vous d’accords ici sur le prix et les autres conditions pour la mission. \n" +
+                    "Pour accepter la mission exécutez la command `/offer` et ainsi réaliser une offre qui pourra être validée par le créateur de la mission.\n" +
+                    `||${author}||`,
+            });
+
+            // Edit validation message
             (interaction.message as Message).edit({
                 components: [],
                 embeds: [
@@ -87,7 +127,7 @@ export async function run(
                             name: interaction.user.tag,
                         },
                         timestamp: new Date(),
-                        title: "Mission acceptée.",
+                        title: "Mission validée.",
                         color: "GREEN",
                     },
                 ],

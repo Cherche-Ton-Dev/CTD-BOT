@@ -135,62 +135,62 @@ export async function run(
     if (!comment) return { status: "ERROR", label: "TIMEOUT" };
     log("Commentaire:", comment.slice(0, 20));
 
-    const dev = await interaction.guild.members.fetch(mission.acceptedBy || "");
-    const missionClient = await interaction.guild.members.fetch(
-        mission.authorUserID,
-    );
+    // const dev = await interaction.guild.members.fetch(mission.acceptedBy || "");
+    // const missionClient = await interaction.guild.members.fetch(
+    //     mission.authorUserID,
+    // );
 
-    const rating = await createRating(
-        mission,
-        parseInt(rank || "0"),
-        comment,
-        dev,
-        missionClient,
-    );
-    await rating.save();
+    // const rating = await createRating(
+    //     mission,
+    //     parseInt(rank || "0"),
+    //     comment,
+    //     dev,
+    //     missionClient,
+    // );
+    // await rating.save();
 
-    const embed = await generateRatingEmbed(rating);
-    await interaction.channel.send({ embeds: [embed] });
+    // const embed = await generateRatingEmbed(rating);
+    // await interaction.channel.send({ embeds: [embed] });
 
-    const ratingChannel = await interaction.guild.channels.fetch(
-        config.ratingChanelID,
-    );
+    // const ratingChannel = await interaction.guild.channels.fetch(
+    //     config.ratingChanelID,
+    // );
 
-    if (!(ratingChannel instanceof TextChannel))
-        return { status: "ERROR", label: "WRONG_RATING_CHANNEL" };
+    // if (!(ratingChannel instanceof TextChannel))
+    //     return { status: "ERROR", label: "WRONG_RATING_CHANNEL" };
 
-    await ratingChannel.send({ embeds: [embed] });
+    // await ratingChannel.send({ embeds: [embed] });
 
-    mission.finished = true;
-    await mission.save();
+    // mission.finished = true;
+    // await mission.save();
 
-    const contribution_points = ratingPoints(parseInt(rank || "0"));
-    await addPoints(dev, contribution_points);
+    // const contribution_points = ratingPoints(parseInt(rank || "0"));
+    // await addPoints(dev, contribution_points);
 
-    interaction.channel.send({
-        embeds: [
-            {
-                title: "Mission terminée",
-                description:
-                    "La mission a été terminée avec succès. Merci de vérifier le channel des avis.",
-                color: "GREEN",
-            },
-        ],
-        components: [
-            {
-                type: "ACTION_ROW",
-                components: [
-                    {
-                        type: "BUTTON",
-                        customId: "event-close-ticket",
-                        label: "Fermer",
-                        emoji: "🗑️",
-                        style: "DANGER",
-                    },
-                ],
-            },
-        ],
-    });
+    // interaction.channel.send({
+    //     embeds: [
+    //         {
+    //             title: "Mission terminée",
+    //             description:
+    //                 "La mission a été terminée avec succès. Merci de vérifier le channel des avis.",
+    //             color: "GREEN",
+    //         },
+    //     ],
+    //     components: [
+    //         {
+    //             type: "ACTION_ROW",
+    //             components: [
+    //                 {
+    //                     type: "BUTTON",
+    //                     customId: "event-close-ticket",
+    //                     label: "Fermer",
+    //                     emoji: "🗑️",
+    //                     style: "DANGER",
+    //                 },
+    //             ],
+    //         },
+    //     ],
+    // });
 
     return {
         status: "OK",

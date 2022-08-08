@@ -2,7 +2,11 @@ import {
     APIApplicationCommand,
     APIApplicationCommandBasicOption,
 } from "discord-api-types/v9";
-import { ApplicationCommandSubCommand, Client, Interaction } from "discord.js";
+import {
+    ApplicationCommandSubCommand,
+    Client,
+    CommandInteraction,
+} from "discord.js";
 
 declare interface PartialApplicationCommand
     extends Partial<APIApplicationCommand> {
@@ -26,7 +30,10 @@ export type CommandReturn = {
 interface rawCommandModule {
     subCommand?: false;
     data: PartialApplicationCommand;
-    run: (client: Client, interaction: Interaction) => Promise<CommandReturn>;
+    run: (
+        client: Client,
+        interaction: CommandInteraction,
+    ) => Promise<CommandReturn>;
 }
 
 type commandModule =
