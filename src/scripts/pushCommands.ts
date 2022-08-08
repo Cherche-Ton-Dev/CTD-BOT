@@ -1,7 +1,7 @@
 import readline from "readline";
 import dotenv from "dotenv";
 import util from "util";
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
 import { commands } from "../commands/index";
 import {
     APIApplicationCommand,
@@ -41,10 +41,13 @@ function formatAPICommands(
         delete command.version;
         delete command.description_localizations;
         delete command.name_localizations;
+        delete command.application_id;
+        delete command.default_member_permissions;
+        delete command.default_permission;
+        delete command.guild_id;
         if (!command.options) command.options = [];
 
         for (const option of command.options) {
-            if (!option.required) option.required = false;
             delete option.description_localizations;
             delete option.name_localizations;
         }
@@ -59,7 +62,7 @@ function formatOURCommands(commands: ICommandList) {
     if (!process.env.APP_ID) throw new Error("Missing APP_ID");
     if (!process.env.GUILD_ID) throw new Error("Missing GUILD_ID");
 
-    const result: Omit<Omit<APIApplicationCommand, "id">, "version">[] = [];
+    const result: PartialApplicationCommand[] = [];
 
     for (const [name, command] of Object.entries(commands)) {
         if (command?.subCommand) {
@@ -68,21 +71,26 @@ function formatOURCommands(commands: ICommandList) {
                 description: command.description,
                 options: [],
                 type: 1,
-                default_member_permissions: null,
-                default_permission: true,
-                application_id: process.env.APP_ID,
-                guild_id: process.env.GUILD_ID,
+                // default_member_permissions: null,
+                // default_permission: true,
+                // application_id: process.env.APP_ID,
+                // guild_id: process.env.GUILD_ID,
             };
 
             for (const subCommand of Object.values(command.commands)) {
                 const data = subCommand.data;
-                resultCommand.options!.push({
-                    name: data.name,
-                    description: data.description,
-                    options:
-                        data.options as APIApplicationCommandSubcommandOption[],
-                    type: 1,
-                });
+                if (data)
+                    resultCommand.options.push({
+                        name: data.name,
+                        description: data.description,
+                        options: data.options.map(
+                            (opt: APIApplicationCommandSubcommandOption) => {
+                                if (!opt.required) delete opt.required;
+                                return opt;
+                            },
+                        ),
+                        type: 1,
+                    });
             }
             result.push(resultCommand);
         } else if (command?.subCommand == false) {
@@ -90,13 +98,18 @@ function formatOURCommands(commands: ICommandList) {
             result.push({
                 name: data.name,
                 description: data.description,
-                options: data.options,
+                options: data.options.map(
+                    (opt: APIApplicationCommandSubcommandOption) => {
+                        if (!opt.required) delete opt.required;
+                        return opt;
+                    },
+                ),
                 type: 1,
-                default_member_permissions:
-                    data.default_member_permissions || null,
-                default_permission: true,
-                application_id: process.env.APP_ID,
-                guild_id: process.env.GUILD_ID,
+                // default_member_permissions:
+                //     data.default_member_permissions || null,
+                // default_permission: true,
+                // application_id: process.env.APP_ID,
+                // guild_id: process.env.GUILD_ID,
             });
         }
     }
@@ -123,9 +136,6 @@ async function deploy() {
         throw new Error("Failed to fetch");
     }
 
-    // console.log(
-    //     jsonDiff.diffString(currentCommands, ourCommands, { full: true }),
-    // );
     console.log(">> DIFF:");
 
     const diff = Diff.diffJson(currentCommands, ourCommands);
@@ -167,20 +177,28 @@ async function deploy() {
         console.log("aborting...");
         process.exit();
     }
+
     const r = await axios({
         method: "PUT",
         url: `https://discord.com/api/v9/applications/${process.env.APP_ID}/guilds/${process.env.GUILD_ID}/commands`,
         headers,
         data: ourCommands,
+        validateStatus: () => true,
     });
 
     if (r.status === 200) {
-        process.stdout.write("✔️ ");
+        process.stdout.write("Successfully pushed.");
     } else {
         process.stdout.write("❌ ");
+        console.log(r.statusText);
+        console.log(
+            util.inspect(r.data, {
+                showHidden: false,
+                depth: null,
+                colors: true,
+            }),
+        );
     }
-    console.log(r.statusText);
-    console.log(r.data);
     process.stdout.write("\n");
     process.exit();
 }

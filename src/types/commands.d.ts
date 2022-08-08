@@ -1,8 +1,16 @@
 import {
     APIApplicationCommand,
+    APIApplicationCommandBasicOption,
     APIApplicationCommandSubcommandOption,
 } from "discord-api-types/v9";
-import { ApplicationCommandSubCommand, Client, Interaction } from "discord.js";
+import {
+    ApplicationCommandChannelOption,
+    ApplicationCommandChoicesOption,
+    ApplicationCommandNonOptions,
+    ApplicationCommandSubCommand,
+    Client,
+    Interaction,
+} from "discord.js";
 
 declare interface PartialApplicationCommand
     extends Partial<APIApplicationCommand> {
@@ -14,6 +22,7 @@ declare interface PartialApplicationCommandSubCommand
     extends Partial<ApplicationCommandSubCommand> {
     name: string;
     description: string;
+    options: APIApplicationCommandBasicOption[];
 }
 
 export type CommandReturn = {
