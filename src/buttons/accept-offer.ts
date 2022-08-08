@@ -1,7 +1,3 @@
-/**
- * IN Server, take the mission, enter in contact with the client.
- */
-
 import chalk from "chalk";
 import {
     ButtonInteraction,
@@ -71,7 +67,7 @@ export async function run(
         };
     }
     // check if mission already accepted
-    if (!mission.offer?.$isEmpty("")) {
+    if (!(mission.offer as Offer)?.$isEmpty("")) {
         interaction.reply({
             embeds: [
                 {

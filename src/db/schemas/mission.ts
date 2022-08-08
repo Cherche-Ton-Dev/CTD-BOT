@@ -4,7 +4,6 @@ import { IMission, IOffer } from "$types/missions";
 export type Mission = Document<unknown, unknown, IMission> &
     IMission & {
         _id: Types.ObjectId;
-        offer?: Offer;
     };
 export type Offer = Document<unknown, unknown, IOffer> &
     IOffer & {
