@@ -16,6 +16,7 @@ import { Mission } from "$db/schemas/mission";
 import { generateMeanEmbed } from "$utils/embeds/mean";
 import { generateOfferEmbed } from "$utils/embeds/offer";
 import { getRatings } from "$db/api/rating";
+import { config } from "$context/config";
 
 export const subCommand = false;
 export const data: PartialApplicationCommand = {
@@ -68,6 +69,51 @@ export async function run(
         return {
             status: "ERROR",
             label: "not in a deal thread",
+        };
+    }
+
+    // Check if deal is not made by the mission author
+    if (interaction.user.id == mission.authorUserID) {
+        interaction.reply({
+            embeds: [
+                {
+                    title: "Erreur",
+                    description:
+                        "Tu ne peux pas créer d'offre, c'est au dev ou graphiste de le faire.",
+                    color: "RED",
+                },
+            ],
+            ephemeral: true,
+        });
+        return {
+            status: "ERROR",
+            label: "offer from author",
+        };
+    }
+
+    // Check if the dealer has the required role
+    const requiredRole = config.devRoles.find(
+        (role) => role.value === mission.target,
+    );
+
+    if (
+        !(interaction.member as GuildMember).roles.cache.some(
+            (role) => role.id === requiredRole?.roleID,
+        )
+    ) {
+        interaction.reply({
+            embeds: [
+                {
+                    title: "Erreur",
+                    description: `Tu n'as pas le role ${requiredRole?.label}`,
+                    color: "RED",
+                },
+            ],
+            ephemeral: true,
+        });
+        return {
+            status: "ERROR",
+            label: "missing role for offer",
         };
     }
 

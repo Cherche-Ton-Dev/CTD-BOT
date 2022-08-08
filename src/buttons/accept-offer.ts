@@ -10,6 +10,7 @@ import {
     Message,
     MessageEmbed,
     MessageMentions,
+    ThreadChannel,
 } from "discord.js";
 import { config } from "$context/config";
 import { createOrGetMember } from "$db/api/member";
@@ -211,6 +212,10 @@ export async function run(
         embeds,
         components: [],
     });
+
+    await (interaction.channel as ThreadChannel).setName(
+        "Mission déjà acceptée",
+    );
 
     mission.channel = channel.id;
     mission.offer = offer as Offer;
