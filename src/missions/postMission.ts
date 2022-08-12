@@ -1,11 +1,7 @@
 import { config } from "$context/config";
 import { Mission } from "$db/schemas/mission";
 import { generateMissionEmbed } from "$utils/embeds/mission";
-import {
-    ButtonInteraction,
-    CommandInteraction,
-    TextChannel,
-} from "discord.js";
+import { ButtonInteraction, CommandInteraction, TextChannel } from "discord.js";
 
 export async function postMission(
     interaction: ButtonInteraction | CommandInteraction,
