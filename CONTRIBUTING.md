@@ -8,17 +8,24 @@ En cas de problème nous sommes disponibles pour répondre a toutes vos question
 
 - [CONTRIBUTING](#contributing)
   - [SUMMARY](#summary)
-  - [Installation des outils](#installation-des-outils)
-    - [MongoDB](#mongodb)
   - [Getting started](#getting-started)
+    - [Installation des outils](#installation-des-outils)
+      - [MongoDB](#mongodb)
     - [Mise en place](#mise-en-place)
     - [Configuration d'un serveur de test](#configuration-dun-serveur-de-test)
       - [Créer le bot](#créer-le-bot)
       - [Connexion au bot, db et serveur](#connexion-au-bot-db-et-serveur)
       - [Synchronisez les commandes](#synchronisez-les-commandes)
       - [Lancer le bot](#lancer-le-bot)
+  - [Style de code](#style-de-code)
+    - [Utilisation de async await](#utilisation-de-async-await)
+    - [Pas de builders discord > options](#pas-de-builders-discord--options)
+    - [utilisation de const, var et let avec parcimonie](#utilisation-de-const-var-et-let-avec-parcimonie)
+  - [Structure du projet](#structure-du-projet)
 
-## Installation des outils
+## Getting started
+
+### Installation des outils
 
 Pour développer le bot vous aurez besoin de certains outils:
 
@@ -32,14 +39,12 @@ Pour développer le bot vous aurez besoin de certains outils:
 
 > NOTE: Merci de ne pas utiliser npm, nous préférons yarn
 
-### MongoDB
+#### MongoDB
 
 Pour metre en place la base de donees vous avez deux options:
 
 1. Installer mongoDB localement (https://www.mongodb.com/try/download/community), [guide d'installation](https://treehouse.github.io/installation-guides/windows/mongo-windows.html)
 2. Utiliser un compte mongoDB atlas pour avoir la DB dans le cloud (https://account.mongodb.com/account/register) [guide](https://www.mongodb.com/docs/atlas/getting-started/)
-
-## Getting started
 
 ### Mise en place
 
@@ -127,3 +132,82 @@ si vous voyez
 ```
 
 tout est bon!
+
+## Style de code
+
+### Utilisation de async await
+
+❌ Mauvais
+
+```js
+guild.members.fetch().then((members) => {
+    // code
+    guild.channels.fetch().then((channels) => {
+        // code
+        message.reply("test").then(() => {
+            // code
+        });
+    });
+    // code
+});
+```
+
+✅ Bon
+
+```js
+const members = await guild.members.fetch();
+// code
+const channels = await guild.channels.fetch();
+// code
+await message.reply("test");
+// code
+```
+
+### Pas de builders discord > options
+
+❌ Mauvais
+
+```js
+const exampleEmbed = new EmbedBuilder()
+    .setColor(0x0099ff)
+    .setTitle("Some title")
+    .setAuthor({
+        name: "Some name",
+        iconURL: "https://i.imgur.com/AfFp7pu.png",
+        url: "https://discord.js.org",
+    })
+    .setDescription("Some description here")
+    .setThumbnail("https://i.imgur.com/AfFp7pu.png")
+    .addFields(
+        { name: "Regular field title", value: "Some value here" },
+        { name: "\u200B", value: "\u200B" },
+        { name: "Inline field title", value: "Some value here", inline: true },
+    )
+    .setImage("https://i.imgur.com/AfFp7pu.png");
+```
+
+✅ Bon
+
+```js
+const exampleEmbedOptions: MessageEmbedOptions = {
+    title: "Some title",
+    description: "Some description here",
+    thumbnail: { url: "https://i.imgur.com/AfFp7pu.png" },
+    image: { url: "https://i.imgur.com/AfFp7pu.png" },
+    fields: [
+        { name: "Regular field title", value: "Some value here" },
+        { name: "\u200B", value: "\u200B" },
+        { name: "Inline field title", value: "Some value here", inline: true },
+    ],
+    author: {
+        name: "Some name",
+        iconURL: "https://i.imgur.com/AfFp7pu.png",
+        url: "https://discord.js.org",
+    },
+    color: 0x0099ff,
+};
+```
+
+### utilisation de const, var et let avec parcimonie
+
+## Structure du projet
