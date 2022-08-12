@@ -33,9 +33,7 @@ tracker.on("guildMemberAdd", handleMemberAdd);
 client.on("guildMemberRemove", handleMemberRemove);
 
 client.once("ready", async () => {
-    log(
-        `🤖 Bot ${client.user?.username}#${client.user?.tag} successfully started 🚀`,
-    );
+    log(`🤖 Bot ${client.user?.tag} successfully started 🚀`);
 });
 
 client.on("interactionCreate", handleInteractionCreate);
