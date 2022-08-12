@@ -14,6 +14,7 @@
     "build": "tsc --build --verbose",
     "start": "cross-env TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/index.js",
     "format": "prettier -w ./src/",
+    "check-formatting": "prettier --check ./src/",
     "lint": "eslint ./src"
   },
   "dependencies": {

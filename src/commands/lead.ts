@@ -41,6 +41,7 @@ export async function run(
                         .get(member.discordID)
                         ?.user.displayAvatarURL({ dynamic: true }) || "",
             },
+            // prettier-ignore
             color:
                 i === 0
                     ? "GOLD"
