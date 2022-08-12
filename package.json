@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "node -r ts-node/register -r tsconfig-paths/register ./src/index.ts",
     "push": "node -r ts-node/register -r tsconfig-paths/register ./src/scripts/pushCommands.ts",
-    "build": "tsc",
+    "build": "tsc --build --verbose",
     "start": "cross-env TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/index.js",
     "format": "prettier -w ./src/",
     "lint": "eslint ./src"

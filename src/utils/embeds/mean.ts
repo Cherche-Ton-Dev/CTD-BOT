@@ -16,7 +16,7 @@ export function generateMeanEmbed(
                 value:
                     "⭐".repeat(Math.round(mean)) +
                     ":curly_loop:".repeat(5 - Math.round(mean)) +
-                    ` (${mean}/5)`,
+                    ` (${Math.round(mean * 10) / 10 || "-"}/5)`,
             },
         ],
         color: mean >= 4 ? "GREEN" : mean >= 2 ? "YELLOW" : "RED",
