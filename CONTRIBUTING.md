@@ -22,6 +22,7 @@ En cas de problème nous sommes disponibles pour répondre a toutes vos question
     - [Pas de builders discord > options](#pas-de-builders-discord--options)
     - [utilisation de const, var et let avec parcimonie](#utilisation-de-const-var-et-let-avec-parcimonie)
   - [Structure du projet](#structure-du-projet)
+    - [Commandes et boutons](#commandes-et-boutons)
 
 ## Getting started
 
@@ -210,4 +211,62 @@ const exampleEmbedOptions: MessageEmbedOptions = {
 
 ### utilisation de const, var et let avec parcimonie
 
+| type  | utilisation                                              |
+| ----- | -------------------------------------------------------- |
+| let   | Variable qui change                                      |
+| const | variable qui ne change pas ou et est uniquement muté     |
+| var   | Uniquement si la variable a besoin de sortir de la scope |
+
 ## Structure du projet
+
+```c
+src
+├───buttons // functions qui sont appelées quand un bouton est pressé
+├───commands // Commandes slash, détectées et push avec la commande `push`
+│   └───gestion // Sous catégories de commandes
+├───context
+│   ├───config.ts // contient la configuration du bit
+│   └───context   // permets de stocker des valeurs globales, ex: client
+├───db
+│   ├───api // fonctions pour interagir avec la DB (facultatif)
+│   └───schemas // Différents schemas (types de donnés) de la DB
+├───events // Handeler pour les différents event de l'api discord
+├───missions // fonctions relatives aux missions
+├───scripts // scripts utilitaires
+├───types // contient tous les types relatifs au bot
+└───utils // fonctions utilitaires
+    ├───embeds // génération d'embed
+    └───questions // questions dans le chat
+```
+
+### Commandes et boutons
+
+Les function run des commandes et des boutons doivent renvoyer le résultat de la mission:
+
+```ts
+export type CommandReturn = {
+    status: "OK" | "ERROR" | "IGNORE";
+    /** le résultat de la commande, à afficher dans la console */
+    label?: string;
+};
+```
+
+le `label` peut contenir "success", un message pour signaler ce qui a été fait ou bien le texte de l'erreur
+
+| type   | utilisation                                             |
+| ------ | ------------------------------------------------------- |
+| OK     | La commande a été exécuté normalement avec succès       |
+| ERROR  | Il y a eu une erreur lors de l’exécution de la commande |
+| IGNORE | Cette interaction peu être ignorée                      |
+
+Pour créer une commande le plus simple est d'en copier une pré-existante et de la modifier.
+
+> A chaque fois que les données des commandes sont modifiées le script `yarn push` doit être exécuté
+
+Les event pour boutons seront appelées en fonction du customID si il correspond a ce schema:
+
+> données est facultatif, s'il est présent il est passé comme dernier argument a la fonction run
+
+```
+event-<ID>-{données}
+```
