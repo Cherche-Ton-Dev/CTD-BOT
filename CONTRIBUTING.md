@@ -23,6 +23,7 @@ En cas de problème nous sommes disponibles pour répondre a toutes vos question
     - [utilisation de const, var et let avec parcimonie](#utilisation-de-const-var-et-let-avec-parcimonie)
   - [Structure du projet](#structure-du-projet)
     - [Commandes et boutons](#commandes-et-boutons)
+  - [Faire des changements](#faire-des-changements)
 
 ## Getting started
 
@@ -30,6 +31,7 @@ En cas de problème nous sommes disponibles pour répondre a toutes vos question
 
 Pour développer le bot vous aurez besoin de certains outils:
 
+-   Un compte github: [inscription](https://github.com/join)
 -   [git](https://git-scm.com/downloads)
     -   Permets la synchronisation du code et la collaboration
     -   pensez a cocher la case **add to path**
@@ -51,8 +53,10 @@ Pour metre en place la base de donees vous avez deux options:
 
 Une fois que vous avez tous les outils nécessaires il faut récupérer le code avec `git`
 
+Cliquez sur le bouton **fork** pour créer votre copie du code, récupérez l'url de votre fork et utilisez la pour cloner votre code:
+
 ```console
-git clone https://github.com/rafalou38/CTD-BOT.git
+git clone https://github.com/<votre pseudo>/CTD-BOT
 ```
 
 puis installer tous les modules
@@ -270,3 +274,20 @@ Les event pour boutons seront appelées en fonction du customID si il correspond
 ```
 event-<ID>-{données}
 ```
+
+## Faire des changements
+
+Quand vous faites des changements au code il est nécessaire de les "commit"
+
+> Avant de commit pensez a executer les commandes suivante pour formater et verifier votre code
+
+```
+yarn lint
+yarn format
+```
+
+Puis pour soumettre votre code exécutez la commande git push puis faites un pull request.
+
+> Merci de ne pas inclure les changements de configuration dans vos commits
+
+[Guide détaillé avec images](https://github.com/firstcontributions/first-contributions)
