@@ -1,4 +1,4 @@
-import { GuildMember, PartialGuildMember } from "discord.js";
+import { GuildMember, PartialGuildMember, User } from "discord.js";
 import { log } from "../utils/log";
 import { InviteData, JoinType } from "../types/invites";
 import { config } from "../context/config";
@@ -8,6 +8,8 @@ import { invitePoints } from "../utils/equations";
 export async function handleMemberRemove(
     member: GuildMember | PartialGuildMember,
 ): Promise<void> {
+    if (!(member instanceof GuildMember))
+        return log("ERROR: received a partial member left");
     const channel = await member.guild.channels.fetch(config.welcomeChanelID);
     if (!channel || !channel.isText())
         return log("ERREUR: welcomeChanelID invalide");
