@@ -22,7 +22,7 @@ export async function run(
         await interaction.member.roles.add(config.bumpSquadID);
         await interaction.reply({
             ephemeral: true,
-            content: "✅ Tu ne seras prévenu des prochains bumps.",
+            content: "✅ Tu seras prévenu des prochains bumps.",
         });
     }
 
