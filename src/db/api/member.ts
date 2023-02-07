@@ -1,6 +1,6 @@
 import { GuildMember } from "discord.js";
-import { featureContrib } from "../../utils/contrib";
-import { DBMember } from "../schemas/member";
+import { featureContrib } from "$utils/embeds/contrib";
+import { DBMember } from "$db/schemas/member";
 
 export async function getMember(member: GuildMember): Promise<DBMember | null> {
     return await DBMember.findOne({

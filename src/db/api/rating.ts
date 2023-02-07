@@ -1,7 +1,6 @@
-import { GuildMember, User } from "discord.js";
-import { Mission } from "../schemas/mission";
-import { Rating } from "../schemas/rating";
-import { getMember } from "./member";
+import { GuildMember } from "discord.js";
+import { Mission } from "$db/schemas/mission";
+import { Rating } from "$db/schemas/rating";
 
 export async function createRating(
     mission: Mission,

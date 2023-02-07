@@ -4,13 +4,13 @@
 
 import { DMChannel, GuildMember } from "discord.js";
 
-import { askYesNo, askText, askSelectOne } from "../utils/questions/index";
-import { config } from "../context/config";
-import { Dev, IMission } from "../types/missions";
-import { generateMissionEmbed } from "../missions/generateEmbed";
+import { askYesNo, askText, askSelectOne } from "$utils/questions/index";
+import { config } from "$context/config";
+import { Dev, IMission } from "$types/missions";
+import { generateMissionEmbed } from "$utils/embeds/mission";
 import chalk from "chalk";
-import { log } from "../utils/log";
-import { validateMission } from "./validateMission";
+import { log } from "$utils/log";
+import { validateMission } from "./sendForValidation";
 
 export const subCommand = false;
 

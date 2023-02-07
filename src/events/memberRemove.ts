@@ -1,9 +1,8 @@
-import { GuildMember, PartialGuildMember, User } from "discord.js";
-import { log } from "../utils/log";
-import { InviteData, JoinType } from "../types/invites";
-import { config } from "../context/config";
-import { addPoints, createOrGetMember, getMember } from "../db/api/member";
-import { invitePoints } from "../utils/equations";
+import { GuildMember, PartialGuildMember } from "discord.js";
+import { log } from "$utils/log";
+import { config } from "$context/config";
+import { addPoints, getMember } from "$db/api/member";
+import { invitePoints } from "$utils/equations";
 
 export async function handleMemberRemove(
     member: GuildMember | PartialGuildMember,

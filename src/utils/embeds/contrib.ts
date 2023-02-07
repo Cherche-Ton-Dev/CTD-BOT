@@ -1,8 +1,8 @@
 import { GuildMember, MessageEmbedOptions, TextChannel } from "discord.js";
-import { config } from "../context/config";
-import { context } from "../context/context";
-import { createOrGetMember } from "../db/api/member";
-import { log } from "./log";
+import { config } from "$context/config";
+import { context } from "$context/context";
+import { createOrGetMember } from "$db/api/member";
+import { log } from "$utils/log";
 
 export async function featureContrib(
     member: GuildMember,

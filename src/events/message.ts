@@ -1,6 +1,6 @@
 import { GuildMember, Message } from "discord.js";
-import { addPoints } from "../db/api/member";
-import { bumpPoints, messagePoints } from "../utils/equations";
+import { addPoints } from "$db/api/member";
+import { bumpPoints, messagePoints } from "$utils/equations";
 
 const lastMessages: Map<string, Date> = new Map();
 

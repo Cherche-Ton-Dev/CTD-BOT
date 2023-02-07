@@ -1,13 +1,7 @@
-import {
-    ButtonInteraction,
-    Client,
-    GuildMember,
-    GuildMemberRoleManager,
-} from "discord.js";
+import { ButtonInteraction, Client } from "discord.js";
 
-import { CommandReturn } from "../types/commands";
-import { config } from "../context/config";
-import { getMember } from "../db/api/member";
+import { CommandReturn } from "$types/commands";
+import { getMember } from "$db/api/member";
 
 export const subCommand = false;
 

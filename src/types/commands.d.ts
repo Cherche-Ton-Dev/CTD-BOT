@@ -1,9 +1,24 @@
-import { APIApplicationCommand } from "discord-api-types";
-import { Client, Interaction } from "discord.js";
+import {
+    APIApplicationCommand,
+    APIApplicationCommandBasicOption,
+} from "discord-api-types/v9";
+import {
+    ApplicationCommandSubCommand,
+    Client,
+    CommandInteraction,
+} from "discord.js";
 
-declare interface ApplicationCommand
-    extends Omit<Omit<APIApplicationCommand, "id">, "application_id"> {
-    id?: string;
+declare interface PartialApplicationCommand
+    extends Partial<APIApplicationCommand> {
+    name: string;
+    description: string;
+    options: APIApplicationCommandOption[];
+}
+declare interface PartialApplicationCommandSubCommand
+    extends Partial<ApplicationCommandSubCommand> {
+    name: string;
+    description: string;
+    options: APIApplicationCommandBasicOption[];
 }
 
 export type CommandReturn = {
@@ -14,8 +29,11 @@ export type CommandReturn = {
 
 interface rawCommandModule {
     subCommand?: false;
-    data: ApplicationCommand;
-    run: (client: Client, interaction: Interaction) => Promise<CommandReturn>;
+    data: PartialApplicationCommand;
+    run: (
+        client: Client,
+        interaction: CommandInteraction,
+    ) => Promise<CommandReturn>;
 }
 
 type commandModule =
@@ -24,7 +42,11 @@ type commandModule =
           subCommand?: true;
           name: string;
           description: string;
-          commands: { [key: string]: rawCommandModule };
+          commands: {
+              [key: string]: rawCommandModule & {
+                  data: PartialApplicationCommandSubCommand;
+              };
+          };
       };
 
 /**

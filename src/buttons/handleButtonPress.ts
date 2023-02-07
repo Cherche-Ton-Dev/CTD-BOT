@@ -1,9 +1,9 @@
 import chalk from "chalk";
 import { ButtonInteraction } from "discord.js";
 import { commands } from ".";
-import { CommandReturn } from "../types/commands";
-import { log } from "../utils/log";
-import { context } from "../context/context";
+import { CommandReturn } from "$types/commands";
+import { log } from "$utils/log";
+import { context } from "$context/context";
 
 export async function handleButtonPress(interaction: ButtonInteraction) {
     if (!interaction.customId.startsWith("event-")) return;

@@ -25,7 +25,7 @@ client.on("ready", async () => {
 
     console.log(`>> ${members?.size} après filtrage.`);
 
-    for (const [_, member] of members) {
+    for (const [, member] of members) {
         await delay(1000);
         process.stdout.write("\t>> Envoi du DM à " + member.user.tag + " : ");
         try {

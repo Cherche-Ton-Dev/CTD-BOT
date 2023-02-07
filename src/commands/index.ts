@@ -1,4 +1,4 @@
-import { ICommandList } from "../types/commands";
+import { ICommandList } from "types/commands";
 
 import * as suggest from "./suggest";
 import * as finish from "./finish";
@@ -6,11 +6,10 @@ import * as moyenne from "./moyenne";
 import * as ticket from "./ticket";
 import * as contrib from "./contrib";
 import * as lead from "./lead";
-import admin from "./admin/index";
+import * as offer from "./offer";
 import gestion from "./gestion/index";
 
 export const commands: ICommandList = {
-    // admin,
     gestion,
     suggest,
     moyenne,
@@ -18,4 +17,5 @@ export const commands: ICommandList = {
     finish,
     contrib,
     lead,
+    offer,
 };

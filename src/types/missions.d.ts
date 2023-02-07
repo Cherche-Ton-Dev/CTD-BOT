@@ -5,7 +5,8 @@ export type Difficulty = "1" | "2" | "3" | "4" | "5";
 
 export interface IMission {
     accepted: boolean;
-    acceptedBy?: string;
+    // acceptedBy?: string;
+    offer?: IOffer;
     channel?: string;
     isPayed: boolean;
     price?: string;
@@ -16,4 +17,13 @@ export interface IMission {
     authorUserID: string;
     authorGuildID: string;
     finished: boolean;
+    dealThreadID?: string;
+}
+
+export interface IOffer {
+    price: string;
+    delay: string;
+    info: string;
+    devDiscordID: string;
+    // type: "middleman" | "custom";
 }

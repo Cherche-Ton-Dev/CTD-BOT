@@ -1,6 +1,6 @@
 import { MessageEmbedOptions } from "discord.js";
-import { context } from "../context/context";
-import { Rating } from "../db/schemas/rating";
+import { context } from "$context/context";
+import { Rating } from "$db/schemas/rating";
 
 export async function generateRatingEmbed(
     rating: Rating,

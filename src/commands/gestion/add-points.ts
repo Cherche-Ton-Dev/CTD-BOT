@@ -1,20 +1,23 @@
 import chalk from "chalk";
-import { ApplicationCommandOptionType } from "discord-api-types";
+import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { Client, GuildMember, Interaction } from "discord.js";
-import { config } from "../../context/config";
-import { addPoints } from "../../db/api/member";
-import { ApplicationCommand, CommandReturn } from "../../types/commands";
-import { log } from "../../utils/log";
+import { config } from "$context/config";
+import { addPoints } from "$db/api/member";
+import {
+    CommandReturn,
+    PartialApplicationCommandSubCommand,
+} from "$types/commands";
+import { log } from "$utils/log";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommandSubCommand = {
     name: "add-points",
     description: "Ajout un certain nombre de points a un membre.",
     options: [
         {
             type: ApplicationCommandOptionType.User,
             name: "cible",
-            description: "Qui doit recevoir les points",
+            description: "Qui doit recevoir les points.",
             required: true,
         },
         {
@@ -26,7 +29,7 @@ export const data: ApplicationCommand = {
         {
             type: ApplicationCommandOptionType.String,
             name: "reason",
-            description: "raison du don",
+            description: "Raison du don de points.",
             required: false,
         },
     ],

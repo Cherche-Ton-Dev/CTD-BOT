@@ -4,13 +4,13 @@ dotenv.config(); // load discord token from .env
 import Discord from "discord.js";
 import InvitesTracker from "@androz2091/discord-invites-tracker";
 
-import { log } from "./utils/log";
-import { handleInteractionCreate } from "./events/interactionCreate";
-import { connectDB } from "./db/init";
-import { context } from "./context/context";
-import { handleMemberAdd } from "./events/memberAdd";
-import { handleMessageCreated } from "./events/message";
-import { handleMemberRemove } from "./events/memberRemove";
+import { log } from "$utils/log";
+import { handleInteractionCreate } from "$events/interactionCreate";
+import { connectDB } from "$db/init";
+import { context } from "$context/context";
+import { handleMemberAdd } from "$events/memberAdd";
+import { handleMessageCreated } from "$events/message";
+import { handleMemberRemove } from "$events/memberRemove";
 
 const intents: Discord.IntentsString[] = [
     "GUILDS",
@@ -33,9 +33,7 @@ tracker.on("guildMemberAdd", handleMemberAdd);
 client.on("guildMemberRemove", handleMemberRemove);
 
 client.once("ready", async () => {
-    log(
-        `🤖 Bot ${client.user?.username}#${client.user?.tag} successfully started 🚀`,
-    );
+    log(`🤖 Bot ${client.user?.tag} successfully started 🚀`);
 });
 
 client.on("interactionCreate", handleInteractionCreate);

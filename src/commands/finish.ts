@@ -1,28 +1,26 @@
-import { ApplicationCommandOptionType } from "discord-api-types";
 import {
     Client,
     Guild,
     GuildMember,
-    GuildMemberRoleManager,
     Interaction,
     TextChannel,
 } from "discord.js";
-import { config } from "../context/config";
-import { addPoints } from "../db/api/member";
-import { createRating } from "../db/api/rating";
-import { DBMember } from "../db/schemas/member";
-import { Mission } from "../db/schemas/mission";
-import { ApplicationCommand, CommandReturn } from "../types/commands";
-import { ratingPoints } from "../utils/equations";
-import { log } from "../utils/log";
-import { askSelectOne } from "../utils/questions";
-import { askTextInteraction } from "../utils/questions/askText";
-import { generateRatingEmbed } from "../utils/rating";
+import { config } from "$context/config";
+import { Mission } from "$db/schemas/mission";
+import { PartialApplicationCommand, CommandReturn } from "$types/commands";
+import { log } from "$utils/log";
+import { askSelectOne } from "$utils/questions";
+import { askTextInteraction } from "$utils/questions/askText";
+import { createRating } from "$db/api/rating";
+import { generateRatingEmbed } from "$utils/embeds/rating";
+import { ratingPoints } from "$utils/equations";
+import { addPoints } from "$db/api/member";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommand = {
     name: "finish",
-    description: "Terminer une mission",
+    description: "Terminer une mission.",
+    options: [],
 };
 
 export async function run(
@@ -137,7 +135,9 @@ export async function run(
     if (!comment) return { status: "ERROR", label: "TIMEOUT" };
     log("Commentaire:", comment.slice(0, 20));
 
-    const dev = await interaction.guild.members.fetch(mission.acceptedBy || "");
+    const dev = await interaction.guild.members.fetch(
+        mission.offer?.devDiscordID || "",
+    );
     const missionClient = await interaction.guild.members.fetch(
         mission.authorUserID,
     );

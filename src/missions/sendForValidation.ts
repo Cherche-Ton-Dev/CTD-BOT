@@ -3,12 +3,12 @@
  */
 
 import { GuildMember } from "discord.js";
-import { Mission } from "../db/schemas/mission";
-import { IMission } from "../types/missions";
-import { createOrGetMember } from "../db/api/member";
-import { config } from "../context/config";
-import { log } from "../utils/log";
-import { generateMissionEmbed } from "./generateEmbed";
+import { Mission } from "$db/schemas/mission";
+import { IMission } from "$types/missions";
+import { createOrGetMember } from "$db/api/member";
+import { config } from "context/config";
+import { log } from "utils/log";
+import { generateMissionEmbed } from "utils/embeds/mission";
 
 export async function validateMission(
     rawMission: IMission,

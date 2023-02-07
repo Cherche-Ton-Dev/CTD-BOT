@@ -1,7 +1,7 @@
 import { ButtonInteraction, Client, TextChannel } from "discord.js";
 
-import { CommandReturn } from "../types/commands";
-import { sleep } from "../utils";
+import { CommandReturn } from "$types/commands";
+import { sleep } from "$utils";
 
 export const subCommand = false;
 

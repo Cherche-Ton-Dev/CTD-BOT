@@ -4,8 +4,8 @@
 
 import { ButtonInteraction, Client, GuildMember } from "discord.js";
 
-import { CommandReturn } from "../types/commands";
-import { createMission } from "../missions/createMissionInDm";
+import { CommandReturn } from "$types/commands";
+import { createMission } from "$missions/createMissionInDm";
 
 export const subCommand = false;
 

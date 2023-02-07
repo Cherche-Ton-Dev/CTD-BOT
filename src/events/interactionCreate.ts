@@ -1,10 +1,10 @@
 import chalk from "chalk";
-import { commands } from "../commands/index";
-import { context } from "../context/context";
+import { commands } from "$commands/index";
+import { context } from "$context/context";
 import { Interaction } from "discord.js";
-import { CommandReturn, rawCommandModule } from "../types/commands";
-import { log } from "../utils/log";
-import { handleButtonPress } from "../buttons/index";
+import { CommandReturn, rawCommandModule } from "$types/commands";
+import { log } from "$utils/log";
+import { handleButtonPress } from "$buttons/index";
 
 export async function handleInteractionCreate(
     interaction: Interaction,

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { log } from "../utils/log";
+import { log } from "$utils/log";
 
 export async function connectDB(): Promise<void> {
     if (process.env.MONGO_URI) {

@@ -1,7 +1,7 @@
 import { Document, model, ObjectId, Schema, Types } from "mongoose";
-import { IMission } from "../../types/missions";
+import { IMission } from "$types/missions";
 
-interface IRating {
+export interface IRating {
     guildID: string;
     mission: string | ObjectId | IMission;
     dev: string;

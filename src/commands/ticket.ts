@@ -1,10 +1,8 @@
-import { ApplicationCommandOptionType } from "discord-api-types";
 import { Client, Interaction } from "discord.js";
-import { config } from "../context/config";
-import { ApplicationCommand, CommandReturn } from "../types/commands";
+import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
 export const subCommand = false;
-export const data: ApplicationCommand = {
+export const data: PartialApplicationCommand = {
     name: "ticket",
     description: "Ouvre un ticket.",
     options: [],

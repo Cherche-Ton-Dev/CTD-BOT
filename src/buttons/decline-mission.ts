@@ -4,10 +4,10 @@
 
 import { ButtonInteraction, Client, Message, MessageEmbed } from "discord.js";
 
-import { CommandReturn } from "../types/commands";
-import { declineMission } from "../db/api/mission";
-import { generateMissionEmbed } from "../missions/generateEmbed";
-import { askTextInteraction } from "../utils/questions/askText";
+import { CommandReturn } from "$types/commands";
+import { declineMission } from "$db/api/mission";
+import { generateMissionEmbed } from "utils/embeds/mission";
+import { askTextInteraction } from "$utils/questions/askText";
 
 export const subCommand = false;
 
