@@ -3,6 +3,7 @@ import { Dev } from "$types/missions";
 export const config = {
     suggestionsChanelId: "934916135491608702",
     pendingChannelId: "934916135051198471",
+    bumpSquadID: "1072499795119321149",
     modoRoleId: "934916134329786387",
     respDevRoleId: "934916134329786381",
     respArtistRoleId: "934916134329786380",

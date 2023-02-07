@@ -1,6 +1,7 @@
 import { GuildMember, Message } from "discord.js";
 import { addPoints } from "$db/api/member";
 import { bumpPoints, messagePoints } from "$utils/equations";
+import { config } from "$context/config";
 
 const lastMessages: Map<string, Date> = new Map();
 
@@ -20,9 +21,34 @@ export async function handleMessageCreated(message: Message) {
         if (!bumper) return;
         const contribPoints = bumpPoints(bumper);
         await addPoints(bumper, contribPoints);
-        await message.channel.send(
-            `${bumper} a reçu ${contribPoints} points de contribution pour son bump 👍.`,
-        );
+        await message.channel.send({
+            content: `${bumper} a reçu ${contribPoints} points de contribution pour son bump 👍.\n Clique ci dessous pour être prévenu quand tu pourras bump a nouveau.`,
+            components: [
+                {
+                    type: "ACTION_ROW",
+                    components: [
+                        {
+                            type: "BUTTON",
+                            label: "PRÉVIENS MOI",
+                            emoji: "⏰",
+                            customId: "event-bump-squad",
+                        },
+                    ],
+                },
+            ],
+        });
+
+        setTimeout(() => {
+            message.channel.send({
+                content:
+                    `Le bump est disponible: <&${config.bumpSquadID}>\n` +
+                    `
+\`\`\`
+/bump
+\`\`\
+`,
+            });
+        }, 1000 * 60 * 60 * 2 + 1000 * 60);
     }
 }
 
