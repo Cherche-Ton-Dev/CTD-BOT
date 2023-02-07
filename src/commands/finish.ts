@@ -81,14 +81,21 @@ export async function run(
                 {
                     title: "Erreur",
                     description:
-                        "Vous n'avez pas la permission de terminer cette mission.",
+                        "Je préviens le client de la conclusion de sa mission.",
                     color: "RED",
                 },
             ],
         });
+        const author = await interaction.guild.members.fetch(
+            mission.authorUserID,
+        );
+        await author.send(
+            "Ta mission sur CTD est terminée, rends toi dans le salon pour la clore (`/finish`)",
+        );
+
         return {
-            label: "MISSING_PERMISSIONS",
-            status: "ERROR",
+            label: "sending ping",
+            status: "OK",
         };
     }
 
