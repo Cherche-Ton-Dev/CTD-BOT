@@ -32,6 +32,7 @@ export async function handleMessageCreated(message: Message) {
                             label: "PRÉVIENS MOI",
                             emoji: "⏰",
                             customId: "event-bump-squad",
+                            style: "SUCCESS",
                         },
                     ],
                 },
