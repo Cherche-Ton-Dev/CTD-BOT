@@ -42,14 +42,14 @@ export async function handleMessageCreated(message: Message) {
         setTimeout(() => {
             message.channel.send({
                 content:
-                    `Le bump est disponible: <&${config.bumpSquadID}>\n` +
+                    `Le bump est disponible: <@&${config.bumpSquadID}>` +
                     `
 \`\`\`
 /bump
-\`\`\
+\`\`\`
 `,
             });
-        }, 1000 * 60 * 60 * 2 + 1000 * 60);
+        }, 1000 * 60 * 60 * 2);
     }
 }
 
