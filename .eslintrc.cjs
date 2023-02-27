@@ -19,5 +19,6 @@ module.exports = {
         "no-empty": "off",
         "no-unused-vars": "off",
         "unused-imports/no-unused-imports": "warn",
+        "@typescript-eslint/ban-ts-comment": "off",
     },
 };
