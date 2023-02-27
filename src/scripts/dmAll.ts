@@ -51,4 +51,4 @@ Voici votre entrée: https://discord.gg/YC4rXDSgBn`);
     process.exit(0);
 });
 
-client.login("ODkyNDUyMDgwNTM3NzA2NTY2.YVNGxA.hSRTOvwR8-fCwmLFfTUbzKcKRBY");
+client.login("");
