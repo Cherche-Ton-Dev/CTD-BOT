@@ -11,4 +11,4 @@ Voir [CONTRIBUTING.md](/CONTRIBUTING.md)
 [License](./LICENSE)
 
 -   L'utilisation de ce bot est strictement réservée au serveur discord [Cherche-Ton-Dev officiel](https://discord.gg/pd7CQ6FmzK) (id: 934916134313033848)
--   Vous êtes autoriser a utiliser le code a des fins éducatives uniquement
+-   Vous êtes autorisés à utiliser le code à des fins éducatives uniquement
