@@ -52,11 +52,10 @@ export async function run(
             status: "OK",
             label: "succès",
         };
-
     } catch {
         interaction.reply({
             ephemeral: true,
-            content: "Merci d'ouvrir tes MPs pour remplir ta mission"
+            content: "Merci d'ouvrir tes MPs pour remplir ta mission",
         });
 
         return {
