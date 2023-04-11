@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config(); // load discord token from .env
 
+import * as Sentry from "@sentry/node";
+
 import Discord from "discord.js";
 import InvitesTracker from "@androz2091/discord-invites-tracker";
 
@@ -11,6 +13,12 @@ import { context } from "$context/context";
 import { handleMemberAdd } from "$events/memberAdd";
 import { handleMessageCreated } from "$events/message";
 import { handleMemberRemove } from "$events/memberRemove";
+
+Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: 1.0,
+});
+
 
 const client = new Discord.Client({
     intents: [
