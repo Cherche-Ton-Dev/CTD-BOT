@@ -46,9 +46,7 @@ export async function run(
                         name: interaction.user.tag,
                     },
                     timestamp:
-                        new Date().toLocaleDateString() +
-                        " " +
-                        new Date().toLocaleTimeString(),
+                        new Date().toISOString(),
                     title: "Mission validée.",
                     color: Colors.Green,
                 },

@@ -66,9 +66,7 @@ export async function run(
                     name: interaction.user.tag,
                 },
                 timestamp:
-                    new Date().toLocaleDateString() +
-                    " " +
-                    new Date().toLocaleTimeString(),
+                    new Date().toISOString(),
                 title: "Mission Refusé.",
                 description: reason,
                 color: Colors.Red,

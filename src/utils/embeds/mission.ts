@@ -28,8 +28,6 @@ export function generateMissionEmbed(mission: IMission, user: User): APIEmbed {
         description: mission.task,
         fields,
         timestamp:
-            new Date().toLocaleDateString() +
-            " " +
-            new Date().toLocaleTimeString(),
+            new Date().toISOString(),
     };
 }
