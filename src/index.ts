@@ -19,7 +19,6 @@ Sentry.init({
     tracesSampleRate: 1.0,
 });
 
-
 const client = new Discord.Client({
     intents: [
         "Guilds",
