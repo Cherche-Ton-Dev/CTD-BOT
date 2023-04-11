@@ -27,7 +27,6 @@ export function generateMissionEmbed(mission: IMission, user: User): APIEmbed {
         title: "Mission",
         description: mission.task,
         fields,
-        timestamp:
-            new Date().toISOString(),
+        timestamp: new Date().toISOString(),
     };
 }

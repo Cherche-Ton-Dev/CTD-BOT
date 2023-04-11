@@ -38,7 +38,6 @@ export async function run(
         };
     }
 
-
     const sentMessage = await DM.send(
         "** **\n\n\n\n\n\n\n\n\n\n\n\nCreation d'une nouvelle mission.\n❗ Tu possèdes désormais **5 minutes** pour répondre à chaque question ❗",
     );
@@ -75,5 +74,4 @@ export async function run(
         status: "OK",
         label: "succès",
     };
-
 }
