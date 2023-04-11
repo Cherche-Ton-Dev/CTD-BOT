@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, GuildMember, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember, Interaction } from "discord.js";
 import { config } from "$context/config";
 import { addPoints } from "$db/api/member";
 import {
@@ -37,10 +37,10 @@ export const data: PartialApplicationCommandSubCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (
-        !interaction.isCommand() ||
+        !interaction.isChatInputCommand() ||
         !(interaction.member instanceof GuildMember)
     )
         return { status: "IGNORE" };
@@ -55,14 +55,14 @@ export async function run(
                     title: "Erreur",
                     description:
                         "Tu n'as pas la permission d'utiliser cette commande.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
         return { status: "IGNORE" };
     }
 
-    const target = interaction.options.getMember("cible", true);
+    const target = interaction.options.getMember("cible");
     if (!(target instanceof GuildMember)) return { status: "IGNORE" };
 
     const points = interaction.options.getNumber("points", true);
@@ -80,15 +80,13 @@ export async function run(
                     (reason
                         ? `\nPour la raison: \n\`\`\`\n${reason}\n\`\`\``
                         : ""),
-                color: "GREEN",
+                color: Colors.Green,
                 thumbnail: {
-                    url: target.displayAvatarURL({ dynamic: true }) || "",
+                    url: target.displayAvatarURL() || "",
                 },
                 author: {
                     name: interaction.user.tag,
-                    icon_url: interaction.user.displayAvatarURL({
-                        dynamic: true,
-                    }),
+                    icon_url: interaction.user.displayAvatarURL(),
                 },
             },
         ],

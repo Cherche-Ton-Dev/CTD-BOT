@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, GuildMember, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember, Interaction } from "discord.js";
 import { createOrGetMember } from "$db/api/member";
 import { CommandReturn, PartialApplicationCommand } from "$types/commands";
 
@@ -19,7 +19,7 @@ export const data: PartialApplicationCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (
         !interaction.isCommand() ||
@@ -37,7 +37,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Ce membre n'existe pas.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -54,7 +54,7 @@ export async function run(
             {
                 title: `Points de ${target.displayName}`,
                 description: `${target} possède **${dbMember.contributionPoints}** points de contribution.`,
-                color: "BLURPLE",
+                color: Colors.Blurple,
                 thumbnail: {
                     url: target.user.displayAvatarURL(),
                 },

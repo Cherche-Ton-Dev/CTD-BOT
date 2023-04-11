@@ -2,7 +2,7 @@
  * IN Guild, after create mission button cliqued
  */
 
-import { ButtonInteraction, Client, GuildMember } from "discord.js";
+import { ButtonInteraction, ButtonStyle, Client, Colors, ComponentType, GuildMember } from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { createMission } from "$missions/createMissionInDm";
@@ -13,39 +13,41 @@ export async function run(
     client: Client,
     interaction: ButtonInteraction,
 ): Promise<CommandReturn> {
+    await interaction.deferReply({
+        ephemeral: true,
+    });
     try {
         const DM = await interaction.user.createDM();
         const sentMessage = await DM.send(
             "** **\n\n\n\n\n\n\n\n\n\n\n\nCreation d'une nouvelle mission.\n❗ Tu possèdes désormais **5 minutes** pour répondre à chaque question ❗",
         );
 
-        createMission(DM, interaction.member as GuildMember); // not awaited: will run separated
+        await createMission(DM, interaction.member as GuildMember);
 
-        await interaction.reply({
+        await interaction.editReply({
             embeds: [
                 {
                     title: "Nouvelle Mission",
                     description:
                         "Fais un tour dans tes messages privés pour nous donner les informations nécessaire à la création de la mission !",
-                    color: "GREEN",
+                    color: Colors.Green,
                     thumbnail: { url: client.user?.avatarURL() || "" },
                     url: sentMessage.url,
                 },
             ],
             components: [
                 {
-                    type: "ACTION_ROW",
+                    type: ComponentType.ActionRow,
                     components: [
                         {
-                            type: "BUTTON",
-                            style: "LINK",
+                            type: ComponentType.Button,
+                            style: ButtonStyle.Link,
                             label: "Messages Privées",
                             url: sentMessage.url,
                         },
                     ],
                 },
             ],
-            ephemeral: true,
         });
 
         return {
@@ -53,8 +55,7 @@ export async function run(
             label: "succès",
         };
     } catch {
-        interaction.reply({
-            ephemeral: true,
+        interaction.editReply({
             content: "Merci d'ouvrir tes MPs pour remplir ta mission",
         });
 

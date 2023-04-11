@@ -1,10 +1,10 @@
 import { IRating } from "$db/schemas/rating";
-import { GuildMember, MessageEmbedOptions } from "discord.js";
+import { APIEmbed, Colors, GuildMember } from "discord.js";
 
 export function generateMeanEmbed(
     member: GuildMember,
     ratings: IRating[],
-): MessageEmbedOptions {
+): APIEmbed {
     const mean =
         ratings.reduce((acc, cur) => acc + cur.rating, 0) / ratings.length;
     return {
@@ -19,7 +19,7 @@ export function generateMeanEmbed(
                     ` (${Math.round(mean * 10) / 10 || "-"}/5)`,
             },
         ],
-        color: mean >= 4 ? "GREEN" : mean >= 2 ? "YELLOW" : "RED",
+        color: mean >= 4 ? Colors.Green : mean >= 2 ? Colors.Red : Colors.Red,
         thumbnail: {
             url: member.user.displayAvatarURL(),
         },

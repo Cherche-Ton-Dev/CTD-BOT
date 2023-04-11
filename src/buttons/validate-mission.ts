@@ -2,7 +2,7 @@
  * IN Guild, admin channel, mission valid
  */
 
-import { ButtonInteraction, Client, Message, MessageEmbed } from "discord.js";
+import { APIEmbed, ButtonInteraction, Client, Colors, Message } from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { validateMission } from "$db/api/mission";
@@ -33,15 +33,15 @@ export async function run(
         (interaction.message as Message).edit({
             components: [],
             embeds: [
-                ...(interaction.message.embeds as MessageEmbed[]),
+                ...(interaction.message.embeds as APIEmbed[]),
                 {
                     author: {
-                        iconURL: interaction.user.avatarURL() || "",
+                        icon_url: interaction.user.avatarURL() || "",
                         name: interaction.user.tag,
                     },
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
                     title: "Mission validée.",
-                    color: "GREEN",
+                    color: Colors.Green,
                 },
             ],
         });
@@ -51,7 +51,7 @@ export async function run(
             embeds: [
                 {
                     title: "Cet mission n'existe pas",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });

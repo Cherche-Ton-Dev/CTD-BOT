@@ -1,4 +1,4 @@
-import { GuildMember, Message } from "discord.js";
+import { ButtonStyle, ComponentType, GuildMember, Message } from "discord.js";
 import { addPoints } from "$db/api/member";
 import { bumpPoints, messagePoints } from "$utils/equations";
 import { config } from "$context/config";
@@ -25,14 +25,14 @@ export async function handleMessageCreated(message: Message) {
             content: `${bumper} a reçu ${contribPoints} points de contribution pour son bump 👍.\n Clique ci dessous pour être prévenu quand tu pourras bump a nouveau.`,
             components: [
                 {
-                    type: "ACTION_ROW",
+                    type: ComponentType.ActionRow,
                     components: [
                         {
-                            type: "BUTTON",
+                            type: ComponentType.Button,
                             label: "PRÉVIENS MOI",
                             emoji: "⏰",
                             customId: "event-bump-squad",
-                            style: "SUCCESS",
+                            style: ButtonStyle.Success,
                         },
                     ],
                 },

@@ -1,5 +1,9 @@
 import {
+    ButtonStyle,
     Client,
+    Colors,
+    CommandInteraction,
+    ComponentType,
     Guild,
     GuildMember,
     Interaction,
@@ -25,7 +29,7 @@ export const data: PartialApplicationCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (
         !interaction.isCommand() ||
@@ -47,7 +51,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Vous ne vous trouvez pas dans une mission.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -62,7 +66,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Cette mission est déjà terminée.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -82,7 +86,7 @@ export async function run(
                     title: "Erreur",
                     description:
                         "Je préviens le client de la conclusion de sa mission.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -182,19 +186,19 @@ export async function run(
                 title: "Mission terminée",
                 description:
                     "La mission a été terminée avec succès. Merci de vérifier le channel des avis.",
-                color: "GREEN",
+                color: Colors.Green,
             },
         ],
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "BUTTON",
+                        type: ComponentType.Button,
                         customId: "event-close-ticket",
                         label: "Fermer",
                         emoji: "🗑️",
-                        style: "DANGER",
+                        style: ButtonStyle.Danger,
                     },
                 ],
             },

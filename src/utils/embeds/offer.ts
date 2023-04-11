@@ -1,15 +1,15 @@
 import { IOffer } from "$types/missions";
-import { GuildMember, MessageEmbedOptions } from "discord.js";
+import { APIEmbed, Colors, GuildMember } from "discord.js";
 
 export function generateOfferEmbed(
     offer: IOffer,
     creator: GuildMember,
-): MessageEmbedOptions {
+): APIEmbed {
     return {
         title: "Offre",
         description: `offre de la part de ${creator}`,
         author: {
-            icon_url: creator.displayAvatarURL({ dynamic: true }),
+            icon_url: creator.avatarURL() || "",
             name: creator.displayName,
         },
         fields: [
@@ -26,6 +26,6 @@ export function generateOfferEmbed(
                 value: "```\n" + (offer.info || "Aucunes") + "\n```",
             },
         ],
-        color: "GREEN",
+        color: Colors.Green,
     };
 }

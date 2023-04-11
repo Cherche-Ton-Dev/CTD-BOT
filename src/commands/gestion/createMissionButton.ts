@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, Interaction } from "discord.js";
+import { ButtonStyle, Client, Colors, CommandInteraction, ComponentType, Interaction } from "discord.js";
 import {
     CommandReturn,
     PartialApplicationCommandSubCommand,
@@ -21,9 +21,9 @@ export const data: PartialApplicationCommandSubCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
-    if (!interaction.isCommand()) return { status: "IGNORE" };
+    if (!interaction.isChatInputCommand()) return { status: "IGNORE" };
 
     const message = interaction.options.getString("message");
 
@@ -31,12 +31,12 @@ export async function run(
         content: message || "** **",
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
                         label: "👨‍💻 CRÉER UNE MISSION 🖌️",
-                        type: "BUTTON",
-                        style: "SUCCESS",
+                        type: ComponentType.Button,
+                        style: ButtonStyle.Success,
                         customId: "event-create-mission",
                     },
                 ],
@@ -49,7 +49,7 @@ export async function run(
             {
                 title: "✅ Fait.",
                 description: "Le bouton à été crée.",
-                color: "GREEN",
+                color: Colors.Green,
             },
         ],
         ephemeral: true,

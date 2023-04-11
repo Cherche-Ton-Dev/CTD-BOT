@@ -15,14 +15,14 @@
         "start": "cross-env TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/index.js",
         "format": "prettier -w ./src/",
         "check-formatting": "prettier --check ./src/",
-        "lint": "eslint ./src"
+        "lint": "eslint ./src && tsc --noEmit"
     },
     "dependencies": {
         "@androz2091/discord-invites-tracker": "^1.1.0",
         "axios": "^0.22.0",
         "chalk": "^4.1.2",
         "cross-env": "^7.0.3",
-        "discord.js": "^13.1.0",
+        "discord.js": "^14.9.0",
         "dotenv": "^10.0.0",
         "mongoose": "^6.0.10"
     },
@@ -31,7 +31,6 @@
         "@typescript-eslint/eslint-plugin": "^4.32.0",
         "@typescript-eslint/parser": "^4.32.0",
         "diff": "^5.1.0",
-        "discord-api-types": "^0.37.1",
         "eslint": "^7.32.0",
         "eslint-plugin-unused-imports": "^2.0.0",
         "prettier": "^2.4.1",

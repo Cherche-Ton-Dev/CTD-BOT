@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, GuildMember, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember, Interaction } from "discord.js";
 import { getRatings } from "$db/api/rating";
 import { PartialApplicationCommand, CommandReturn } from "types/commands";
 import { generateMeanEmbed } from "$utils/embeds/mean";
@@ -20,7 +20,7 @@ export const data: PartialApplicationCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (!interaction.isCommand()) return { status: "IGNORE" };
 
@@ -34,7 +34,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Ce membre n'existe pas.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });

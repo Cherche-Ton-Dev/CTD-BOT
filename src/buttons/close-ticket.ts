@@ -1,4 +1,4 @@
-import { ButtonInteraction, Client, TextChannel } from "discord.js";
+import { ButtonInteraction, Client, Colors, TextChannel } from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { sleep } from "$utils";
@@ -21,7 +21,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Vous ne vous trouvez pas dans un ticket.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,

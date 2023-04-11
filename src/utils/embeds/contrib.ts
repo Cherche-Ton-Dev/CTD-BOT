@@ -1,4 +1,4 @@
-import { GuildMember, MessageEmbedOptions, TextChannel } from "discord.js";
+import { APIEmbed, Colors, GuildMember, TextChannel } from "discord.js";
 import { config } from "$context/config";
 import { context } from "$context/context";
 import { createOrGetMember } from "$db/api/member";
@@ -24,10 +24,10 @@ export async function featureContrib(
         contribPoints = dbMem.contributionPoints;
     }
 
-    const embed: MessageEmbedOptions = {
+    const embed: APIEmbed = {
         title: "Contribution",
         description: `${member} a atteint les ${contribPoints} points de contribution. 🎉`,
-        color: "GREEN",
+        color: Colors.Green,
         thumbnail: {
             url: member.user.displayAvatarURL(),
         },

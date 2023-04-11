@@ -1,10 +1,10 @@
-import { MessageEmbedOptions } from "discord.js";
 import { context } from "$context/context";
 import { Rating } from "$db/schemas/rating";
+import { APIEmbed, Colors } from "discord.js";
 
 export async function generateRatingEmbed(
     rating: Rating,
-): Promise<MessageEmbedOptions> {
+): Promise<APIEmbed> {
     const devMember = await context.client.guilds.cache
         .get(rating.guildID)
         ?.members.fetch(rating.dev);
@@ -14,7 +14,7 @@ export async function generateRatingEmbed(
     return {
         title: "Avis",
         description: `${devMember} a été noté **${rating.rating}/5** par ${clientMember}`,
-        color: "GREEN",
+        color: Colors.Green,
         fields: [
             {
                 name: "Commentaire",
@@ -26,10 +26,10 @@ export async function generateRatingEmbed(
             },
         ],
         thumbnail: {
-            url: devMember?.user.displayAvatarURL(),
+            url: devMember?.user.displayAvatarURL() || "",
         },
         footer: {
-            text: clientMember?.user.tag,
+            text: clientMember?.user.tag || "",
             icon_url: clientMember?.user.displayAvatarURL(),
         },
     };

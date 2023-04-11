@@ -1,21 +1,21 @@
 import chalk from "chalk";
 import { commands } from "$commands/index";
 import { context } from "$context/context";
-import { Interaction } from "discord.js";
+import { CommandInteraction, Interaction } from "discord.js";
 import { CommandReturn, rawCommandModule } from "$types/commands";
 import { log } from "$utils/log";
 import { handleButtonPress } from "$buttons/index";
 
 export async function handleInteractionCreate(
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<void> {
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
         let command: rawCommandModule | undefined;
 
         let subCommandName;
         try {
             subCommandName = interaction.options.getSubcommand();
-        } catch {}
+        } catch { }
 
         if (subCommandName) {
             const group = commands[interaction.commandName];

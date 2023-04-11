@@ -1,4 +1,4 @@
-import { GuildMember } from "discord.js";
+import { ChannelType, Colors, GuildMember } from "discord.js";
 import { log } from "$utils/log";
 import { InviteData, JoinType } from "$types/invites";
 import { config } from "$context/config";
@@ -11,7 +11,7 @@ export async function handleMemberAdd(
     usedInvite: InviteData | null,
 ): Promise<void> {
     const channel = await member.guild.channels.fetch(config.welcomeChanelID);
-    if (!channel || !channel.isText())
+    if (channel?.type != ChannelType.GuildText)
         return log("ERREUR: welcomeChanelID invalide");
 
     if (joinType === "normal") {
@@ -24,12 +24,10 @@ export async function handleMemberAdd(
                 {
                     title: `Bonjour ${member.user.username} !`,
                     description: `Bienvenue sur CTD.\nTu as été invité par ${inviterMem}.`,
-                    color: "GREEN",
+                    color: Colors.Green,
                     thumbnail: {
                         url:
-                            member.user.displayAvatarURL({
-                                dynamic: true,
-                            }) || "",
+                            member.user.displayAvatarURL() || "",
                     },
                     footer: {
                         text: inviterMem.user.tag,
@@ -54,12 +52,10 @@ export async function handleMemberAdd(
             {
                 title: `Bonjour ${member.user.username} !`,
                 description: "Bienvenue sur CTD.",
-                color: "GREEN",
+                color: Colors.Green,
                 thumbnail: {
                     url:
-                        member.user.displayAvatarURL({
-                            dynamic: true,
-                        }) || "",
+                        member.user.displayAvatarURL() || "",
                 },
             },
         ],

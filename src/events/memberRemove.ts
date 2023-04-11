@@ -1,4 +1,5 @@
-import { GuildMember, PartialGuildMember } from "discord.js";
+/* eslint-disable indent */
+import { ChannelType, Colors, GuildMember, PartialGuildMember } from "discord.js";
 import { log } from "$utils/log";
 import { config } from "$context/config";
 import { addPoints, getMember } from "$db/api/member";
@@ -10,24 +11,20 @@ export async function handleMemberRemove(
     if (!(member instanceof GuildMember))
         return log("ERROR: received a partial member left");
     const channel = await member.guild.channels.fetch(config.welcomeChanelID);
-    if (!channel || !channel.isText())
+    if (channel?.type != ChannelType.GuildText)
         return log("ERREUR: welcomeChanelID invalide");
 
     channel.send({
         embeds: [
             {
-                title: `Au revoir ${
-                    member.nickname || member.user?.username
-                } !`,
-                description: `${
-                    member.nickname || member.user?.username
-                } a quitté CTD 🥺.`,
-                color: "RED",
+                title: `Au revoir ${member.nickname || member.user?.username
+                    } !`,
+                description: `${member.nickname || member.user?.username
+                    } a quitté CTD 🥺.`,
+                color: Colors.Red,
                 thumbnail: {
                     url:
-                        member.user?.displayAvatarURL({
-                            dynamic: true,
-                        }) || "",
+                        member.user?.displayAvatarURL() || "",
                 },
             },
         ],

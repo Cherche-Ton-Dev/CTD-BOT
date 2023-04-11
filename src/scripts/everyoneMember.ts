@@ -1,7 +1,7 @@
-import { Client } from "discord.js";
+import { Client, IntentsBitField } from "discord.js";
 
 const client = new Client({
-    intents: ["GUILD_MEMBERS"],
+    intents: [IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildModeration],
 });
 
 client.on("ready", async () => {

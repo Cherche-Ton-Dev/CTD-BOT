@@ -12,15 +12,15 @@ import { handleMemberAdd } from "$events/memberAdd";
 import { handleMessageCreated } from "$events/message";
 import { handleMemberRemove } from "$events/memberRemove";
 
-const intents: Discord.IntentsString[] = [
-    "GUILDS",
-    "GUILD_MESSAGES",
-    "DIRECT_MESSAGES",
-    "GUILD_INVITES",
-    "GUILD_MEMBERS",
-];
+
 const client = new Discord.Client({
-    intents: intents,
+    intents: [
+        "Guilds",
+        "GuildMessages",
+        "DirectMessages",
+        "GuildInvites",
+        "GuildMembers",
+    ],
 });
 context.client = client;
 

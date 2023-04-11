@@ -4,7 +4,7 @@ import { Client } from "discord.js";
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const client = new Client({
-    intents: ["GUILD_MEMBERS", "DIRECT_MESSAGES"],
+    intents: ["GuildMembers", "DirectMessages"],
 });
 
 client.on("ready", async () => {

@@ -12,17 +12,17 @@
 //             {
 //                 title: "Erreur",
 //                 description: `Tu n'as pas le role ${requiredRole?.label}`,
-//                 color: "RED",
+//                 color: Colors.Red,
 //             },
 //         ],
 //         components: [
 //             {
-//                 type: "ACTION_ROW",
+//                 type: ComponentType.ActionRow,
 //                 components: [
 //                     {
-//                         type: "BUTTON",
+//                         type: ComponentType.Button,
 //                         label: "Obtenir le role",
-//                         style: "SUCCESS",
+//                         style: ButtonStyle.Success,
 //                         customId: "get-role",
 //                     },
 //                 ],
@@ -56,7 +56,7 @@
 //                             title: "Erreur",
 //                             description:
 //                                 "Tu as déjà un ticket de role ouvert, si ce n'est pas le cas, fais en part aux modérateurs",
-//                             color: "RED",
+//                             color: Colors.Red,
 //                         },
 //                     ],
 //                 });
@@ -76,17 +76,17 @@
 //                 ],
 //                 [
 //                     {
-//                         type: "ACTION_ROW",
+//                         type: ComponentType.ActionRow,
 //                         components: [
 //                             {
-//                                 type: "BUTTON",
-//                                 style: "SUCCESS",
+//                                 type: ComponentType.Button,
+//                                 style: ButtonStyle.Success,
 //                                 label: "Accepter",
 //                                 customId: `event-give-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
 //                             },
 //                             {
-//                                 type: "BUTTON",
-//                                 style: "DANGER",
+//                                 type: ComponentType.Button,
+//                                 style: ButtonStyle.Danger,
 //                                 label: "Refuser",
 //                                 customId: `event-refuse-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
 //                             },
@@ -110,7 +110,7 @@
 //                     {
 //                         title: "Ticket crée.",
 //                         description: `Va dans ton ticket ${channel} pour demander le role`,
-//                         color: "GREEN",
+//                         color: Colors.Green,
 //                     },
 //                 ],
 //             });
