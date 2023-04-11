@@ -1,5 +1,10 @@
 /* eslint-disable indent */
-import { ChannelType, Colors, GuildMember, PartialGuildMember } from "discord.js";
+import {
+    ChannelType,
+    Colors,
+    GuildMember,
+    PartialGuildMember,
+} from "discord.js";
 import { log } from "$utils/log";
 import { config } from "$context/config";
 import { addPoints, getMember } from "$db/api/member";
@@ -17,14 +22,15 @@ export async function handleMemberRemove(
     channel.send({
         embeds: [
             {
-                title: `Au revoir ${member.nickname || member.user?.username
-                    } !`,
-                description: `${member.nickname || member.user?.username
-                    } a quitté CTD 🥺.`,
+                title: `Au revoir ${
+                    member.nickname || member.user?.username
+                } !`,
+                description: `${
+                    member.nickname || member.user?.username
+                } a quitté CTD 🥺.`,
                 color: Colors.Red,
                 thumbnail: {
-                    url:
-                        member.user?.displayAvatarURL() || "",
+                    url: member.user?.displayAvatarURL() || "",
                 },
             },
         ],

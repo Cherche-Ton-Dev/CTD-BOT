@@ -12,7 +12,6 @@ import { handleMemberAdd } from "$events/memberAdd";
 import { handleMessageCreated } from "$events/message";
 import { handleMemberRemove } from "$events/memberRemove";
 
-
 const client = new Discord.Client({
     intents: [
         "Guilds",

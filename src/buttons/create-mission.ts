@@ -2,7 +2,14 @@
  * IN Guild, after create mission button cliqued
  */
 
-import { ButtonInteraction, ButtonStyle, Client, Colors, ComponentType, GuildMember } from "discord.js";
+import {
+    ButtonInteraction,
+    ButtonStyle,
+    Client,
+    Colors,
+    ComponentType,
+    GuildMember,
+} from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { createMission } from "$missions/createMissionInDm";

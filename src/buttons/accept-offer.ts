@@ -142,30 +142,28 @@ export async function run(
         };
     }
     // create channel
-    const channel = await interaction.guild?.channels.create(
-        {
-            name: `Mission de ${interaction.user.tag}`,
-            type: ChannelType.GuildText,
-            permissionOverwrites: [
-                {
-                    id: interaction.guild.id, // shortcut for @everyone role ID
-                    deny: [PermissionFlagsBits.ViewChannel],
-                },
-                {
-                    id: interaction.user.id,
-                    allow: [PermissionFlagsBits.ViewChannel],
-                },
-                {
-                    id: modoRole,
-                    allow: [PermissionFlagsBits.ViewChannel],
-                },
-                {
-                    id: dealer.id,
-                    allow: [PermissionFlagsBits.ViewChannel],
-                },
-            ],
-        },
-    );
+    const channel = await interaction.guild?.channels.create({
+        name: `Mission de ${interaction.user.tag}`,
+        type: ChannelType.GuildText,
+        permissionOverwrites: [
+            {
+                id: interaction.guild.id, // shortcut for @everyone role ID
+                deny: [PermissionFlagsBits.ViewChannel],
+            },
+            {
+                id: interaction.user.id,
+                allow: [PermissionFlagsBits.ViewChannel],
+            },
+            {
+                id: modoRole,
+                allow: [PermissionFlagsBits.ViewChannel],
+            },
+            {
+                id: dealer.id,
+                allow: [PermissionFlagsBits.ViewChannel],
+            },
+        ],
+    });
     if (!channel) {
         interaction.reply({
             embeds: [
@@ -194,16 +192,12 @@ export async function run(
         timestamp: Date.now(),
         author: {
             name: interaction.user.tag,
-            iconURL:
-                interaction.user.avatarURL() || "",
+            iconURL: interaction.user.avatarURL() || "",
         },
         color: Colors.Green,
     });
     await missionMessage.edit({
-        embeds: [
-            ...embeds,
-            embed
-        ],
+        embeds: [...embeds, embed],
         components: [],
     });
 

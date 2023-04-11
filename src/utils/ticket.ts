@@ -8,7 +8,7 @@ import {
     APIActionRowComponent,
     APIMessageActionRowComponent,
     MessageActionRowComponentData,
-    MessageActionRowComponentBuilder
+    MessageActionRowComponentBuilder,
 } from "discord.js";
 
 export async function createTicket(
@@ -19,7 +19,9 @@ export async function createTicket(
     embeds?: APIEmbed[],
     components?: (
         | APIActionRowComponent<APIMessageActionRowComponent>
-        | ActionRowData<MessageActionRowComponentData | MessageActionRowComponentBuilder>
+        | ActionRowData<
+              MessageActionRowComponentData | MessageActionRowComponentBuilder
+          >
         | APIActionRowComponent<APIMessageActionRowComponent>
     )[],
 ) {

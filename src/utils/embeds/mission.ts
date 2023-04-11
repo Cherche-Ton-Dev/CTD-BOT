@@ -1,10 +1,7 @@
 import { APIEmbed, Colors, User, APIEmbedField } from "discord.js";
 import { IMission } from "types/missions";
 
-export function generateMissionEmbed(
-    mission: IMission,
-    user: User,
-): APIEmbed {
+export function generateMissionEmbed(mission: IMission, user: User): APIEmbed {
     const fields: APIEmbedField[] = [];
 
     if (mission.price) {
@@ -30,6 +27,9 @@ export function generateMissionEmbed(
         title: "Mission",
         description: mission.task,
         fields,
-        timestamp: (new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+        timestamp:
+            new Date().toLocaleDateString() +
+            " " +
+            new Date().toLocaleTimeString(),
     };
 }

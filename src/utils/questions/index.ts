@@ -4,7 +4,7 @@ import {
     Message,
     SelectMenuInteraction,
     ActionRowBuilder,
-    ButtonBuilder
+    ButtonBuilder,
 } from "discord.js";
 
 export { askSelectOne } from "./askSelect";
@@ -12,11 +12,11 @@ export { askText } from "./askText";
 export { askYesNo } from "./askYesNo";
 
 export async function disableComponent(message: Message) {
-
-
-    const newComponents = message.components.map(row => {
+    const newComponents = message.components.map((row) => {
         const rowBuild = ActionRowBuilder.from(row);
-        rowBuild.components.forEach(c => (c as ButtonBuilder).setDisabled(true));
+        rowBuild.components.forEach((c) =>
+            (c as ButtonBuilder).setDisabled(true),
+        );
 
         return rowBuild;
     });
@@ -25,7 +25,7 @@ export async function disableComponent(message: Message) {
 
     message.edit({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        components: newComponents as any
+        components: newComponents as any,
     });
 }
 

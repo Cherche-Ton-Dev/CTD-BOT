@@ -2,9 +2,7 @@ import { context } from "$context/context";
 import { Rating } from "$db/schemas/rating";
 import { APIEmbed, Colors } from "discord.js";
 
-export async function generateRatingEmbed(
-    rating: Rating,
-): Promise<APIEmbed> {
+export async function generateRatingEmbed(rating: Rating): Promise<APIEmbed> {
     const devMember = await context.client.guilds.cache
         .get(rating.guildID)
         ?.members.fetch(rating.dev);

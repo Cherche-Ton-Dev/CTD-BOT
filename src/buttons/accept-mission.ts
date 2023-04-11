@@ -2,7 +2,7 @@
  * IN Server, take the mission, enter in contact with the client.
  */
 
-import { ButtonInteraction, Client, Colors, } from "discord.js";
+import { ButtonInteraction, Client, Colors } from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 

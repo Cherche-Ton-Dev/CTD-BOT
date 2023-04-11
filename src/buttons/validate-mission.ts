@@ -2,7 +2,13 @@
  * IN Guild, admin channel, mission valid
  */
 
-import { APIEmbed, ButtonInteraction, Client, Colors, Message } from "discord.js";
+import {
+    APIEmbed,
+    ButtonInteraction,
+    Client,
+    Colors,
+    Message,
+} from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { validateMission } from "$db/api/mission";
@@ -39,7 +45,10 @@ export async function run(
                         icon_url: interaction.user.avatarURL() || "",
                         name: interaction.user.tag,
                     },
-                    timestamp: (new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+                    timestamp:
+                        new Date().toLocaleDateString() +
+                        " " +
+                        new Date().toLocaleTimeString(),
                     title: "Mission validée.",
                     color: Colors.Green,
                 },

@@ -26,8 +26,7 @@ export async function handleMemberAdd(
                     description: `Bienvenue sur CTD.\nTu as été invité par ${inviterMem}.`,
                     color: Colors.Green,
                     thumbnail: {
-                        url:
-                            member.user.displayAvatarURL() || "",
+                        url: member.user.displayAvatarURL() || "",
                     },
                     footer: {
                         text: inviterMem.user.tag,
@@ -54,8 +53,7 @@ export async function handleMemberAdd(
                 description: "Bienvenue sur CTD.",
                 color: Colors.Green,
                 thumbnail: {
-                    url:
-                        member.user.displayAvatarURL() || "",
+                    url: member.user.displayAvatarURL() || "",
                 },
             },
         ],

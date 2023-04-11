@@ -1,7 +1,12 @@
 import { config } from "$context/config";
 import { Mission } from "$db/schemas/mission";
 import { generateMissionEmbed } from "$utils/embeds/mission";
-import { ButtonInteraction, Colors, CommandInteraction, TextChannel } from "discord.js";
+import {
+    ButtonInteraction,
+    Colors,
+    CommandInteraction,
+    TextChannel,
+} from "discord.js";
 
 export async function postMission(
     interaction: ButtonInteraction | CommandInteraction,
@@ -17,7 +22,10 @@ export async function postMission(
             content: "** **",
             embeds: [
                 {
-                    timestamp: (new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+                    timestamp:
+                        new Date().toLocaleDateString() +
+                        " " +
+                        new Date().toLocaleTimeString(),
                     title: "L'utilisateur est introuvable",
                     color: Colors.Red,
                 },
@@ -33,8 +41,8 @@ export async function postMission(
     // get target channel
     const channelID =
         config.missionChannelIDS[mission.target][
-        // eslint-disable-next-line indent
-        mission.isPayed ? "payed" : "free"
+            // eslint-disable-next-line indent
+            mission.isPayed ? "payed" : "free"
         ];
 
     const channel = (await interaction.guild?.channels.fetch(

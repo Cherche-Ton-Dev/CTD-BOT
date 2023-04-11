@@ -15,7 +15,7 @@ export async function handleInteractionCreate(
         let subCommandName;
         try {
             subCommandName = interaction.options.getSubcommand();
-        } catch { }
+        } catch {}
 
         if (subCommandName) {
             const group = commands[interaction.commandName];

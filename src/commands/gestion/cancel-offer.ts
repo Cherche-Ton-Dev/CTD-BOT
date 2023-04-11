@@ -1,4 +1,10 @@
-import { Client, Colors, CommandInteraction, GuildMember, TextChannel } from "discord.js";
+import {
+    Client,
+    Colors,
+    CommandInteraction,
+    GuildMember,
+    TextChannel,
+} from "discord.js";
 import { config } from "$context/config";
 import {
     CommandReturn,
@@ -67,8 +73,8 @@ export async function run(
     // Get channel to post mission
     const channelID =
         config.missionChannelIDS[mission.target][
-        // eslint-disable-next-line indent
-        mission.isPayed ? "payed" : "free"
+            // eslint-disable-next-line indent
+            mission.isPayed ? "payed" : "free"
         ];
 
     const channel = (await interaction.guild?.channels.fetch(

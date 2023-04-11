@@ -2,7 +2,13 @@
  * IN Guild, admin channel, invalid mission
  */
 
-import { APIEmbed, ButtonInteraction, Client, Colors, Message } from "discord.js";
+import {
+    APIEmbed,
+    ButtonInteraction,
+    Client,
+    Colors,
+    Message,
+} from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { declineMission } from "$db/api/mission";
@@ -59,7 +65,10 @@ export async function run(
                     icon_url: interaction.user.avatarURL() || "",
                     name: interaction.user.tag,
                 },
-                timestamp: (new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+                timestamp:
+                    new Date().toLocaleDateString() +
+                    " " +
+                    new Date().toLocaleTimeString(),
                 title: "Mission Refusé.",
                 description: reason,
                 color: Colors.Red,

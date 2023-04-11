@@ -1,4 +1,13 @@
-import { ButtonStyle, Client, Colors, CommandInteraction, ComponentType, GuildMember, ModalBuilder, TextInputStyle } from "discord.js";
+import {
+    ButtonStyle,
+    Client,
+    Colors,
+    CommandInteraction,
+    ComponentType,
+    GuildMember,
+    ModalBuilder,
+    TextInputStyle,
+} from "discord.js";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 import { Mission } from "$db/schemas/mission";
 import { generateMeanEmbed } from "$utils/embeds/mean";
@@ -114,7 +123,7 @@ export async function run(
     modal.addComponents(
         {
             type: ComponentType.ActionRow,
-            components: []
+            components: [],
         },
         {
             type: ComponentType.ActionRow,
