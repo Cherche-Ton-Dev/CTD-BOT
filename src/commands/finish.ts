@@ -6,7 +6,6 @@ import {
     ComponentType,
     Guild,
     GuildMember,
-    Interaction,
     TextChannel,
 } from "discord.js";
 import { config } from "$context/config";

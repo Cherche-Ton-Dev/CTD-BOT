@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { ChannelType, Client, Colors, CommandInteraction, Interaction } from "discord.js";
+import { ChannelType, Client, Colors, CommandInteraction } from "discord.js";
 import { config } from "$context/config";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 

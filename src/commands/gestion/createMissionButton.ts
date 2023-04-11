@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { ButtonStyle, Client, Colors, CommandInteraction, ComponentType, Interaction } from "discord.js";
+import { ButtonStyle, Client, Colors, CommandInteraction, ComponentType } from "discord.js";
 import {
     CommandReturn,
     PartialApplicationCommandSubCommand,

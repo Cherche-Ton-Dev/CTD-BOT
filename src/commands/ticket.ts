@@ -1,4 +1,4 @@
-import { ButtonStyle, ChannelType, Client, Colors, CommandInteraction, ComponentType, Interaction } from "discord.js";
+import { ButtonStyle, ChannelType, Client, Colors, CommandInteraction, ComponentType } from "discord.js";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
 export const subCommand = false;

@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import { commands } from "$commands/index";
 import { context } from "$context/context";
-import { CommandInteraction, Interaction } from "discord.js";
+import { Interaction } from "discord.js";
 import { CommandReturn, rawCommandModule } from "$types/commands";
 import { log } from "$utils/log";
 import { handleButtonPress } from "$buttons/index";
 
 export async function handleInteractionCreate(
-    interaction: CommandInteraction,
+    interaction: Interaction,
 ): Promise<void> {
     if (interaction.isChatInputCommand()) {
         let command: rawCommandModule | undefined;

@@ -1,4 +1,4 @@
-import { Client, Colors, CommandInteraction, GuildMember, Interaction, TextChannel } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember, TextChannel } from "discord.js";
 import { config } from "$context/config";
 import {
     CommandReturn,

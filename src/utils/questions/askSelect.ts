@@ -6,7 +6,6 @@ import {
     MessageCreateOptions,
     SelectMenuComponentOptionData,
     StringSelectMenuInteraction,
-    StringSelectMenuOptionBuilder,
     TextChannel,
 } from "discord.js";
 import { disableComponent } from "./index";

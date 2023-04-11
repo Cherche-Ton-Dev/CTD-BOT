@@ -1,4 +1,4 @@
-import { Client, Colors, CommandInteraction, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction } from "discord.js";
 import { DBMember } from "$db/schemas/member";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 

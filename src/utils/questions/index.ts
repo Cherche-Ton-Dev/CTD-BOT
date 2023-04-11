@@ -24,6 +24,7 @@ export async function disableComponent(message: Message) {
     // Todo check if it works
 
     message.edit({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         components: newComponents as any
     });
 }

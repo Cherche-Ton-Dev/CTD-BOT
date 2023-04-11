@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, Colors, CommandInteraction, GuildMember, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember } from "discord.js";
 import { config } from "$context/config";
 import { addPoints } from "$db/api/member";
 import {

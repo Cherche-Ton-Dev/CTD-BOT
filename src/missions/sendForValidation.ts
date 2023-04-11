@@ -2,7 +2,7 @@
  * IN MP, send the mission to the server for validation.
  */
 
-import { ButtonStyle, ChannelType, Colors, ComponentType, GuildMember, TextChannel } from "discord.js";
+import { ButtonStyle, ChannelType, Colors, ComponentType, GuildMember } from "discord.js";
 import { Mission } from "$db/schemas/mission";
 import { IMission } from "$types/missions";
 import { createOrGetMember } from "$db/api/member";

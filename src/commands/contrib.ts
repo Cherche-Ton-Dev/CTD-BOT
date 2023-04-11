@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, Colors, CommandInteraction, GuildMember, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember } from "discord.js";
 import { createOrGetMember } from "$db/api/member";
 import { CommandReturn, PartialApplicationCommand } from "$types/commands";
 

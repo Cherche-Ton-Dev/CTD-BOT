@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, Colors, CommandInteraction, GuildMember, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction, GuildMember } from "discord.js";
 import { getRatings } from "$db/api/rating";
 import { PartialApplicationCommand, CommandReturn } from "types/commands";
 import { generateMeanEmbed } from "$utils/embeds/mean";
