@@ -1,10 +1,11 @@
 import {
     CommandInteraction,
+    ComponentType,
     DMChannel,
     Message,
-    MessageOptions,
-    MessageSelectOptionData,
-    SelectMenuInteraction,
+    MessageCreateOptions,
+    SelectMenuComponentOptionData,
+    StringSelectMenuInteraction,
     TextChannel,
 } from "discord.js";
 import { disableComponent } from "./index";
@@ -13,17 +14,17 @@ export async function askSelectOne<T>(
     channel: DMChannel | TextChannel,
     timeout: number,
     text: string,
-    options: (MessageSelectOptionData & { value: T })[],
+    options: (SelectMenuComponentOptionData & { value: T })[],
     interaction?: CommandInteraction,
 ) {
-    const msgOptions: MessageOptions = {
+    const msgOptions: MessageCreateOptions = {
         content: text,
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "SELECT_MENU",
+                        type: ComponentType.StringSelect,
                         customId: "dev-select",
                         options,
                     },
@@ -36,11 +37,11 @@ export async function askSelectOne<T>(
         sentMessage = (await interaction.editReply(msgOptions)) as Message;
     else sentMessage = await channel.send(msgOptions);
 
-    let selectInteraction: SelectMenuInteraction;
+    let selectInteraction: StringSelectMenuInteraction;
     try {
         selectInteraction = await sentMessage.awaitMessageComponent({
             time: timeout,
-            componentType: "SELECT_MENU",
+            componentType: ComponentType.StringSelect,
         });
         // await fakeReply(selectInteraction);
     } catch (error) {

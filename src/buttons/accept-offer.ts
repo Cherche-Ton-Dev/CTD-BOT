@@ -1,9 +1,12 @@
 import chalk from "chalk";
 import {
     ButtonInteraction,
+    ChannelType,
     Client,
+    Colors,
+    EmbedBuilder,
     Message,
-    MessageEmbed,
+    PermissionFlagsBits,
     ThreadChannel,
 } from "discord.js";
 import { config } from "$context/config";
@@ -52,7 +55,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Cet mission n'existe plus 🤔",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -70,7 +73,7 @@ export async function run(
                     title: "Erreur",
                     description:
                         "Une offre a déja été prise pour cette mission",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -89,7 +92,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Ce n'est pas a toi d'accepter le deal.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -128,7 +131,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Role modo introuvable.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -139,30 +142,28 @@ export async function run(
         };
     }
     // create channel
-    const channel = await interaction.guild?.channels.create(
-        `Mission de ${interaction.user.tag}`,
-        {
-            type: "GUILD_TEXT",
-            permissionOverwrites: [
-                {
-                    id: interaction.guild.id, // shortcut for @everyone role ID
-                    deny: "VIEW_CHANNEL",
-                },
-                {
-                    id: interaction.user.id,
-                    allow: "VIEW_CHANNEL",
-                },
-                {
-                    id: modoRole,
-                    allow: "VIEW_CHANNEL",
-                },
-                {
-                    id: dealer.id,
-                    allow: "VIEW_CHANNEL",
-                },
-            ],
-        },
-    );
+    const channel = await interaction.guild?.channels.create({
+        name: `Mission de ${interaction.user.tag}`,
+        type: ChannelType.GuildText,
+        permissionOverwrites: [
+            {
+                id: interaction.guild.id, // shortcut for @everyone role ID
+                deny: [PermissionFlagsBits.ViewChannel],
+            },
+            {
+                id: interaction.user.id,
+                allow: [PermissionFlagsBits.ViewChannel],
+            },
+            {
+                id: modoRole,
+                allow: [PermissionFlagsBits.ViewChannel],
+            },
+            {
+                id: dealer.id,
+                allow: [PermissionFlagsBits.ViewChannel],
+            },
+        ],
+    });
     if (!channel) {
         interaction.reply({
             embeds: [
@@ -170,7 +171,7 @@ export async function run(
                     title: "Erreur",
                     description:
                         "Impossible de créer un salon pour la mission.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -186,22 +187,17 @@ export async function run(
         interaction.message.id,
     )) as Message;
     const { embeds } = missionMessage;
-    embeds.push(
-        new MessageEmbed({
-            title: "Deal Acceptée",
-            timestamp: Date.now(),
-            author: {
-                name: interaction.user.tag,
-                iconURL:
-                    interaction.user.avatarURL({
-                        dynamic: true,
-                    }) || "",
-            },
-            color: "GREEN",
-        }),
-    );
+    const embed = new EmbedBuilder({
+        title: "Deal Acceptée",
+        timestamp: Date.now(),
+        author: {
+            name: interaction.user.tag,
+            iconURL: interaction.user.avatarURL() || "",
+        },
+        color: Colors.Green,
+    });
     await missionMessage.edit({
-        embeds,
+        embeds: [...embeds, embed],
         components: [],
     });
 
@@ -218,7 +214,7 @@ export async function run(
             {
                 title: "Succès",
                 description: `Un salon a été crée pour que tu puisse parler avec ${interaction.user}: ${channel}`,
-                color: "GREEN",
+                color: Colors.Green,
             },
         ],
         ephemeral: true,

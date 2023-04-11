@@ -1,6 +1,8 @@
 import {
     ButtonInteraction,
+    ButtonStyle,
     CommandInteraction,
+    ComponentType,
     DMChannel,
     Message,
     SelectMenuInteraction,
@@ -20,17 +22,17 @@ export async function askYesNo(
         content: text,
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "BUTTON",
-                        style: "SUCCESS",
+                        type: ComponentType.Button,
+                        style: ButtonStyle.Success,
                         label: labelYes || "OUI",
                         customId: "yes",
                     },
                     {
-                        type: "BUTTON",
-                        style: "DANGER",
+                        type: ComponentType.Button,
+                        style: ButtonStyle.Danger,
                         label: labelNo || "NON",
                         customId: "no",
                     },
@@ -43,7 +45,7 @@ export async function askYesNo(
     try {
         buttonInteraction = await sentMessage.awaitMessageComponent({
             time: timeout,
-            componentType: "BUTTON",
+            componentType: ComponentType.Button,
         });
         if (remove) {
             sentMessage.delete();
@@ -68,17 +70,17 @@ export async function askYesNoInteraction(
         content: text,
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "BUTTON",
-                        style: "SUCCESS",
+                        type: ComponentType.Button,
+                        style: ButtonStyle.Success,
                         label: labelYes || "OUI",
                         customId: "yes",
                     },
                     {
-                        type: "BUTTON",
-                        style: "DANGER",
+                        type: ComponentType.Button,
+                        style: ButtonStyle.Danger,
                         label: labelNo || "NON",
                         customId: "no",
                     },
@@ -91,7 +93,7 @@ export async function askYesNoInteraction(
     try {
         buttonInteraction = await sentMessage.awaitMessageComponent({
             time: timeout,
-            componentType: "BUTTON",
+            componentType: ComponentType.Button,
         });
         if (remove) {
             await sentMessage.delete();

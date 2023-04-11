@@ -17,6 +17,8 @@ export const subCommand = false;
 const timeout = 1000 * 60 * 5; // 5 min
 
 export async function createMission(DM: DMChannel, member: GuildMember) {
+    if (!DM.recipient) return;
+
     const mission: IMission = {
         accepted: false,
         difficulty: "1",
@@ -141,7 +143,7 @@ export async function createMission(DM: DMChannel, member: GuildMember) {
 async function cancelMission(DM: DMChannel) {
     log(
         "Aucune donnée entrée pendant 5m, annulation de la mission de",
-        chalk.blue(DM.recipient.tag),
+        chalk.blue(DM.recipient?.tag),
     );
     DM.send("Tu as été trop lent dans ta réponse ! Annulation de la mission.");
     return null;

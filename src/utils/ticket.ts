@@ -1,10 +1,14 @@
 import {
-    BaseMessageComponentOptions,
+    ChannelType,
     GuildMember,
-    MessageActionRow,
-    MessageActionRowOptions,
-    MessageEmbedOptions,
     OverwriteResolvable,
+    PermissionFlagsBits,
+    APIEmbed,
+    ActionRowData,
+    APIActionRowComponent,
+    APIMessageActionRowComponent,
+    MessageActionRowComponentData,
+    MessageActionRowComponentBuilder,
 } from "discord.js";
 
 export async function createTicket(
@@ -12,20 +16,23 @@ export async function createTicket(
     title: string,
     rolesIDS?: string[],
     parentID?: string,
-    embeds?: MessageEmbedOptions[],
+    embeds?: APIEmbed[],
     components?: (
-        | MessageActionRow
-        | (Required<BaseMessageComponentOptions> & MessageActionRowOptions)
+        | APIActionRowComponent<APIMessageActionRowComponent>
+        | ActionRowData<
+              MessageActionRowComponentData | MessageActionRowComponentBuilder
+          >
+        | APIActionRowComponent<APIMessageActionRowComponent>
     )[],
 ) {
     const permissionOverwrites: OverwriteResolvable[] = [
         {
             id: requester.guild.id, // shortcut for @everyone role ID
-            deny: "VIEW_CHANNEL",
+            deny: PermissionFlagsBits.ViewChannel,
         },
         {
             id: requester.user.id,
-            allow: "VIEW_CHANNEL",
+            allow: PermissionFlagsBits.ViewChannel,
         },
     ];
 
@@ -33,12 +40,13 @@ export async function createTicket(
         rolesIDS.forEach((roleID) => {
             permissionOverwrites.push({
                 id: roleID,
-                allow: "VIEW_CHANNEL",
+                allow: PermissionFlagsBits.ViewChannel,
             });
         });
     }
-    const channel = await requester.guild?.channels.create(title, {
-        type: "GUILD_TEXT",
+    const channel = await requester.guild?.channels.create({
+        name: title,
+        type: ChannelType.GuildText,
     });
 
     await channel.send({

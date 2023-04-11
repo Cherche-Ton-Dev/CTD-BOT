@@ -1,4 +1,13 @@
-import { Client, CommandInteraction, GuildMember, Modal } from "discord.js";
+import {
+    ButtonStyle,
+    Client,
+    Colors,
+    CommandInteraction,
+    ComponentType,
+    GuildMember,
+    ModalBuilder,
+    TextInputStyle,
+} from "discord.js";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 import { Mission } from "$db/schemas/mission";
 import { generateMeanEmbed } from "$utils/embeds/mean";
@@ -28,7 +37,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Tu ne peux pas utiliser cette commande ici",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -49,7 +58,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Tu ne peux pas utiliser cette commande ici",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -68,7 +77,7 @@ export async function run(
                     title: "Erreur",
                     description:
                         "Tu ne peux pas créer d'offre, c'est au dev ou graphiste de le faire.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -94,7 +103,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: `Tu n'as pas le role ${requiredRole?.label}`,
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
             ephemeral: true,
@@ -105,7 +114,7 @@ export async function run(
         };
     }
 
-    const modal = new Modal({
+    const modal = new ModalBuilder({
         title: "Création de deal",
         components: [],
         customId: "offer-{" + mission.id + "}",
@@ -113,42 +122,46 @@ export async function run(
 
     modal.addComponents(
         {
-            type: "ACTION_ROW",
+            type: ComponentType.ActionRow,
+            components: [],
+        },
+        {
+            type: ComponentType.ActionRow,
             components: [
                 {
                     label: "Récompense",
                     value: mission.price,
                     custom_id: "price",
-                    type: "TEXT_INPUT",
+                    type: ComponentType.TextInput,
                     required: false,
-                    style: "SHORT",
+                    style: TextInputStyle.Short,
                 },
             ],
         },
         {
-            type: "ACTION_ROW",
+            type: ComponentType.ActionRow,
             components: [
                 {
                     label: "Délai",
                     custom_id: "delay",
-                    type: "TEXT_INPUT",
+                    type: ComponentType.TextInput,
                     required: false,
                     placeholder: "ex: 2 semaines, le 10/08/2021",
-                    style: "SHORT",
+                    style: TextInputStyle.Short,
                 },
             ],
         },
         {
-            type: "ACTION_ROW",
+            type: ComponentType.ActionRow,
             components: [
                 {
                     label: "Détails supplémentaires",
                     custom_id: "info",
-                    type: "TEXT_INPUT",
+                    type: ComponentType.TextInput,
                     required: false,
                     placeholder:
                         "Codé en javascript\nMoitié payée avant\n200 de tes pts de contribution",
-                    style: "PARAGRAPH",
+                    style: TextInputStyle.Paragraph,
                 },
             ],
         },
@@ -156,7 +169,7 @@ export async function run(
 
     // if (mission.isPayed) {
     //     modal.addComponents({
-    //         type: "ACTION_ROW",
+    //         type: ComponentType.ActionRow,
     //         components: [
     //             {
     //                 type: "SELECT_MENU",
@@ -213,13 +226,13 @@ export async function run(
         embeds: [meanEmbed, offerEmbed],
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "BUTTON",
+                        type: ComponentType.Button,
                         label: "Accepter",
                         emoji: "✅",
-                        style: "SUCCESS",
+                        style: ButtonStyle.Success,
                         customId: "event-accept-offer",
                     },
                 ],

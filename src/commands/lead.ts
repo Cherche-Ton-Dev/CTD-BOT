@@ -1,4 +1,4 @@
-import { Client, Interaction } from "discord.js";
+import { Client, Colors, CommandInteraction } from "discord.js";
 import { DBMember } from "$db/schemas/member";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
@@ -11,7 +11,7 @@ export const data: PartialApplicationCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (!interaction.isCommand()) return { status: "IGNORE" };
 
@@ -39,17 +39,17 @@ export async function run(
                 url:
                     interaction.guild?.members.cache
                         .get(member.discordID)
-                        ?.user.displayAvatarURL({ dynamic: true }) || "",
+                        ?.user.displayAvatarURL() || "",
             },
             // prettier-ignore
             color:
                 i === 0
-                    ? "GOLD"
+                    ? Colors.Gold
                     : i === 1
-                        ? "DARK_GREY"
+                        ? Colors.DarkGrey
                         : i === 2
-                            ? "DARK_ORANGE"
-                            : "BLURPLE",
+                            ? Colors.DarkOrange
+                            : Colors.Blurple,
         })),
     });
 

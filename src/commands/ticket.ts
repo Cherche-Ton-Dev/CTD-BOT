@@ -1,4 +1,11 @@
-import { Client, Interaction } from "discord.js";
+import {
+    ButtonStyle,
+    ChannelType,
+    Client,
+    Colors,
+    CommandInteraction,
+    ComponentType,
+} from "discord.js";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
 export const subCommand = false;
@@ -10,27 +17,26 @@ export const data: PartialApplicationCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (!interaction.isCommand()) return { status: "IGNORE" };
 
-    const channel = await interaction.guild?.channels.create(
-        `ticket-de-${interaction.user.username}`,
-        {
-            permissionOverwrites: [
-                {
-                    id: interaction.guild?.id,
-                    deny: ["VIEW_CHANNEL"],
-                },
-                {
-                    id: interaction.user.id,
-                    allow: ["VIEW_CHANNEL"],
-                },
-            ],
-        },
-    );
+    const channel = await interaction.guild?.channels.create({
+        name: `ticket-de-${interaction.user.username}`,
+        type: ChannelType.GuildText,
+        permissionOverwrites: [
+            {
+                id: interaction.guild?.id,
+                deny: ["ViewChannel"],
+            },
+            {
+                id: interaction.user.id,
+                allow: ["ViewChannel"],
+            },
+        ],
+    });
 
-    if (!channel) {
+    if (channel?.type != ChannelType.GuildText) {
         return {
             status: "ERROR",
             label: "Impossible de créer le salon",
@@ -41,17 +47,17 @@ export async function run(
         embeds: [
             {
                 title: "Ticket de " + interaction.user.username,
-                color: "GREEN",
+                color: Colors.Green,
             },
         ],
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "BUTTON",
+                        type: ComponentType.Button,
                         label: "Fermer",
-                        style: "DANGER",
+                        style: ButtonStyle.Danger,
                         emoji: "🗑️",
                         customId: "event-close-ticket",
                     },
@@ -65,7 +71,7 @@ export async function run(
             {
                 title: "Ticket ouvert",
                 description: `Ton ticket à été crée: ${channel}.`,
-                color: "GREEN",
+                color: Colors.Green,
             },
         ],
         ephemeral: true,

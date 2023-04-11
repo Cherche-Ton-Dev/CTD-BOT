@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
-import { Client, Interaction } from "discord.js";
+import { ChannelType, Client, Colors, CommandInteraction } from "discord.js";
 import { config } from "$context/config";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
 
@@ -19,14 +19,14 @@ export const data: PartialApplicationCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
-    if (!interaction.isCommand()) return { status: "IGNORE" };
+    if (!interaction.isChatInputCommand()) return { status: "IGNORE" };
 
     const channel = await interaction.guild?.channels.fetch(
         config.suggestionsChanelId,
     );
-    if (!channel || !channel.isText())
+    if (channel?.type != ChannelType.GuildText)
         return {
             status: "ERROR",
             label: "L'id du salon de suggestion n'est pas bon",
@@ -38,7 +38,7 @@ export async function run(
             embeds: [
                 {
                     title: "Erreur",
-                    color: "RED",
+                    color: Colors.Red,
                     description: "la suggestion n'est pas valide",
                 },
             ],
@@ -54,18 +54,14 @@ export async function run(
         embeds: [
             {
                 title: `Suggestion de ${interaction.user.tag}`,
-                color: "GREEN",
+                color: Colors.Green,
                 description: "```" + suggestion + "```",
                 thumbnail: {
-                    url: interaction.user.displayAvatarURL({
-                        dynamic: true,
-                    }),
+                    url: interaction.user.displayAvatarURL(),
                 },
                 footer: {
                     text: interaction.user.tag,
-                    icon_url: interaction.user.displayAvatarURL({
-                        dynamic: true,
-                    }),
+                    icon_url: interaction.user.displayAvatarURL(),
                 },
             },
         ],
@@ -79,7 +75,7 @@ export async function run(
                 title: "Suggestion",
                 description: "Votre suggestion a été crée",
                 url: sentMessage.url,
-                color: "GREEN",
+                color: Colors.Green,
             },
         ],
         ephemeral: true,

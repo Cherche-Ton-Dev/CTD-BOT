@@ -9,7 +9,7 @@ import { handleButtonPress } from "$buttons/index";
 export async function handleInteractionCreate(
     interaction: Interaction,
 ): Promise<void> {
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
         let command: rawCommandModule | undefined;
 
         let subCommandName;

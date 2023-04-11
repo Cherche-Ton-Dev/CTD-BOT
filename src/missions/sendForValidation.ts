@@ -2,7 +2,13 @@
  * IN MP, send the mission to the server for validation.
  */
 
-import { GuildMember } from "discord.js";
+import {
+    ButtonStyle,
+    ChannelType,
+    Colors,
+    ComponentType,
+    GuildMember,
+} from "discord.js";
 import { Mission } from "$db/schemas/mission";
 import { IMission } from "$types/missions";
 import { createOrGetMember } from "$db/api/member";
@@ -24,7 +30,7 @@ export async function validateMission(
     // SEND FOR VERIFICATION
 
     const channel = await member.guild.channels.fetch(config.pendingChannelId);
-    if (!channel || !channel.isText()) {
+    if (channel?.type != ChannelType.GuildText) {
         log("🟥 pendingChannelId is wrong 🟥");
         return;
     }
@@ -43,25 +49,25 @@ export async function validateMission(
                         value: newMission.isPayed ? "oui" : "non",
                     },
                 ],
-                color: "RANDOM",
+                color: Colors.Blue,
             },
             generateMissionEmbed(newMission, member.user),
         ],
         components: [
             {
-                type: "ACTION_ROW",
+                type: ComponentType.ActionRow,
                 components: [
                     {
-                        type: "BUTTON",
+                        type: ComponentType.Button,
                         label: "ACCEPTER",
-                        style: "SUCCESS",
+                        style: ButtonStyle.Success,
                         emoji: "✅",
                         customId: `event-validate-{${newMission.id}}`,
                     },
                     {
-                        type: "BUTTON",
+                        type: ComponentType.Button,
                         label: "REFUSER",
-                        style: "DANGER",
+                        style: ButtonStyle.Danger,
                         emoji: "🗑️",
                         customId: `event-decline{${newMission.id}}`,
                     },

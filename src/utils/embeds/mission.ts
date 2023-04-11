@@ -1,11 +1,8 @@
-import { EmbedFieldData, MessageEmbedOptions, User } from "discord.js";
+import { APIEmbed, Colors, User, APIEmbedField } from "discord.js";
 import { IMission } from "types/missions";
 
-export function generateMissionEmbed(
-    mission: IMission,
-    user: User,
-): MessageEmbedOptions {
-    const fields: EmbedFieldData[] = [];
+export function generateMissionEmbed(mission: IMission, user: User): APIEmbed {
+    const fields: APIEmbedField[] = [];
 
     if (mission.price) {
         fields.push({
@@ -20,16 +17,16 @@ export function generateMissionEmbed(
 
     return {
         author: {
-            iconURL: user.avatarURL({ dynamic: true }) || "",
+            icon_url: user.avatarURL() || "",
             name: user.username,
         },
         thumbnail: {
             url: "https://emoji.gg/assets/emoji/7169_ThisIsFine.png",
         },
-        color: "DARK_BLUE",
+        color: Colors.DarkBlue,
         title: "Mission",
         description: mission.task,
         fields,
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
     };
 }

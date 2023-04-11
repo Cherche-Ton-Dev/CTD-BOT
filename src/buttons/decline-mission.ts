@@ -2,7 +2,13 @@
  * IN Guild, admin channel, invalid mission
  */
 
-import { ButtonInteraction, Client, Message, MessageEmbed } from "discord.js";
+import {
+    APIEmbed,
+    ButtonInteraction,
+    Client,
+    Colors,
+    Message,
+} from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 import { declineMission } from "$db/api/mission";
@@ -53,16 +59,16 @@ export async function run(
     (interaction.message as Message).edit({
         components: [],
         embeds: [
-            ...(interaction.message.embeds as MessageEmbed[]),
+            ...(interaction.message.embeds as APIEmbed[]),
             {
                 author: {
-                    iconURL: interaction.user.avatarURL() || "",
+                    icon_url: interaction.user.avatarURL() || "",
                     name: interaction.user.tag,
                 },
-                timestamp: new Date(),
+                timestamp: new Date().toISOString(),
                 title: "Mission Refusé.",
                 description: reason,
-                color: "RED",
+                color: Colors.Red,
             },
         ],
     });
@@ -76,7 +82,7 @@ export async function run(
             embeds: [
                 {
                     title: "Cet mission n'existe plus",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });

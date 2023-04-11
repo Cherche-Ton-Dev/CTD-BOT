@@ -3,6 +3,8 @@ import {
     CommandInteraction,
     Message,
     SelectMenuInteraction,
+    ActionRowBuilder,
+    ButtonBuilder,
 } from "discord.js";
 
 export { askSelectOne } from "./askSelect";
@@ -10,12 +12,20 @@ export { askText } from "./askText";
 export { askYesNo } from "./askYesNo";
 
 export async function disableComponent(message: Message) {
-    const components = message.components;
-    components.forEach((row) =>
-        row.components.forEach((component) => component.setDisabled(true)),
-    );
-    await message.edit({
-        components,
+    const newComponents = message.components.map((row) => {
+        const rowBuild = ActionRowBuilder.from(row);
+        rowBuild.components.forEach((c) =>
+            (c as ButtonBuilder).setDisabled(true),
+        );
+
+        return rowBuild;
+    });
+
+    // Todo check if it works
+
+    message.edit({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        components: newComponents as any,
     });
 }
 

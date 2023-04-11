@@ -2,7 +2,7 @@
  * IN Server, take the mission, enter in contact with the client.
  */
 
-import { ButtonInteraction, Client } from "discord.js";
+import { ButtonInteraction, Client, Colors } from "discord.js";
 
 import { CommandReturn } from "$types/commands";
 
@@ -18,7 +18,7 @@ export async function run(
                 title: "Erreur",
                 description:
                     "Cette fonctionalité a été désactive, merci de demander au créateur de a mission de la créer a nouveau",
-                color: "RED",
+                color: Colors.Red,
             },
         ],
         ephemeral: true,
@@ -46,7 +46,7 @@ export async function run(
     //             {
     //                 title: "Erreur",
     //                 description: "Problème de configuration du bot.",
-    //                 color: "RED",
+    //                 color: Colors.Red,
     //             },
     //         ],
     //         ephemeral: true,
@@ -65,7 +65,7 @@ export async function run(
     //             {
     //                 title: "Erreur",
     //                 description: "Cet mission n'existe plus 🤔",
-    //                 color: "RED",
+    //                 color: Colors.Red,
     //             },
     //         ],
     //         ephemeral: true,
@@ -91,17 +91,17 @@ export async function run(
     //             {
     //                 title: "Erreur",
     //                 description: `Tu n'as pas le role ${requiredRole?.label}`,
-    //                 color: "RED",
+    //                 color: Colors.Red,
     //             },
     //         ],
     //         components: [
     //             {
-    //                 type: "ACTION_ROW",
+    //                 type: ComponentType.ActionRow,
     //                 components: [
     //                     {
-    //                         type: "BUTTON",
+    //                         type: ComponentType.Button,
     //                         label: "Obtenir le role",
-    //                         style: "SUCCESS",
+    //                         style: ButtonStyle.Success,
     //                         customId: "get-role",
     //                     },
     //                 ],
@@ -135,7 +135,7 @@ export async function run(
     //                             title: "Erreur",
     //                             description:
     //                                 "Tu as déjà un ticket de role ouvert, si ce n'est pas le cas, fais en part aux modérateurs",
-    //                             color: "RED",
+    //                             color: Colors.Red,
     //                         },
     //                     ],
     //                 });
@@ -155,17 +155,17 @@ export async function run(
     //                 ],
     //                 [
     //                     {
-    //                         type: "ACTION_ROW",
+    //                         type: ComponentType.ActionRow,
     //                         components: [
     //                             {
-    //                                 type: "BUTTON",
-    //                                 style: "SUCCESS",
+    //                                 type: ComponentType.Button,
+    //                                 style: ButtonStyle.Success,
     //                                 label: "Accepter",
     //                                 customId: `event-give-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
     //                             },
     //                             {
-    //                                 type: "BUTTON",
-    //                                 style: "DANGER",
+    //                                 type: ComponentType.Button,
+    //                                 style: ButtonStyle.Danger,
     //                                 label: "Refuser",
     //                                 customId: `event-refuse-role-{${interaction.member?.user.id},${requiredRole?.roleID}}`,
     //                             },
@@ -189,7 +189,7 @@ export async function run(
     //                     {
     //                         title: "Ticket crée.",
     //                         description: `Va dans ton ticket ${channel} pour demander le role`,
-    //                         color: "GREEN",
+    //                         color: Colors.Green,
     //                     },
     //                 ],
     //             });
@@ -210,7 +210,7 @@ export async function run(
     //                 title: "Erreur",
     //                 description:
     //                     "Le propriétaire de cette mission a quitté le serveur",
-    //                 color: "RED",
+    //                 color: Colors.Red,
     //             },
     //         ],
     //         ephemeral: true,
@@ -253,7 +253,7 @@ export async function run(
     //                 title: "Erreur",
     //                 description:
     //                     "Impossible de créer un salon pour la mission.",
-    //                 color: "RED",
+    //                 color: Colors.Red,
     //             },
     //         ],
     //         ephemeral: true,
@@ -280,7 +280,7 @@ export async function run(
     //                     dynamic: true,
     //                 }) || "",
     //         },
-    //         color: "GREEN",
+    //         color: Colors.Green,
     //     }),
     // );
     // await missionMessage.edit({
@@ -297,7 +297,7 @@ export async function run(
     //         {
     //             title: "Succès",
     //             description: `Un salon a été crée pour que tu puisse parler avec ${author}: ${channel}`,
-    //             color: "GREEN",
+    //             color: Colors.Green,
     //         },
     //     ],
     //     ephemeral: true,

@@ -1,7 +1,12 @@
 import { config } from "$context/config";
 import { Mission } from "$db/schemas/mission";
 import { generateMissionEmbed } from "$utils/embeds/mission";
-import { ButtonInteraction, CommandInteraction, TextChannel } from "discord.js";
+import {
+    ButtonInteraction,
+    Colors,
+    CommandInteraction,
+    TextChannel,
+} from "discord.js";
 
 export async function postMission(
     interaction: ButtonInteraction | CommandInteraction,
@@ -17,9 +22,9 @@ export async function postMission(
             content: "** **",
             embeds: [
                 {
-                    timestamp: new Date(),
+                    timestamp: new Date().toISOString(),
                     title: "L'utilisateur est introuvable",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -33,6 +38,7 @@ export async function postMission(
     // get target channel
     const channelID =
         config.missionChannelIDS[mission.target][
+            // eslint-disable-next-line indent
             mission.isPayed ? "payed" : "free"
         ];
 
@@ -70,7 +76,6 @@ export async function postMission(
     const thread = await channel.threads.create({
         name: "Accepter la mission 👆",
         startMessage: sentMissionMessage,
-        type: "GUILD_PUBLIC_THREAD",
     });
     mission.dealThreadID = thread.id;
     await mission.save();

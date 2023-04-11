@@ -1,4 +1,10 @@
-import { Client, GuildMember, Interaction, TextChannel } from "discord.js";
+import {
+    Client,
+    Colors,
+    CommandInteraction,
+    GuildMember,
+    TextChannel,
+} from "discord.js";
 import { config } from "$context/config";
 import {
     CommandReturn,
@@ -17,7 +23,7 @@ export const data: PartialApplicationCommandSubCommand = {
 
 export async function run(
     client: Client,
-    interaction: Interaction,
+    interaction: CommandInteraction,
 ): Promise<CommandReturn> {
     if (
         !interaction.isCommand() ||
@@ -35,7 +41,7 @@ export async function run(
                     title: "Erreur",
                     description:
                         "Tu n'as pas la permission d'utiliser cette commande.",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -53,7 +59,7 @@ export async function run(
                     title: "Error",
                     description:
                         "Aucune mission trouvée correspondant a ce salon",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
@@ -67,6 +73,7 @@ export async function run(
     // Get channel to post mission
     const channelID =
         config.missionChannelIDS[mission.target][
+            // eslint-disable-next-line indent
             mission.isPayed ? "payed" : "free"
         ];
 
@@ -82,7 +89,7 @@ export async function run(
                 {
                     title: "Erreur",
                     description: "Le la mission d'origine est introuvable",
-                    color: "RED",
+                    color: Colors.Red,
                 },
             ],
         });
