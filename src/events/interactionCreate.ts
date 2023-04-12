@@ -5,6 +5,7 @@ import { Interaction } from "discord.js";
 import { CommandReturn, rawCommandModule } from "$types/commands";
 import { log } from "$utils/log";
 import { handleButtonPress } from "$buttons/index";
+import * as Sentry from "@sentry/node";
 
 export async function handleInteractionCreate(
     interaction: Interaction,
@@ -15,7 +16,7 @@ export async function handleInteractionCreate(
         let subCommandName;
         try {
             subCommandName = interaction.options.getSubcommand();
-        } catch {}
+        } catch { }
 
         if (subCommandName) {
             const group = commands[interaction.commandName];
@@ -39,6 +40,7 @@ export async function handleInteractionCreate(
             result = await command.run(context.client, interaction);
         } catch (err) {
             error = err;
+            Sentry.captureException(err);
         }
 
         log(

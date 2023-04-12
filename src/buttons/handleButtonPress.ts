@@ -3,6 +3,7 @@ import { ButtonInteraction } from "discord.js";
 import { commands } from ".";
 import { CommandReturn } from "$types/commands";
 import { log } from "$utils/log";
+import * as Sentry from "@sentry/node";
 import { context } from "$context/context";
 
 export async function handleButtonPress(interaction: ButtonInteraction) {
@@ -30,6 +31,7 @@ export async function handleButtonPress(interaction: ButtonInteraction) {
         result = await command.run(context.client, interaction, args);
     } catch (err) {
         error = err;
+        Sentry.captureException(err);
     }
 
     log(

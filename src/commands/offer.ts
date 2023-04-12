@@ -123,10 +123,6 @@ export async function run(
     modal.addComponents(
         {
             type: ComponentType.ActionRow,
-            components: [],
-        },
-        {
-            type: ComponentType.ActionRow,
             components: [
                 {
                     label: "Récompense",
