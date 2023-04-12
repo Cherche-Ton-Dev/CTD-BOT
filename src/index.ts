@@ -26,6 +26,7 @@ const client = new Discord.Client({
         "DirectMessages",
         "GuildInvites",
         "GuildMembers",
+        "MessageContent",
     ],
 });
 context.client = client;
