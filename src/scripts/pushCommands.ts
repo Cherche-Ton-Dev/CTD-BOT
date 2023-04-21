@@ -11,6 +11,10 @@ import { PartialApplicationCommand, ICommandList } from "$types/commands";
 
 import * as Diff from "diff";
 import chalk from "chalk";
+import {
+    APIApplicationCommandBasicOption,
+    APIApplicationCommandOption,
+} from "discord.js";
 
 dotenv.config();
 
@@ -78,7 +82,7 @@ function formatOURCommands(commands: ICommandList) {
                         name: data.name,
                         description: data.description,
                         options: data.options.map(
-                            (opt: APIApplicationCommandSubcommandOption) => {
+                            (opt: APIApplicationCommandBasicOption) => {
                                 if (!opt.required) delete opt.required;
                                 return opt;
                             },
@@ -93,7 +97,7 @@ function formatOURCommands(commands: ICommandList) {
                 name: data.name,
                 description: data.description,
                 options: data.options.map(
-                    (opt: APIApplicationCommandSubcommandOption) => {
+                    (opt: APIApplicationCommandOption) => {
                         if (!opt.required) delete opt.required;
                         return opt;
                     },

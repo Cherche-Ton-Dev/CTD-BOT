@@ -3,6 +3,7 @@ import {
     APIApplicationCommandBasicOption,
 } from "discord-api-types/v9";
 import {
+    APIApplicationCommandOption,
     ApplicationCommandSubCommand,
     Client,
     CommandInteraction,

@@ -5,6 +5,7 @@ export const config = {
     pendingChannelId: "934916135051198471",
     bumpSquadID: "1072499795119321149",
     modoRoleId: "934916134329786387",
+    staffRoleId: "1003601208788926564",
     respDevRoleId: "934916134329786381",
     respArtistRoleId: "934916134329786380",
     ticketCategoryId: "973257863977922640",

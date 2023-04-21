@@ -1,23 +1,42 @@
-import { Client, Colors, CommandInteraction } from "discord.js";
+import {
+    ApplicationCommandOptionType,
+    ChatInputCommandInteraction,
+    Client,
+    Colors,
+    CommandInteraction,
+} from "discord.js";
 import { DBMember } from "$db/schemas/member";
 import { PartialApplicationCommand, CommandReturn } from "$types/commands";
+import { GuildMember } from "discord.js";
+import { config } from "$context/config";
+import { log } from "$utils/log";
 
 export const subCommand = false;
 export const data: PartialApplicationCommand = {
     name: "lead",
     description: "Affiche le classement de contribution.",
-    options: [],
+    options: [
+        {
+            type: ApplicationCommandOptionType.Boolean,
+            name: "staff",
+            description: "Afficher les membres du staff",
+            required: false,
+        },
+    ],
 };
 
 export async function run(
     client: Client,
     interaction: CommandInteraction,
 ): Promise<CommandReturn> {
-    if (!interaction.isCommand()) return { status: "IGNORE" };
+    if (!interaction.isChatInputCommand()) return { status: "IGNORE" };
+    await interaction.deferReply();
+
+    const staff = interaction.options.getBoolean("staff", false) || false;
 
     const members = await DBMember.find({})
         .sort({ contributionPoints: -1 })
-        .limit(10);
+        .limit(25);
 
     await Promise.all(
         members.map((member) => {
@@ -30,16 +49,35 @@ export async function run(
         }),
     );
 
-    await interaction.reply({
-        content: "Voici le classement des contributeurs :",
-        embeds: members.map((member, i) => ({
-            title: `${i + 1}. ${member.username}`,
-            description: `**${member.contributionPoints}** points de contribution`,
+    const list: {
+        db: DBMember;
+        member: GuildMember;
+    }[] = [];
+
+    for (const dbMember of members) {
+        if (list.length >= 10) break;
+        const member = await interaction.guild?.members
+            .fetch(dbMember.discordID)
+            .catch(() => log(`[lead] Failed to fetch ${dbMember.username}`));
+        if (!member) continue;
+        if (!staff && member.roles.cache.has(config.staffRoleId)) continue;
+
+        list.push({
+            db: dbMember,
+            member,
+        });
+    }
+
+    await interaction.editReply({
+        content:
+            "Voici le classement des contributeurs :" + staff
+                ? "\n*Les membres du staff ne sont pas affichées.*"
+                : "",
+        embeds: list.map(({ db: dbMem, member }, i) => ({
+            title: `${i + 1}. ${dbMem.username}`,
+            description: `**${dbMem.contributionPoints}** points de contribution`,
             thumbnail: {
-                url:
-                    interaction.guild?.members.cache
-                        .get(member.discordID)
-                        ?.user.displayAvatarURL() || "",
+                url: member.user.displayAvatarURL() || "",
             },
             // prettier-ignore
             color:
