@@ -40,15 +40,15 @@ interface rawCommandModule {
 type commandModule =
     | rawCommandModule
     | {
-        subCommand?: true;
-        name: string;
-        description: string;
-        commands: {
-            [key: string]: rawCommandModule & {
-                data: PartialApplicationCommandSubCommand;
-            };
-        };
-    };
+          subCommand?: true;
+          name: string;
+          description: string;
+          commands: {
+              [key: string]: rawCommandModule & {
+                  data: PartialApplicationCommandSubCommand;
+              };
+          };
+      };
 
 /**
  * list of commands and sub commands

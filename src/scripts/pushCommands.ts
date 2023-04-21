@@ -11,7 +11,10 @@ import { PartialApplicationCommand, ICommandList } from "$types/commands";
 
 import * as Diff from "diff";
 import chalk from "chalk";
-import { APIApplicationCommandBasicOption, APIApplicationCommandOption } from "discord.js";
+import {
+    APIApplicationCommandBasicOption,
+    APIApplicationCommandOption,
+} from "discord.js";
 
 dotenv.config();
 
