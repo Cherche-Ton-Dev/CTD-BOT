@@ -145,19 +145,12 @@ export async function run(
     if (!comment) return { status: "ERROR", label: "TIMEOUT" };
     log("Commentaire:", comment.slice(0, 20));
 
-    const dev = await interaction.guild.members.fetch(
-        mission.offer?.devDiscordID || "",
-    );
-    const missionClient = await interaction.guild.members.fetch(
-        mission.authorUserID,
-    );
-
     const rating = await createRating(
         mission,
         parseInt(rank || "0"),
         comment,
-        dev,
-        missionClient,
+        mission.offer?.devDiscordID || "",
+        mission.authorUserID,
     );
     await rating.save();
 
@@ -177,7 +170,12 @@ export async function run(
     await mission.save();
 
     const contribution_points = ratingPoints(parseInt(rank || "0"));
-    await addPoints(dev, contribution_points);
+    try {
+        const dev = await interaction.guild.members.fetch(
+            mission.offer?.devDiscordID || "",
+        );
+        await addPoints(dev, contribution_points);
+    } catch {}
 
     interaction.channel.send({
         embeds: [

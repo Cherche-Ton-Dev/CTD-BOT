@@ -3,10 +3,7 @@ import dotenv from "dotenv";
 import util from "util";
 import axios from "axios";
 import { commands } from "$commands/index";
-import {
-    APIApplicationCommand,
-    APIApplicationCommandSubcommandOption,
-} from "discord-api-types/v9";
+import { APIApplicationCommand } from "discord-api-types/v9";
 import { PartialApplicationCommand, ICommandList } from "$types/commands";
 
 import * as Diff from "diff";

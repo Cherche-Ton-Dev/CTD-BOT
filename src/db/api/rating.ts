@@ -6,14 +6,14 @@ export async function createRating(
     mission: Mission,
     rating: number,
     comment: string,
-    dev: GuildMember,
-    client: GuildMember,
+    dev: string,
+    client: string,
 ) {
     return new Rating({
         guildID: mission.authorGuildID,
         mission: mission._id,
-        dev: dev.user.id,
-        client: client.user.id,
+        dev: dev,
+        client: client,
         rating,
         comment,
     });

@@ -1,6 +1,5 @@
 import {
     ApplicationCommandOptionType,
-    ChatInputCommandInteraction,
     Client,
     Colors,
     CommandInteraction,

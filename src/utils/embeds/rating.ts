@@ -3,12 +3,12 @@ import { Rating } from "$db/schemas/rating";
 import { APIEmbed, Colors } from "discord.js";
 
 export async function generateRatingEmbed(rating: Rating): Promise<APIEmbed> {
-    const devMember = await context.client.guilds.cache
-        .get(rating.guildID)
-        ?.members.fetch(rating.dev);
-    const clientMember = await context.client.guilds.cache
-        .get(rating.guildID)
-        ?.members.fetch(rating.client);
+    const devMember = await context.client.users
+        .fetch(rating.dev)
+        .catch(() => null);
+    const clientMember = await context.client.users
+        .fetch(rating.client)
+        .catch(() => null);
     return {
         title: "Avis",
         description: `${devMember} a été noté **${rating.rating}/5** par ${clientMember}`,
@@ -24,11 +24,11 @@ export async function generateRatingEmbed(rating: Rating): Promise<APIEmbed> {
             },
         ],
         thumbnail: {
-            url: devMember?.user.displayAvatarURL() || "",
+            url: devMember?.displayAvatarURL() || "Invalid User",
         },
         footer: {
-            text: clientMember?.user.tag || "",
-            icon_url: clientMember?.user.displayAvatarURL(),
+            text: clientMember?.tag || "Invalid User",
+            icon_url: clientMember?.displayAvatarURL() || "Invalid User",
         },
     };
 }
