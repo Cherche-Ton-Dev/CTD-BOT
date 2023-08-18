@@ -5,7 +5,6 @@ import axios from "axios";
 import { commands } from "$commands/index";
 import {
     APIApplicationCommand,
-    APIApplicationCommandSubcommandOption,
 } from "discord-api-types/v9";
 import { PartialApplicationCommand, ICommandList } from "$types/commands";
 

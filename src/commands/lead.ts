@@ -1,6 +1,5 @@
 import {
     ApplicationCommandOptionType,
-    ChatInputCommandInteraction,
     Client,
     Colors,
     CommandInteraction,
@@ -44,7 +43,7 @@ export async function run(
                 interaction.guild?.members
                     .fetch(member.discordID)
                     // eslint-disable-next-line @typescript-eslint/no-empty-function
-                    .catch(() => {})
+                    .catch(() => { })
             );
         }),
     );
