@@ -1,6 +1,6 @@
 import { ButtonStyle, ComponentType, GuildMember, Message } from "discord.js";
 import { addPoints } from "$db/api/member";
-import { bumpPoints, messagePoints } from "$utils/equations";
+import { messagePoints } from "$utils/equations";
 import { config } from "$context/config";
 
 const lastMessages: Map<string, Date> = new Map();
@@ -19,10 +19,10 @@ export async function handleMessageCreated(message: Message) {
             message.interaction.user.id,
         );
         if (!bumper) return;
-        const contribPoints = bumpPoints(bumper);
-        await addPoints(bumper, contribPoints);
+        // const contribPoints = bumpPoints(bumper);
+        // await addPoints(bumper, contribPoints);
         await message.channel.send({
-            content: `${bumper} a reçu ${contribPoints} points de contribution pour son bump 👍.\n Clique ci dessous pour être prévenu quand tu pourras bump a nouveau.`,
+            content: "Merci pour le bump 👍.\n Clique ci dessous pour être prévenu quand tu pourras bump a nouveau.",
             components: [
                 {
                     type: ComponentType.ActionRow,
