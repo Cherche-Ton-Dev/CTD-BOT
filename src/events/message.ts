@@ -22,7 +22,8 @@ export async function handleMessageCreated(message: Message) {
         // const contribPoints = bumpPoints(bumper);
         // await addPoints(bumper, contribPoints);
         await message.channel.send({
-            content: "Merci pour le bump 👍.\n Clique ci dessous pour être prévenu quand tu pourras bump a nouveau.",
+            content:
+                "Merci pour le bump 👍.\n Clique ci dessous pour être prévenu quand tu pourras bump a nouveau.",
             components: [
                 {
                     type: ComponentType.ActionRow,
